@@ -11,6 +11,7 @@ namespace TrabalhoAED
         static void Main(string[] args)
         {
             Console.WriteLine("teste");
+            int a = 1;
             Console.ReadKey();
         }
     }
