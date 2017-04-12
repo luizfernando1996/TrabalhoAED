@@ -12,24 +12,25 @@ namespace TrabalhoAED.Menu
     class Menu
     {
         //Métodos para string
-        public static void imprimeMessage(string message)
+        public void imprimeMessage(string message)
         {
             Console.WriteLine(message);
         }
 
         //Métodos para inteiro
-        public static bool verificaInt(string num)
+        public bool verificaInt(string num)
         {
             int n;
             bool wordIsString = int.TryParse(num, out n);
             return wordIsString;
         }
-        public static int requisitaInt()
+        public int requisitaInt()
         {
             bool sairWhile = false;
             string num = null;
             while (sairWhile == false)
             {
+                Console.Write("\t");
                 num = Console.ReadLine();
                 sairWhile = verificaInt(num);//verifica se foi digitado um numero inteiro
 
@@ -43,7 +44,7 @@ namespace TrabalhoAED.Menu
             }
             return int.Parse(num);
         }
-        public static int requisitaIntNoRange(int range)
+        public int requisitaIntNoRange(int range)
         {
             int num = 0;
             bool sairWhile = false;
@@ -65,22 +66,27 @@ namespace TrabalhoAED.Menu
         }
         //fim dos métodos para inteiro
 
-        //gerencia a repetição e saída do menu
-        public static void gerenciadoMenu()
+        //gerencia o menu
+        public void gerenciadorMenu()
         {
             bool sairWhile = false;
+
+            //exibe menu principal
+            //gerencia a repetição e saida do menu
             while (sairWhile == false)
             {
-                int num = entradaDoMenu();
+                exibeMenu();
+                //o menu tem 7 opções, logo o número deve estar no range 0-7
+                int num = opcaoEscolhidaDoMenu(7);
                 selecionaOptionMenu(num);
+                //Usuario deseja sair do programa então não mostre menu e só saia
                 if (num == 0)
                     sairWhile = true;
             }
         }
-        public static int entradaDoMenu()
+        public void exibeMenu()
         {
             string message = null;
-            int num = 0;
             message = "---------------------------Menu------------------------";
             message += "\nDigite 1 para cadastrar Aeroportos";
             message += "\nDigite 2 para cadastrar Voos";
@@ -88,13 +94,24 @@ namespace TrabalhoAED.Menu
             message += "\nDigite 4 para imprimir os voos";
             message += "\nDigite 5 para imprimir tudo";
             message += "\nDigite 6 para procurar voo";
+            message += "\nDigite 7 para limpar";
             message += "\nDigite 0 para sair";
             imprimeMessage(message);
-            //requisita um numero inteiro valido (1-6)
-            num = requisitaIntNoRange(6);
+        }
+        public int opcaoEscolhidaDoMenu(int range)
+        {
+            int num = 0;
+            //requisita um numero inteiro valido no range
+            num = requisitaIntNoRange(range);
             return num;
         }
-        public static void selecionaOptionMenu(int num)
+        public void limparMenu()
+        {
+            Console.Clear();
+        }
+
+        //Opções do menu
+        public void selecionaOptionMenu(int num)
         {
             switch (num)
             {
@@ -117,19 +134,15 @@ namespace TrabalhoAED.Menu
                 case 6:
                     procuraVoo();
                     break;
+                case 7:
+                    limparMenu();
+                    break;
                 case 0:
                     finalizarProgram();
                     break;
             }
         }
-
-        public static void Main(string[] args)
-        {
-            gerenciadoMenu();
-        }
-
-        //Opções do menu
-        public static void cadastraAeroporto()
+        public void cadastraAeroporto()
         {
             Aeroporto obj = new Aeroporto();
 
@@ -139,7 +152,7 @@ namespace TrabalhoAED.Menu
             string cidade = Console.ReadLine();
             obj.cadastraAeroporto(cidade, 1);
         }
-        public static void cadastraVoo()
+        public void cadastraVoo()
         {
             Voo objVoo = new Voo();
 
@@ -160,7 +173,7 @@ namespace TrabalhoAED.Menu
 
             objVoo.cadastraVoo(codigoVoo, codigoOrigem, codigoDestino);
         }
-        public static void removeVoo()
+        public void removeVoo()
         {
             Voo objVoo = new Voo();
 
@@ -170,7 +183,7 @@ namespace TrabalhoAED.Menu
             int numero = requisitaInt();
             objVoo.removeVoo(numero);
         }
-        public static void imprimeVoo()
+        public void imprimeVoo()
         {
             //imprime todos voos de um determinado aeroporto
             string message = "Forneça o código do Aeroporto";
@@ -178,12 +191,12 @@ namespace TrabalhoAED.Menu
 
             int num = requisitaInt();
         }
-        public static void imprimeTudo()
+        public void imprimeTudo()
         {
             Aeroporto obj = new Aeroporto();
             obj.imprimeTudo();
         }
-        public static void procuraVoo()
+        public void procuraVoo()
         {
             Voo objVoo = new Voo();
 
@@ -203,7 +216,7 @@ namespace TrabalhoAED.Menu
             objVoo.procuraVoo(codigoOrigem, codigoDestino, maximoConexoes);
 
         }
-        public static void finalizarProgram()
+        public void finalizarProgram()
         {
             int j = 100 * 100 * 100 * 100;
             for (int i = 0; i < 6 * j; i++)

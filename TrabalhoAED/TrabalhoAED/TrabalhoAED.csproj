@@ -48,6 +48,7 @@
     <Compile Include="Avioes\Luiz\NodeVoo.cs" />
     <Compile Include="Avioes\Luiz\Voo.cs" />
     <Compile Include="Menu\Menu.cs" />
+    <Compile Include="Menu\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
