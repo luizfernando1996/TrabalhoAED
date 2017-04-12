@@ -21,7 +21,7 @@ namespace TrabalhoAED.FAeroporto.jonathan
             next = null;
         }
 
-        public  NodeAeroporto(string cidade, string sigla, NodeVoo next )
+        public  NodeAeroporto(string cidade, int codigo, string sigla, NodeVoo next )
         {
             this.cidade = cidade;
             this.sigla = sigla;
