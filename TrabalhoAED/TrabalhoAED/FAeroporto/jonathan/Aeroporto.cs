@@ -56,15 +56,16 @@ namespace TrabalhoAED.FAeroporto.jonathan
 
         public void vincularVooAeroporto(NodeVoo voo, int indice)
         {
-            //int i = 0;
-            //while(i != indice)
-            //{
-            //    if ( cidadeOrigem== vetor[i].cidade)// encontra no vetor de aeroportos, o aeroporto de origem correspondente ao voo.
-            //    {
-            insereVoo(vetor[indice], voo);
-            //    }
-            //    i++;
-            //}
+            //ja se passa a lacuna do vetor onde deve se inserir o Voo
+            try
+            {
+                insereVoo(vetor[indice], voo);
+
+            }
+            catch (IndexOutOfRangeException)
+            {
+                Console.WriteLine("Impossivel cadastrar este Voo, sendo que os aeroportos");
+            }
         }
 
         //verifica se o aeroporto existe e se sim retorna o indice do aerporto
@@ -105,12 +106,17 @@ namespace TrabalhoAED.FAeroporto.jonathan
         {
             //o next é um campo de NodeVoo
             NodeVoo p = aeroporto.next;
-            while (p != null)
+            if (p == null)
+                aeroporto.next = voo;
+            else
             {
-                p = p.next;
-            }
+                while (p != null)
+                {
+                    p = p.next;
+                }
 
-            p = voo;
+                p = voo;
+            }
             Console.ReadKey();
         }
     }

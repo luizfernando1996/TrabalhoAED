@@ -40,7 +40,7 @@ namespace TrabalhoAED.Avioes.Luiz
                     p = p.next;
                 objVoo = new NodeVoo(numVoo, codigoDestino, p.next);
             }
-            objAero.vincularVooAeroporto(objVoo,codigoOrigem);
+           objAero.vincularVooAeroporto(objVoo,codigoOrigem);
         }
         public void vincularVooAeroporto(NodeVoo ob,int codigoOrigem)
         {
