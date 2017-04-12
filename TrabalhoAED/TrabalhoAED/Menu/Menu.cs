@@ -236,7 +236,7 @@ namespace TrabalhoAED.Menu
             imprimeMessage(message);
             int maximoConexoes = requisitaInt();
 
-            objVoo.procuraVoo(codigoOrigem, codigoDestino, maximoConexoes);
+            objAero.procuraVoo(codigoOrigem, codigoDestino, maximoConexoes);
 
         }
         public void insereDadosParaTeste()
@@ -273,8 +273,6 @@ namespace TrabalhoAED.Menu
             objVoo.cadastraVoo(102, 3, 2);
             //cadastra voos em salvador
             objVoo.cadastraVoo(215, 4, 2);
-
-           //objAero.imprimeVoo("CNF");
         }
         public void finalizarProgram()
         {
