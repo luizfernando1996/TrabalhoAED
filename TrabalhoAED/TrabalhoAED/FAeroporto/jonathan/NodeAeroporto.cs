@@ -11,6 +11,7 @@ namespace TrabalhoAED.FAeroporto.jonathan
     {
         public string cidade;
         public string sigla;
+        public int codigo;
         public NodeVoo next;
 
         public NodeAeroporto()

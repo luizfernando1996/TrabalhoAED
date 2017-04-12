@@ -17,8 +17,9 @@ namespace TrabalhoAED.FAeroporto.jonathan
         {
            
         }
-        public void cadastraAeroporto(string cidade, string sigla)
-        {            
+        public void cadastraAeroporto(string cidade, int codigo)
+        {
+            string sigla = buscaSigla(cidade.ToLower());
             vetor[indice] = new NodeAeroporto(cidade, sigla, null);
             indice++;
         } 
@@ -29,6 +30,26 @@ namespace TrabalhoAED.FAeroporto.jonathan
             {
                 Console.WriteLine("cidade: " + vetor[i].cidade + " sigla:" + vetor[i].sigla);                
             }
+        }
+
+        public string buscaSigla(string cidade)
+        {
+            
+            switch (cidade)
+            {
+                case "brasilia":
+                    return "BSB";
+                case "belo horizinte":
+                    return "CNF";
+                case "rio de janeiro":
+                    return "GIG";
+                case "São Paulo":
+                    return "GRU";
+                case "Salvador":
+                    return "SSA";
+
+            }
+            return "sigla não encontrda";
         }
     }
 }
