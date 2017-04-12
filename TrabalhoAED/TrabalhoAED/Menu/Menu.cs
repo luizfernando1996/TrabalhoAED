@@ -257,7 +257,6 @@ namespace TrabalhoAED.Menu
         }
         public void cadastrarVoosTeste()
         {
-            obj
             //cadastra todos os voos        
             //cadastra voos em brasilia
             objVoo.cadastraVoo(107, 0, 5);
@@ -275,7 +274,7 @@ namespace TrabalhoAED.Menu
             //cadastra voos em salvador
             objVoo.cadastraVoo(215, 4, 2);
 
-           objAereo.imprimeVoo("CNF");
+           //objAereo.imprimeVoo("CNF");
         }
         public void finalizarProgram()
         {

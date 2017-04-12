@@ -27,22 +27,6 @@ namespace TrabalhoAED.Avioes.Luiz
             objVoo = new NodeVoo(numVoo, codigoDestino, sentinela.next);
             objAero.vincularVooAeroporto(objVoo, codigoOrigem);
         }
-        public string removeVoo(int numVoo)
-        {
-            string message;
-            NodeVoo p = sentinela;
-            while (p.next != null && p.next.numeroVoo != numVoo)
-                p = p.next;
-
-            if (p == null)
-                message = "Nâo existe Voo com este número";
-            else
-            {
-                p.next = p.next.next;
-                message = "Voo removido com sucesso";
-            }
-            return message;
-        }
         public void imprimeTudo()
         {
             NodeVoo p = sentinela;
