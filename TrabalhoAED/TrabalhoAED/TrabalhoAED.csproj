@@ -43,8 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Aeroporto\jonathan\Aeroporto.cs" />
-    <Compile Include="Aeroporto\jonathan\NodeAeroporto.cs" />
+    <Compile Include="FAeroporto\jonathan\Aeroporto.cs" />
+    <Compile Include="FAeroporto\jonathan\NodeAeroporto.cs" />
     <Compile Include="Avioes\Luiz\NodeVoo.cs" />
     <Compile Include="Avioes\Luiz\Voo.cs" />
     <Compile Include="Menu\Menu.cs" />
