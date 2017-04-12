@@ -10,6 +10,8 @@ namespace TrabalhoAED
     {
         static void Main(string[] args)
         {
+            /// não posso dar um push se tiver algo no repositorio
+            /// devo dar um pull antes
         }
     }
 }
