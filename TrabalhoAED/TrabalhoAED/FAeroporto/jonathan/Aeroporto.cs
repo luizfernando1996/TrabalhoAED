@@ -175,8 +175,7 @@ namespace TrabalhoAED.FAeroporto.jonathan
 
         public void removeVoo(int numeroVoo)
         {
-            int i = 0;
-            bool chave2 = false;
+            int i = 0;           
             bool chave = true;
             NodeVoo p;
             while (vetor[i] != null)
@@ -204,6 +203,29 @@ namespace TrabalhoAED.FAeroporto.jonathan
                 i++;
 
             }
+        }
+
+        public void procuraVoo(string codigoOrigem, string codigoDestino, int maxConexoes)
+        {
+           
+                int i = 0;
+                NodeVoo p;
+                
+                    while (vetor[i] != null)
+                    {
+                        p = vetor[i].next;
+                        if (p != null)
+                            Console.WriteLine("\nAeroporto de " + vetor[i].cidade + " Código: " + vetor[i].codigo + " Sigla: " + vetor[i].sigla);
+
+                        while (p != null)
+                        {
+                            Console.WriteLine("Voo: " + p.numeroVoo + " " + "Destino: " + p.indiceCidadeDestino);
+                            p = p.next;
+                        }
+                        i++;
+
+                    }
+              
         }
     }
 }
