@@ -117,7 +117,6 @@ namespace TrabalhoAED.FAeroporto.jonathan
 
                 p = voo;
             }
-            Console.ReadKey();
         }
     }
 }
