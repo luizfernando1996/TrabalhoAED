@@ -9,7 +9,7 @@ namespace TrabalhoAED.FAeroporto.jonathan
     public class Aeroporto
     {
         NodeAeroporto sentinela;
-        int a=5;
+
         public Aeroporto()
         {
             sentinela = new NodeAeroporto();
@@ -17,7 +17,6 @@ namespace TrabalhoAED.FAeroporto.jonathan
         public void cadastraAeroporto(string cidade, string sigla,NodeAeroporto next)
         {
             NodeAeroporto novo = new NodeAeroporto(cidade, sigla,next);
-            a++;
         } 
 
         public void imprimeTudo()
