@@ -106,12 +106,12 @@ namespace TrabalhoAED.FAeroporto.jonathan
                 aeroporto.next = voo;
             else
             {
-                while (p != null)
+                while (p.next != null)
                 {
                     p = p.next;
                 }
 
-                p = voo;
+                p.next = voo;
             }
         }
 

@@ -194,8 +194,6 @@ namespace TrabalhoAED.Menu
         }
         public void removeVoo()
         {
-            Voo objVoo = new Voo();
-
             string message = "Digite o numero do voo a ser removido";
             imprimeMessage(message);
 
