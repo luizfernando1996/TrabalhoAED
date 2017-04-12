@@ -67,6 +67,15 @@ namespace TrabalhoAED.Avioes.Luiz
             }
             return message;
         }
+        public void imprimeTudo()
+        {
+            NodeVoo p = sentinela;
+            while (p != null)
+            {
+                Console.WriteLine("Cidade de destino: " + p.indiceCidadeDestino + " Número do Voo: " + p.numeroVoo);
+                p = p.next;
+            }
+        }
         public void procuraVoo(string codigoOrigem, string codigoDestino, int maxConexoes) { }
             
     }

@@ -11,6 +11,9 @@ namespace TrabalhoAED.Menu
 {
     class Menu
     {
+        private Voo objVoo = new Voo();
+
+
         //Métodos para string
         public void imprimeMessage(string message)
         {
@@ -160,7 +163,7 @@ namespace TrabalhoAED.Menu
         }
         public void cadastraVoo()
         {
-            Voo objVoo = new Voo();
+            //Voo objVoo = new Voo();
             Aeroporto objAero = new Aeroporto();
 
             string message = "Identifique o codigo do Voo";
@@ -172,7 +175,6 @@ namespace TrabalhoAED.Menu
             imprimeMessage(message);
             Console.Write("\t");
             string cidadeOrigem = Console.ReadLine();
-            //o retorno é o indice da cidade de origem
             indiceCidadeOrigem=objAero.verificarAeroportoExiste(cidadeOrigem,ref message);
             //Exibe a mensagem se o Aeroporto está ou não cadastrado
             imprimeMessage(message);
@@ -183,11 +185,11 @@ namespace TrabalhoAED.Menu
             //int codigoDestino = requisitaInt();
             Console.Write("\t");
             string cidadeDestino = Console.ReadLine();
-            //o retorno é o indice da cidade de destino
-            indiceCidadeDestino = objAero.verificarAeroportoExiste(cidadeDestino,ref message);
+            indiceCidadeDestino=objAero.verificarAeroportoExiste(cidadeDestino,ref message);
             //Exibe a mensagem se o Aeroporto está ou não cadastrado
             imprimeMessage(message);
 
+            //objVoo é um objeto da classe
             objVoo.cadastraVoo(codigoVoo, indiceCidadeOrigem, indiceCidadeDestino);
         }
         public void removeVoo()
@@ -203,21 +205,19 @@ namespace TrabalhoAED.Menu
         }
         public void imprimeVoo()
         {
-            Aeroporto objAero = new Aeroporto();
+            //Aeroporto objAero = new Aeroporto();
             //imprime todos voos de um determinado aeroporto
 
-            string message = "Forneça a sigla do Aeroporto";
+            string message = "Forneça o código do Aeroporto";
             imprimeMessage(message);
-            string sigla = Console.ReadLine();
-            objAero.imprimeVoo(sigla);
-            //int num = requisitaInt();
+
+            int num = requisitaInt();
             //objAero.imprimeVoo(num);
-                        
+
         }
         public void imprimeTudo()
         {
-            Aeroporto obj = new Aeroporto();
-            //obj.imprimeTudo();
+            objVoo.imprimeTudo();
         }
         public void procuraVoo()
         {
@@ -257,8 +257,7 @@ namespace TrabalhoAED.Menu
         }
         public void cadastrarVoosTeste()
         {
-            //cadastra os voos
-            Voo objVoo = new Voo();
+            //cadastra todos os voos
             //cadastra voos em brasilia
             objVoo.cadastraVoo(107, 0, 5);
             //cadastra voos em belo horizonte
@@ -274,6 +273,8 @@ namespace TrabalhoAED.Menu
             objVoo.cadastraVoo(102, 3, 2);
             //cadastra voos em salvador
             objVoo.cadastraVoo(215, 4, 2);
+
+           // objVoo.imprimeTudo();
         }
         public void finalizarProgram()
         {
