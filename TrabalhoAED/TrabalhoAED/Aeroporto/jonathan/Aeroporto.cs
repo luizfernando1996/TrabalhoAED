@@ -8,9 +8,25 @@ namespace TrabalhoAED.Aeroporto.jonathan
 {
     class Aeroporto
     {
-        public void criarAeroporto(string cidade, string codigo)
+        NodeAeroporto sentinela;
+
+        public Aeroporto()
         {
+            sentinela = new NodeAeroporto();
+        }
+        public void cadastraAeroporto(string cidade, string sigla)
+        {
+            NodeAeroporto novo = new NodeAeroporto(cidade, sigla);
 
         } 
+
+        public void imprimeTudo()
+        {
+            NodeAeroporto p = sentinela;
+            while (p.next != null)
+            {
+                Console.WriteLine(p.next);
+            }
+        }
     }
 }

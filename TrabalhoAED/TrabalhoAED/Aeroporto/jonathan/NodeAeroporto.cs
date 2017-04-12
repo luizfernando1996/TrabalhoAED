@@ -10,6 +10,14 @@ namespace TrabalhoAED.Aeroporto.jonathan
     {
         public string cidade;
         public string sigla;
+        public string next;
+
+        public NodeAeroporto()
+        {
+            cidade = null;
+            sigla = null;
+            next = null;
+        }
 
         public  NodeAeroporto(string cidade, string sigla )
         {
