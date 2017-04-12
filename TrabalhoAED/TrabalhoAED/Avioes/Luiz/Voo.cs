@@ -22,7 +22,7 @@ namespace TrabalhoAED.Avioes.Luiz
         {
             //numVoo é indentificador unico
 
-            NodeVoo p = inicio;
+            NodeVoo p = sentinela;
             while (p.next != null && p.next.numeroVoo != numVoo)
                 p = p.next;
 
