@@ -68,7 +68,7 @@ namespace TrabalhoAED.FAeroporto.jonathan
         }
 
         //verifica se o aeroporto existe e se sim retorna o indice do aerporto
-        public int verificarAeroportoExiste(string cidade)
+        public int verificarAeroportoExiste(string cidade,ref string message)
         {
             bool sairWhile = true;
             indice = 0;
@@ -81,12 +81,23 @@ namespace TrabalhoAED.FAeroporto.jonathan
                     else
                         indice++;
                 }
+                //vetor ja tem 10 posições e não se encontrou a cidade
                 catch (IndexOutOfRangeException)
                 {
                     indice = 15;
                     sairWhile = false;
                 }
+                //vetor não tem as 10 posições e não se encontrou a cidade
+                catch(NullReferenceException)
+                {
+                    indice = 15;
+                    sairWhile = false;
+                }
             }
+            if (indice == 15)
+                message = "Aeroporto não cadastrado";
+            else
+                message = "Aeroporto cadastrado";
             return indice;
         }
 
@@ -100,6 +111,7 @@ namespace TrabalhoAED.FAeroporto.jonathan
             }
 
             p = voo;
+            Console.ReadKey();
         }
     }
 }

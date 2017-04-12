@@ -166,15 +166,21 @@ namespace TrabalhoAED.Menu
             int indiceCidadeOrigem;
             message = "Digite a cidade do Aeroporto de Origem";
             imprimeMessage(message);
+            Console.Write("\t");
             string cidadeOrigem = Console.ReadLine();
-            indiceCidadeOrigem=objAero.verificarAeroportoExiste(cidadeOrigem);
+            indiceCidadeOrigem=objAero.verificarAeroportoExiste(cidadeOrigem,ref message);
+            //Exibe a mensagem se o Aeroporto está ou não cadastrado
+            imprimeMessage(message);
 
             int indiceCidadeDestino;
             message = "Digite o cidade do Aeroporto de Destino";
             imprimeMessage(message);
             //int codigoDestino = requisitaInt();
+            Console.Write("\t");
             string cidadeDestino = Console.ReadLine();
-            indiceCidadeDestino=objAero.verificarAeroportoExiste(cidadeDestino);
+            indiceCidadeDestino=objAero.verificarAeroportoExiste(cidadeDestino,ref message);
+            //Exibe a mensagem se o Aeroporto está ou não cadastrado
+            imprimeMessage(message);
 
             objVoo.cadastraVoo(codigoVoo, indiceCidadeOrigem, indiceCidadeDestino);
         }
