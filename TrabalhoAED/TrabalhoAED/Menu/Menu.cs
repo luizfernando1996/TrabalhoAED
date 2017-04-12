@@ -11,6 +11,9 @@ namespace TrabalhoAED.Menu
 {
     class Menu
     {
+        private Voo objVoo = new Voo();
+
+
         //Métodos para string
         public void imprimeMessage(string message)
         {
@@ -160,7 +163,7 @@ namespace TrabalhoAED.Menu
         }
         public void cadastraVoo()
         {
-            Voo objVoo = new Voo();
+            //Voo objVoo = new Voo();
             Aeroporto objAero = new Aeroporto();
 
             string message = "Identifique o codigo do Voo";
@@ -186,6 +189,7 @@ namespace TrabalhoAED.Menu
             //Exibe a mensagem se o Aeroporto está ou não cadastrado
             imprimeMessage(message);
 
+            //objVoo é um objeto da classe
             objVoo.cadastraVoo(codigoVoo, indiceCidadeOrigem, indiceCidadeDestino);
         }
         public void removeVoo()
@@ -213,8 +217,7 @@ namespace TrabalhoAED.Menu
         }
         public void imprimeTudo()
         {
-            Aeroporto obj = new Aeroporto();
-            obj.imprimeTudo();
+            objVoo.imprimeTudo();
         }
         public void procuraVoo()
         {
@@ -254,8 +257,7 @@ namespace TrabalhoAED.Menu
         }
         public void cadastrarVoosTeste()
         {
-            //cadastra os voos
-            Voo objVoo = new Voo();
+            //cadastra todos os voos
             //cadastra voos em brasilia
             objVoo.cadastraVoo(107, 0, 5);
             //cadastra voos em belo horizonte
@@ -271,6 +273,8 @@ namespace TrabalhoAED.Menu
             objVoo.cadastraVoo(102, 3, 2);
             //cadastra voos em salvador
             objVoo.cadastraVoo(215, 4, 2);
+
+           // objVoo.imprimeTudo();
         }
         public void finalizarProgram()
         {
