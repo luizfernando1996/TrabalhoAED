@@ -274,7 +274,7 @@ namespace TrabalhoAED.Menu
             //cadastra voos em salvador
             objVoo.cadastraVoo(215, 4, 2);
 
-           //objAereo.imprimeVoo("CNF");
+           //objAero.imprimeVoo("CNF");
         }
         public void finalizarProgram()
         {

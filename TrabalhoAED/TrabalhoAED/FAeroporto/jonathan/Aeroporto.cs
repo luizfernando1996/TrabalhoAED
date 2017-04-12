@@ -24,7 +24,7 @@ namespace TrabalhoAED.FAeroporto.jonathan
             if (indice != 10)
                 vetor[indice] = new NodeAeroporto(cidade, indice, sigla, null);
             indice++;
-        }      
+        }
 
         public string buscaSigla(string cidade)
         {
@@ -36,7 +36,7 @@ namespace TrabalhoAED.FAeroporto.jonathan
                 case "brasília":
                     return "BSB";
                 case "belo horizonte":
-                    return "CNF";                
+                    return "CNF";
                 case "rio de janeiro":
                     return "GIG";
                 case "são paulo":
@@ -65,7 +65,7 @@ namespace TrabalhoAED.FAeroporto.jonathan
         }
 
         //verifica se o aeroporto existe e se sim retorna o indice do aerporto
-        public int verificarAeroportoExiste(string cidade,ref string message)
+        public int verificarAeroportoExiste(string cidade, ref string message)
         {
             bool sairWhile = true;
             indice = 0;
@@ -85,7 +85,7 @@ namespace TrabalhoAED.FAeroporto.jonathan
                     sairWhile = false;
                 }
                 //vetor não tem as 10 posições e não se encontrou a cidade
-                catch(NullReferenceException)
+                catch (NullReferenceException)
                 {
                     indice = 15;
                     sairWhile = false;
@@ -123,7 +123,7 @@ namespace TrabalhoAED.FAeroporto.jonathan
             while (vetor[i] != null)
             {
                 //percorre o vetor até encontrar a sigla correspondete
-                if(vetor[i].sigla == sigla)
+                if (vetor[i].sigla == sigla)
                 {
                     //ponteiro inicial que aponta para a origem...para o vertice
                     p = vetor[i].next;
@@ -140,7 +140,7 @@ namespace TrabalhoAED.FAeroporto.jonathan
                 else
                 {
                     i++;
-                }                
+                }
             }
         }
 
@@ -148,43 +148,59 @@ namespace TrabalhoAED.FAeroporto.jonathan
         {
             int i = 0;
             NodeVoo p;
-            while (vetor[i] != null)
-            {                
-                 p = vetor[i].next;
-                 if (p != null)
+            try
+            {
+                while (vetor[i] != null)
+                {
+                    p = vetor[i].next;
+                    if (p != null)
                         Console.WriteLine("\nAeroporto de " + vetor[i].cidade + " Código: " + vetor[i].codigo + " Sigla: " + vetor[i].sigla);
 
-                while (p != null)
-                 {
+                    while (p != null)
+                    {
                         Console.WriteLine("Voo: " + p.numeroVoo + " " + "Destino: " + p.indiceCidadeDestino);
                         p = p.next;
-                 }
-                 i++;              
-               
+                    }
+                    i++;
+
+                }
+            }
+
+            catch (IndexOutOfRangeException)
+            {
+
+
             }
         }
 
         public void removeVoo(int numeroVoo)
         {
             int i = 0;
+            bool chave2 = false;
+            bool chave = true;
             NodeVoo p;
             while (vetor[i] != null)
             {
-                p = vetor[i].next;              
-
-                
-                while (p != null)
-                {  
-                    if( p.next.numeroVoo != numeroVoo)
-                    {
-                        p = null;
-                    }
-                    p = p.next;
-                }
-                if(p != null)
+                //primeiro voo
+                p = vetor[i].next;
+                if (vetor[i] != null && vetor[i].next != null)
+                    if (vetor[i].next.numeroVoo == numeroVoo)
+                        vetor[i].next = vetor[i].next.next;
+                chave = true;
+                while (chave)
                 {
-                    p.next = p.next.next;
+                    if (p != null && p.next != null)
+                        if (p.next.numeroVoo == numeroVoo)
+                        {
+                            chave = false;
+                            p.next = p.next.next;
+                        }
+                    if (p == null)
+                        chave = false;
+                    else
+                        p = p.next;
                 }
+
                 i++;
 
             }
