@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TrabalhoAED.Aeroporto.jonathan
+namespace TrabalhoAED.FAeroporto.jonathan
 {
-    class Aeroporto
+    public class Aeroporto
     {
         NodeAeroporto sentinela;
 
@@ -14,9 +14,9 @@ namespace TrabalhoAED.Aeroporto.jonathan
         {
             sentinela = new NodeAeroporto();
         }
-        public void cadastraAeroporto(string cidade, string sigla)
+        public void cadastraAeroporto(string cidade, string sigla,NodeAeroporto next)
         {
-            NodeAeroporto novo = new NodeAeroporto(cidade, sigla);
+            NodeAeroporto novo = new NodeAeroporto(cidade, sigla,next);
 
         } 
 
