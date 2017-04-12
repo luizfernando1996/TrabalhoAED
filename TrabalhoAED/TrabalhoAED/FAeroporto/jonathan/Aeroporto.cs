@@ -122,8 +122,10 @@ namespace TrabalhoAED.FAeroporto.jonathan
             NodeVoo p;
             while (vetor[i] != null)
             {
+                //percorre o vetor até encontrar a sigla correspondete
                 if(vetor[i].sigla == sigla)
                 {
+                    //ponteiro inicial que aponta para a origem...para o vertice
                     p = vetor[i].next;
                     if (p != null)
                         Console.WriteLine("\nAeroporto de " + vetor[i].cidade + " Código: " + vetor[i].codigo + " Sigla: " + vetor[i].sigla);
