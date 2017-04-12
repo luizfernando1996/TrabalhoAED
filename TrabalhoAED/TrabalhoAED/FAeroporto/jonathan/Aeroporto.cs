@@ -33,11 +33,15 @@ namespace TrabalhoAED.FAeroporto.jonathan
             {
                 case "brasilia":
                     return "BSB";
+                case "brasília":
+                    return "BSB";
                 case "belo horizonte":
-                    return "CNF";
+                    return "CNF";                
                 case "rio de janeiro":
                     return "GIG";
-                case "são Paulo":
+                case "são paulo":
+                    return "GRU";
+                case "sao paulo":
                     return "GRU";
                 case "salvador":
                     return "SSA";

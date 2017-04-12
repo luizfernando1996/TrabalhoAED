@@ -205,13 +205,14 @@ namespace TrabalhoAED.Menu
         }
         public void imprimeVoo()
         {
-            //Aeroporto objAero = new Aeroporto();
+            Aeroporto objAero = new Aeroporto();
             //imprime todos voos de um determinado aeroporto
 
-            string message = "Forneça o código do Aeroporto";
+            string message = "Forneça a sigla do Aeroporto";
             imprimeMessage(message);
-
-            int num = requisitaInt();
+            string sigla = Console.ReadLine();
+            objAero.imprimeVoo(sigla);
+            //int num = requisitaInt();
             //objAero.imprimeVoo(num);
 
         }
@@ -257,7 +258,7 @@ namespace TrabalhoAED.Menu
         }
         public void cadastrarVoosTeste()
         {
-            //cadastra todos os voos
+            //cadastra todos os voos        
             //cadastra voos em brasilia
             objVoo.cadastraVoo(107, 0, 5);
             //cadastra voos em belo horizonte
