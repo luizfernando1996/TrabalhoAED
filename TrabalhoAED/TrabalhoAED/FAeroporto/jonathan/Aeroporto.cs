@@ -45,9 +45,9 @@ namespace TrabalhoAED.FAeroporto.jonathan
                     return "CNF";
                 case "rio de janeiro":
                     return "GIG";
-                case "São Paulo":
+                case "são Paulo":
                     return "GRU";
-                case "Salvador":
+                case "salvador":
                     return "SSA";
 
             }
