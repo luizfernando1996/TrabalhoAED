@@ -4,28 +4,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace TrabalhoAED.FAeroporto.jonathan
 {
-    public class Aeroporto
+    class Aeroporto
     {
-        NodeAeroporto sentinela;
+        
+        NodeAeroporto[] vetor = new NodeAeroporto[10];
+        static int indice = 0;
 
         public Aeroporto()
         {
-            sentinela = new NodeAeroporto();
+           
         }
-        public void cadastraAeroporto(string cidade, string sigla,NodeAeroporto next)
+        public void cadastraAeroporto(string cidade, string sigla)
         {
-            NodeAeroporto novo = new NodeAeroporto(cidade, sigla,next);
+            NodeAeroporto novo = new NodeAeroporto(cidade, sigla, null);
+            vetor[indice] = novo;
+            indice++;
         } 
 
         public void imprimeTudo()
-        {
-            NodeAeroporto p = sentinela;
-            while (p.next != null)
-            {
-                Console.WriteLine(p.next);
-            }
+        {           
+           
         }
     }
 }
