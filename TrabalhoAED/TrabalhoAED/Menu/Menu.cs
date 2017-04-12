@@ -12,6 +12,7 @@ namespace TrabalhoAED.Menu
     class Menu
     {
         private Voo objVoo = new Voo();
+        Aeroporto objAero = new Aeroporto();
 
 
         //Métodos para string
@@ -203,7 +204,7 @@ namespace TrabalhoAED.Menu
         }
         public void imprimeVoo()
         {
-            Aeroporto objAero = new Aeroporto();
+           
             //imprime todos voos de um determinado aeroporto
 
             string message = "Forneça a sigla do Aeroporto";
@@ -216,7 +217,7 @@ namespace TrabalhoAED.Menu
         }
         public void imprimeTudo()
         {
-            objVoo.imprimeTudo();
+            objAero.imprimeTudo();
         }
         public void procuraVoo()
         {
