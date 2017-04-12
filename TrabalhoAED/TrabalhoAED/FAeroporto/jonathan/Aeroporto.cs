@@ -170,8 +170,8 @@ namespace TrabalhoAED.FAeroporto.jonathan
             NodeVoo p;
             while (vetor[i] != null)
             {
-                p = vetor[i].next;               
-                
+                p = vetor[i].next;              
+
                 
                 while (p != null)
                 {  
