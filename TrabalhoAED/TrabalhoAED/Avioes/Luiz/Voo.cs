@@ -29,12 +29,11 @@ namespace TrabalhoAED.Avioes.Luiz
         public void cadastraVoo(int numVoo, int codigoOrigem, int codigoDestino)
         {
             NodeVoo objVoo=sentinela;
-            Aeroporto objAero = new Aeroporto();
+                Aeroporto objAero = new Aeroporto();
 
             if (listaVazia())
             {
                 objVoo = new NodeVoo(numVoo, codigoDestino, sentinela.next);
-                sentinela.next = objVoo;
             }
             else
             {
@@ -42,14 +41,8 @@ namespace TrabalhoAED.Avioes.Luiz
                 while (p.next != null)
                     p = p.next;
                 objVoo = new NodeVoo(numVoo, codigoDestino, p.next);
-                p.next = objVoo;
             }
            objAero.vincularVooAeroporto(objVoo,codigoOrigem);
-        }
-        public void vincularVooAeroporto(NodeVoo ob,int codigoOrigem)
-        {
-            Aeroporto objAero = new Aeroporto();
-            //objAero.vincularVooAeroporto(sentinela,codigoOrigem);
         }
         public string removeVoo(int numVoo)
         {
