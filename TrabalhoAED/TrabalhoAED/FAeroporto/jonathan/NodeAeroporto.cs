@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TrabalhoAED.Avioes.Luiz;
 
 namespace TrabalhoAED.FAeroporto.jonathan
 {
@@ -10,7 +11,7 @@ namespace TrabalhoAED.FAeroporto.jonathan
     {
         public string cidade;
         public string sigla;
-        public NodeAeroporto next;
+        public NodeVoo next;
 
         public NodeAeroporto()
         {
@@ -19,10 +20,11 @@ namespace TrabalhoAED.FAeroporto.jonathan
             next = null;
         }
 
-        public  NodeAeroporto(string cidade, string sigla, NodeAeroporto next )
+        public  NodeAeroporto(string cidade, string sigla, NodeVoo next )
         {
             this.cidade = cidade;
             this.sigla = sigla;
+            this.next = next;
         }
     }
 }

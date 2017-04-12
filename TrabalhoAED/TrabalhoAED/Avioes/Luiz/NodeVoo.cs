@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TrabalhoAED.Avioes.Luiz
 {
-    class NodeVoo
+    public class NodeVoo
     {
         public NodeVoo next;
         public int indiceCidadeDestino;
