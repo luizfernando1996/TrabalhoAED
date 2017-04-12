@@ -130,7 +130,7 @@ namespace TrabalhoAED.FAeroporto.jonathan
 
                     while (p != null)
                     {
-                        Console.WriteLine("Voo " + p.numeroVoo + ": " + "Destino: " + p.indiceCidadeDestino);
+                        Console.WriteLine("Voo: " + p.numeroVoo + " " + "Destino: " + p.indiceCidadeDestino);
                         p = p.next;
                     }
                     i++;
@@ -139,6 +139,26 @@ namespace TrabalhoAED.FAeroporto.jonathan
                 {
                     i++;
                 }                
+            }
+        }
+
+        public void imprimeTudo()
+        {
+            int i = 0;
+            NodeVoo p;
+            while (vetor[i] != null)
+            {                
+                 p = vetor[i].next;
+                 if (p != null)
+                        Console.WriteLine("\nAeroporto de " + vetor[i].cidade + " Código: " + vetor[i].codigo + " Sigla: " + vetor[i].sigla);
+
+                while (p != null)
+                 {
+                        Console.WriteLine("Voo: " + p.numeroVoo + " " + "Destino: " + p.indiceCidadeDestino);
+                        p = p.next;
+                 }
+                 i++;              
+               
             }
         }
     }
