@@ -200,7 +200,7 @@ namespace TrabalhoAED.Menu
 
             int numero = requisitaInt();
             //retorna uma mensagem de sucesso ou não sobre a remoção do Voo
-            imprimeMessage(objVoo.removeVoo(numero));
+            objAero.removeVoo(numero);
         }
         public void imprimeVoo()
         {
@@ -274,7 +274,7 @@ namespace TrabalhoAED.Menu
             //cadastra voos em salvador
             objVoo.cadastraVoo(215, 4, 2);
 
-           //objAereo.imprimeVoo("CNF");
+           //objAero.imprimeVoo("CNF");
         }
         public void finalizarProgram()
         {
