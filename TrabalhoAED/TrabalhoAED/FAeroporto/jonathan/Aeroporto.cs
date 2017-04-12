@@ -18,15 +18,17 @@ namespace TrabalhoAED.FAeroporto.jonathan
            
         }
         public void cadastraAeroporto(string cidade, string sigla)
-        {
-            NodeAeroporto novo = new NodeAeroporto(cidade, sigla, null);
-            vetor[indice] = novo;
+        {            
+            vetor[indice] = new NodeAeroporto(cidade, sigla, null);
             indice++;
         } 
 
         public void imprimeTudo()
         {           
-           
+           for(int i = 0; i < indice; i++)
+            {
+                Console.WriteLine("cidade: " + vetor[i].cidade + " sigla:" + vetor[i].sigla);                
+            }
         }
     }
 }

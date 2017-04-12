@@ -31,6 +31,7 @@ namespace TrabalhoAED.Menu
                     Console.WriteLine("Digite o código");
                     string sigla = Console.ReadLine();
                     obj.cadastraAeroporto(cidade, sigla);
+                    obj.imprimeTudo();
                     break;
 
                 default:
