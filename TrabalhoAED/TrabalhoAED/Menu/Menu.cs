@@ -200,7 +200,7 @@ namespace TrabalhoAED.Menu
 
             int numero = requisitaInt();
             //retorna uma mensagem de sucesso ou não sobre a remoção do Voo
-            imprimeMessage(objVoo.removeVoo(numero));
+            objAero.removeVoo(numero);
         }
         public void imprimeVoo()
         {
