@@ -16,7 +16,7 @@ namespace TrabalhoAED.Aeroporto.jonathan
         }
         public void cadastraAeroporto(string cidade, string sigla)
         {
-            NodeAeroporto novo = new NodeAeroporto(cidade, sigla);
+            NodeAeroporto novo = new NodeAeroporto(cidade, sigla, null);
 
         } 
 
