@@ -8,10 +8,21 @@ namespace TrabalhoAED.Avioes.Luiz
 {
     class Voo
     {
-        public void cadastraVoo(int numVoo, string codigoOrigem, string codigoDestino) { }
-        public void removeVoo() { }
-        public void imprimeVoo() { }
-        public void procuraVoo() { }
+        public NodeVoo inicio = null;
+
+        public void cadastraVoo(int numVoo, string codigoOrigem, string codigoDestino)
+        {
+
+        }
+        public void removeVoo(int numVoo)
+        {
+
+        }
+        public void imprimeVoos(int numero, string nomeCidade)
+        {
+
+        }
+        public void procuraVoo(string codigoOrigem, string codigoDestino, int maxConexoes) { }
 
     }
 }
