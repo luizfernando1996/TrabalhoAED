@@ -13,11 +13,16 @@ namespace TrabalhoAED.Menu
     {
         public static void Main(string[] args)
         {
-            Aeroporto obj1 = new Aeroporto();
+
             Console.WriteLine("---------------------------Menu------------------------");
             Console.WriteLine("Digite 1 para Procurar Voos");
             Console.WriteLine("Digite 2 para Cadastrar Aeroportos");
             string num = Console.ReadLine();
+
+
+
+
+            Aeroporto obj = new Aeroporto();
             switch (num)
             {
                 case "2":
@@ -25,7 +30,7 @@ namespace TrabalhoAED.Menu
                     string cidade = Console.ReadLine();
                     Console.WriteLine("Digite o código");
                     string sigla = Console.ReadLine();
-                    
+                    obj.cadastraAeroporto(cidade, sigla);
                     break;
 
                 default:

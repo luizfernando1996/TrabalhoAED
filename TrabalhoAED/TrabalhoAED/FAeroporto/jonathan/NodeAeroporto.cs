@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TrabalhoAED.Aeroporto.jonathan
+namespace TrabalhoAED.FAeroporto.jonathan
 {
-    class NodeAeroporto
+    public class NodeAeroporto
     {
         public string cidade;
         public string sigla;
