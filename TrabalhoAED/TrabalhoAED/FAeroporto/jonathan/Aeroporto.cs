@@ -24,15 +24,7 @@ namespace TrabalhoAED.FAeroporto.jonathan
             if (indice != 10)
                 vetor[indice] = new NodeAeroporto(cidade, indice, sigla, null);
             indice++;
-        }
-
-        public void imprimeTudo()
-        {
-            for (int i = 0; i < indice; i++)
-            {
-                Console.WriteLine("cidade: " + vetor[i].cidade + " sigla:" + vetor[i].sigla);
-            }
-        }
+        }      
 
         public string buscaSigla(string cidade)
         {
@@ -41,7 +33,7 @@ namespace TrabalhoAED.FAeroporto.jonathan
             {
                 case "brasilia":
                     return "BSB";
-                case "belo horizinte":
+                case "belo horizonte":
                     return "CNF";
                 case "rio de janeiro":
                     return "GIG";
@@ -51,7 +43,7 @@ namespace TrabalhoAED.FAeroporto.jonathan
                     return "SSA";
 
             }
-            return "sigla não encontrda";
+            return "sigla não encontrada";
         }
 
         public void vincularVooAeroporto(NodeVoo voo, int indice)
@@ -118,6 +110,34 @@ namespace TrabalhoAED.FAeroporto.jonathan
                 p = voo;
             }
             Console.ReadKey();
+        }
+
+        //imprime os voos de todos os aerportos
+        public void imprimeVoos(string sigla)
+        {
+            int i = indice;
+            NodeVoo p;
+            while (vetor[i] != null)
+            {
+                if(vetor[i].sigla == sigla)
+                {
+                    p = vetor[i].next;
+                    if (p != null)
+                        Console.WriteLine("\nAeroporto de " + vetor[i].cidade + " Código: " + vetor[i].codigo + " Sigla: " + vetor[i].sigla);
+
+                    while (p != null)
+                    {
+                        Console.WriteLine("Voo " + p.numeroVoo + ": " + "Destino: " + p.indiceCidadeDestino);
+                        p = p.next;
+                    }
+                    i++;
+                }
+                else
+                {
+
+                }
+               
+            }
         }
     }
 }
