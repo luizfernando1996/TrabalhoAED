@@ -186,11 +186,15 @@ namespace TrabalhoAED.Menu
         }
         public void imprimeVoo()
         {
+            //Aeroporto objAero = new Aeroporto();
             //imprime todos voos de um determinado aeroporto
+
             string message = "Forneça o código do Aeroporto";
             imprimeMessage(message);
 
             int num = requisitaInt();
+            //objAero.imprimeVoo(num);
+
         }
         public void imprimeTudo()
         {
