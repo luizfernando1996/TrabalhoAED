@@ -12,7 +12,7 @@ namespace TrabalhoAED
         {
             Console.WriteLine("teste");
             int a = 1;
-            Console.WriteLine("dasads");
+            Console.WriteLine("teste");
             Console.ReadKey();
         }
     }
