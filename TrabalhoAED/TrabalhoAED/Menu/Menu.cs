@@ -32,9 +32,11 @@ namespace TrabalhoAED.Menu
             {
                 Console.Write("\t");
                 num = Console.ReadLine();
-                sairWhile = verificaInt(num);//verifica se foi digitado um numero inteiro
+                //verifica se foi digitado um numero inteiro
+                sairWhile = verificaInt(num);
 
-                if (sairWhile == false)  //se o numero não for inteiro
+                //se o numero não for inteiro
+                if (sairWhile == false) 
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("\tDigite um número, por favor");
@@ -50,7 +52,8 @@ namespace TrabalhoAED.Menu
             bool sairWhile = false;
             while (sairWhile == false)
             {
-                num = requisitaInt();//requisita um inteiro
+                //requisita um inteiro
+                num = requisitaInt();
                 if (num >= 0 && num <= range)
                     sairWhile = true;
                 else
@@ -71,7 +74,6 @@ namespace TrabalhoAED.Menu
         {
             bool sairWhile = false;
 
-            //exibe menu principal
             //gerencia a repetição e saida do menu
             while (sairWhile == false)
             {
@@ -79,7 +81,7 @@ namespace TrabalhoAED.Menu
                 //o menu tem 7 opções, logo o número deve estar no range 0-7
                 int num = opcaoEscolhidaDoMenu(7);
                 selecionaOptionMenu(num);
-                //Usuario deseja sair do programa então não mostre menu e só saia
+                //Usuario deseja sair do programa
                 if (num == 0)
                     sairWhile = true;
             }
@@ -150,28 +152,31 @@ namespace TrabalhoAED.Menu
             imprimeMessage(message);
 
             string cidade = Console.ReadLine();
-            obj.cadastraAeroporto(cidade, 1);
+            obj.cadastraAeroporto(cidade);
         }
         public void cadastraVoo()
         {
             Voo objVoo = new Voo();
+            Aeroporto objAero = new Aeroporto();
 
             string message = "Identifique o codigo do Voo";
             imprimeMessage(message);
             int codigoVoo = requisitaInt();
 
-            message = "Digite o codigo do Aeroporto de Origem";
+            int indiceCidadeOrigem;
+            message = "Digite a cidade do Aeroporto de Origem";
             imprimeMessage(message);
-            //int codigoOrigem = requisitaInt();//requisita codigo
-            string codigoOrigem = Console.ReadLine();
+            string cidadeOrigem = Console.ReadLine();
+            indiceCidadeOrigem=objAero.verificarAeroportoExiste(cidadeOrigem);
 
-            message = "Digite o codigo do Aeroporto de Destino";
+            int indiceCidadeDestino;
+            message = "Digite o cidade do Aeroporto de Destino";
             imprimeMessage(message);
             //int codigoDestino = requisitaInt();
-            string codigoDestino = Console.ReadLine();
+            string cidadeDestino = Console.ReadLine();
+            indiceCidadeDestino=objAero.verificarAeroportoExiste(cidadeDestino);
 
-
-            objVoo.cadastraVoo(codigoVoo, codigoOrigem, codigoDestino);
+            objVoo.cadastraVoo(codigoVoo, indiceCidadeOrigem, indiceCidadeDestino);
         }
         public void removeVoo()
         {

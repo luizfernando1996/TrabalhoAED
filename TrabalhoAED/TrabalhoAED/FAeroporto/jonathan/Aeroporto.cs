@@ -10,32 +10,33 @@ namespace TrabalhoAED.FAeroporto.jonathan
 {
     class Aeroporto
     {
-        
-        NodeAeroporto[] vetor = new NodeAeroporto[10];
+
+        public static NodeAeroporto[] vetor = new NodeAeroporto[10];
         static int indice = 0;
 
         public Aeroporto()
         {
-           
+
         }
-        public void cadastraAeroporto(string cidade, int codigo)
+        public void cadastraAeroporto(string cidade)
         {
             string sigla = buscaSigla(cidade.ToLower());
-            vetor[indice] = new NodeAeroporto(cidade, codigo, sigla, null);
+            if (indice != 10)
+                vetor[indice] = new NodeAeroporto(cidade, indice, sigla, null);
             indice++;
-        } 
+        }
 
         public void imprimeTudo()
-        {           
-           for(int i = 0; i < indice; i++)
+        {
+            for (int i = 0; i < indice; i++)
             {
-                Console.WriteLine("cidade: " + vetor[i].cidade + " sigla:" + vetor[i].sigla);                
+                Console.WriteLine("cidade: " + vetor[i].cidade + " sigla:" + vetor[i].sigla);
             }
         }
 
         public string buscaSigla(string cidade)
         {
-            
+
             switch (cidade)
             {
                 case "brasilia":
@@ -53,25 +54,49 @@ namespace TrabalhoAED.FAeroporto.jonathan
             return "sigla não encontrda";
         }
 
-        public void vincularVooAeroporto(NodeVoo voo)
+        public void vincularVooAeroporto(NodeVoo voo, int indice)
         {
-            int i = 0;
-            while(i != indice)
+            //int i = 0;
+            //while(i != indice)
+            //{
+            //    if ( cidadeOrigem== vetor[i].cidade)// encontra no vetor de aeroportos, o aeroporto de origem correspondente ao voo.
+            //    {
+            insereVoo(vetor[indice], voo);
+            //    }
+            //    i++;
+            //}
+        }
+
+        //verifica se o aeroporto existe e se sim retorna o indice do aerporto
+        public int verificarAeroportoExiste(string cidade)
+        {
+            bool sairWhile = true;
+            indice = 0;
+            while (sairWhile)
             {
-                if (voo.origem == vetor[i].cidade)// encontra no vetor de aeroportos, o aeroporto de origem correspondente ao voo.
+                try
                 {
-                    insereVoo(vetor[i], voo);
+                    if (vetor[indice].cidade == cidade)
+                        sairWhile = false;
+                    else
+                        indice++;
                 }
-                i++;
+                catch (IndexOutOfRangeException)
+                {
+                    indice = 15;
+                    sairWhile = false;
+                }
             }
+            return indice;
         }
 
         public void insereVoo(NodeAeroporto aeroporto, NodeVoo voo)//insere o voo no fim da lista de aeroporto
         {
+            //o next é um campo de NodeVoo
             NodeVoo p = aeroporto.next;
-            while(p != null)
+            while (p != null)
             {
-                p = p.next;                
+                p = p.next;
             }
 
             p = voo;
