@@ -11,6 +11,11 @@ namespace TrabalhoAED.Avioes.Luiz
         public NodeVoo next;
         public int indiceCidadeDestino;
         public int numeroVoo;
+
+        public NodeVoo()
+        {
+            this.next = null;
+        }
         
         public NodeVoo(NodeVoo next, int indiceCidadeDestino, int numeroVoo)
         {
