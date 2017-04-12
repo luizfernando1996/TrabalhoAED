@@ -36,7 +36,7 @@ namespace TrabalhoAED.Avioes.Luiz
                 p = p.next;
             }
         }
-        public void procuraVoo(string codigoOrigem, string codigoDestino, int maxConexoes) { }
+       
 
     }
 }
