@@ -65,6 +65,18 @@ namespace TrabalhoAED.Menu
         }
         //fim dos métodos para inteiro
 
+        //gerencia a repetição e saída do menu
+        public static void gerenciadoMenu()
+        {
+            bool sairWhile = false;
+            while (sairWhile == false)
+            {
+                int num = entradaDoMenu();
+                selecionaOptionMenu(num);
+                if (num == 0)
+                    sairWhile = true;
+            }
+        }
         public static int entradaDoMenu()
         {
             string message = null;
@@ -89,42 +101,31 @@ namespace TrabalhoAED.Menu
                 case 1:
                     //cadastra um aeroporto solicitando uma cidade e gerando um código  
                     cadastraAeroporto();
-                    entradaDoMenu();
                     break;
                 case 2:
                     cadastraVoo();
-                    entradaDoMenu();
                     break;
                 case 3:
                     removeVoo();
-                    entradaDoMenu();
                     break;
                 case 4:
                     imprimeVoo();
-                    entradaDoMenu();
                     break;
                 case 5:
                     imprimeTudo();
-                    entradaDoMenu();
                     break;
                 case 6:
                     procuraVoo();
-                    entradaDoMenu();
                     break;
                 case 0:
                     finalizarProgram();
                     break;
-
             }
-
         }
 
         public static void Main(string[] args)
         {
-            int num = entradaDoMenu();
-            selecionaOptionMenu(num);
-
-            Console.ReadKey();
+            gerenciadoMenu();
         }
 
         //Opções do menu
