@@ -10,7 +10,7 @@ namespace TrabalhoAED.Aeroporto.jonathan
     {
         public string cidade;
         public string sigla;
-        public string next;
+        public NodeAeroporto next;
 
         public NodeAeroporto()
         {
@@ -19,7 +19,7 @@ namespace TrabalhoAED.Aeroporto.jonathan
             next = null;
         }
 
-        public  NodeAeroporto(string cidade, string sigla )
+        public  NodeAeroporto(string cidade, string sigla, NodeAeroporto next )
         {
             this.cidade = cidade;
             this.sigla = sigla;
