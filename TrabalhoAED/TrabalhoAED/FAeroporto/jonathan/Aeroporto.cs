@@ -163,5 +163,31 @@ namespace TrabalhoAED.FAeroporto.jonathan
                
             }
         }
+
+        public void removeVoo(int numeroVoo)
+        {
+            int i = 0;
+            NodeVoo p;
+            while (vetor[i] != null)
+            {
+                p = vetor[i].next;               
+                
+                
+                while (p != null)
+                {  
+                    if( p.next.numeroVoo != numeroVoo)
+                    {
+                        p = null;
+                    }
+                    p = p.next;
+                }
+                if(p != null)
+                {
+                    p.next = p.next.next;
+                }
+                i++;
+
+            }
+        }
     }
 }
