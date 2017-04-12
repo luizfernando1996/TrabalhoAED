@@ -78,8 +78,8 @@ namespace TrabalhoAED.Menu
             while (sairWhile == false)
             {
                 exibeMenu();
-                //o menu tem 7 opções, logo o número deve estar no range 0-7
-                int num = opcaoEscolhidaDoMenu(7);
+                //o menu tem 8 opções, logo o número deve estar no range 0-8
+                int num = opcaoEscolhidaDoMenu(8);
                 selecionaOptionMenu(num);
                 //Usuario deseja sair do programa
                 if (num == 0)
@@ -97,6 +97,7 @@ namespace TrabalhoAED.Menu
             message += "\nDigite 5 para imprimir tudo";
             message += "\nDigite 6 para procurar voo";
             message += "\nDigite 7 para limpar";
+            message += "\nDigite 8 para inserir entradas no programa - TESTE";
             message += "\nDigite 0 para sair";
             imprimeMessage(message);
         }
@@ -138,6 +139,9 @@ namespace TrabalhoAED.Menu
                     break;
                 case 7:
                     limparMenu();
+                    break;
+                case 8:
+                    insereDadosParaTeste();
                     break;
                 case 0:
                     finalizarProgram();
@@ -231,6 +235,42 @@ namespace TrabalhoAED.Menu
 
             objVoo.procuraVoo(codigoOrigem, codigoDestino, maximoConexoes);
 
+        }
+        public void insereDadosParaTeste()
+        {
+            cadastrarAeroportosTeste();
+            cadastrarVoosTeste();
+        }
+        public void cadastrarAeroportosTeste()
+        {
+            //cadastra os aeroportos
+            Aeroporto obj = new Aeroporto();
+            obj.cadastraAeroporto("Brasilia");
+            obj.cadastraAeroporto("Belo Horizonte");
+            obj.cadastraAeroporto("Rio de Janeiro");
+            obj.cadastraAeroporto("São Paulo");
+            obj.cadastraAeroporto("Salvador");
+
+        }
+        public void cadastrarVoosTeste()
+        {
+            //cadastra os voos
+            Voo objVoo = new Voo();
+            //cadastra voos em brasilia
+            objVoo.cadastraVoo(107, 0, 5);
+            //cadastra voos em belo horizonte
+            objVoo.cadastraVoo(214, 1, 5);
+            objVoo.cadastraVoo(555, 1, 3);
+            objVoo.cadastraVoo(101, 1, 4);
+            //cadastra voos em rio de janeiro
+            objVoo.cadastraVoo(554, 2, 2);
+            objVoo.cadastraVoo(090, 2, 4);
+            //cadastra voos em sao paulo
+            objVoo.cadastraVoo(050, 3, 1);
+            objVoo.cadastraVoo(089, 3, 3);
+            objVoo.cadastraVoo(102, 3, 2);
+            //cadastra voos em salvador
+            objVoo.cadastraVoo(215, 4, 2);
         }
         public void finalizarProgram()
         {

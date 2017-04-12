@@ -109,7 +109,6 @@ namespace TrabalhoAED.FAeroporto.jonathan
 
                 p = voo;
             }
-            Console.ReadKey();
         }
 
         //imprime os voos de todos os aerportos

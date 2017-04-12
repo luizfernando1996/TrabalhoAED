@@ -28,17 +28,21 @@ namespace TrabalhoAED.Avioes.Luiz
 
         public void cadastraVoo(int numVoo, int codigoOrigem, int codigoDestino)
         {
-            NodeVoo objVoo;
+            NodeVoo objVoo=sentinela;
             Aeroporto objAero = new Aeroporto();
 
             if (listaVazia())
+            {
                 objVoo = new NodeVoo(numVoo, codigoDestino, sentinela.next);
+                sentinela.next = objVoo;
+            }
             else
             {
                 NodeVoo p = sentinela;
                 while (p.next != null)
                     p = p.next;
                 objVoo = new NodeVoo(numVoo, codigoDestino, p.next);
+                p.next = objVoo;
             }
            objAero.vincularVooAeroporto(objVoo,codigoOrigem);
         }
