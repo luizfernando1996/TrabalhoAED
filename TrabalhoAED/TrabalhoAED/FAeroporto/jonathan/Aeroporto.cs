@@ -112,11 +112,11 @@ namespace TrabalhoAED.FAeroporto.jonathan
         }
 
         //imprime os voos de todos os aerportos
-        public void imprimeVoos(string sigla)
+        public void imprimeVoo(string sigla)
         {
             int i = indice;
             NodeVoo p;
-            while (vetor[i] != null)
+            while (vetor[i] != null || i == -1)
             {
                 if(vetor[i].sigla == sigla)
                 {
@@ -129,13 +129,13 @@ namespace TrabalhoAED.FAeroporto.jonathan
                         Console.WriteLine("Voo " + p.numeroVoo + ": " + "Destino: " + p.indiceCidadeDestino);
                         p = p.next;
                     }
-                    i++;
+                    i=-1;
                 }
                 else
                 {
-
+                    i++;
                 }
-               
+                
             }
         }
     }

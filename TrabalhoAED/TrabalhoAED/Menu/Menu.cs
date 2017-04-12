@@ -172,6 +172,7 @@ namespace TrabalhoAED.Menu
             imprimeMessage(message);
             Console.Write("\t");
             string cidadeOrigem = Console.ReadLine();
+            //o retorno é o indice da cidade de origem
             indiceCidadeOrigem=objAero.verificarAeroportoExiste(cidadeOrigem,ref message);
             //Exibe a mensagem se o Aeroporto está ou não cadastrado
             imprimeMessage(message);
@@ -182,7 +183,8 @@ namespace TrabalhoAED.Menu
             //int codigoDestino = requisitaInt();
             Console.Write("\t");
             string cidadeDestino = Console.ReadLine();
-            indiceCidadeDestino=objAero.verificarAeroportoExiste(cidadeDestino,ref message);
+            //o retorno é o indice da cidade de destino
+            indiceCidadeDestino = objAero.verificarAeroportoExiste(cidadeDestino,ref message);
             //Exibe a mensagem se o Aeroporto está ou não cadastrado
             imprimeMessage(message);
 
@@ -201,20 +203,21 @@ namespace TrabalhoAED.Menu
         }
         public void imprimeVoo()
         {
-            //Aeroporto objAero = new Aeroporto();
+            Aeroporto objAero = new Aeroporto();
             //imprime todos voos de um determinado aeroporto
 
-            string message = "Forneça o código do Aeroporto";
+            string message = "Forneça a sigla do Aeroporto";
             imprimeMessage(message);
-
-            int num = requisitaInt();
+            string sigla = Console.ReadLine();
+            objAero.imprimeVoo(sigla);
+            //int num = requisitaInt();
             //objAero.imprimeVoo(num);
-
+                        
         }
         public void imprimeTudo()
         {
             Aeroporto obj = new Aeroporto();
-            obj.imprimeTudo();
+            //obj.imprimeTudo();
         }
         public void procuraVoo()
         {
