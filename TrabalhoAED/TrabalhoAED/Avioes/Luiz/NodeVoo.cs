@@ -17,7 +17,7 @@ namespace TrabalhoAED.Avioes.Luiz
             this.next = null;
         }
         
-        public NodeVoo(NodeVoo next, int indiceCidadeDestino, int numeroVoo)
+        public NodeVoo(int numeroVoo, int indiceCidadeDestino,NodeVoo next)
         {
             this.next = next;
             this.indiceCidadeDestino = indiceCidadeDestino;

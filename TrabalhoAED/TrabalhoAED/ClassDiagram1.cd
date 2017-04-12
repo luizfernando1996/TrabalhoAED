@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Comment CommentText="Veja o menu. Entenda os codigos que foram implementados através do nome principalmente, não se preocupe tanto com implementação.&#xD;&#xA;Se você entender o nome vc vai entender o que ele faz.&#xD;&#xA;&#xD;&#xA;">
+    <Position X="4.094" Y="1.14" Height="0.57" Width="4.631" />
+  </Comment>
+  <Comment CommentText="A operação cadastraVoo deve cadastrar um voo de um determinado destino no aeroporto de origem. &#xD;&#xA;Para isto os aeroportos de destino e de origem devem estar cadastrados (crie uma operação para conferir se os aeroportos estão cadastrados).&#xD;&#xA;">
+    <Position X="1.757" Y="2.181" Height="1.037" Width="4.715" />
+  </Comment>
+  <Comment CommentText="No menu a ultima operação a ser implementada eu não sei se ela está correta. Operação ProcuraVoo...Tenho que trabalhar nela ainda.">
+    <Position X="4.642" Y="4.383" Height="0.558" Width="3.828" />
+  </Comment>
+  <Comment CommentText="Implemente a operação imprimeVoos na classe Aeroporto.&#xD;&#xA;Dado um Aeroporto, como Belo Horizonte imprima todos os voos que saem deste Aeroporto.">
+    <Position X="6.097" Y="3.402" Height="0.75" Width="5.03" />
+  </Comment>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

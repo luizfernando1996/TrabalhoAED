@@ -181,7 +181,8 @@ namespace TrabalhoAED.Menu
             imprimeMessage(message);
 
             int numero = requisitaInt();
-            objVoo.removeVoo(numero);
+            //retorna uma mensagem de sucesso ou não sobre a remoção do Voo
+            imprimeMessage(objVoo.removeVoo(numero));
         }
         public void imprimeVoo()
         {
