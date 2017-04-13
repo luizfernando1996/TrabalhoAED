@@ -43,10 +43,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FAeroporto\jonathan\Aeroporto.cs" />
-    <Compile Include="FAeroporto\jonathan\NodeAeroporto.cs" />
-    <Compile Include="Avioes\Luiz\NodeVoo.cs" />
-    <Compile Include="Avioes\Luiz\Voo.cs" />
+    <Compile Include="PastaAeroporto\Aeroporto.cs" />
+    <Compile Include="PastaAeroporto\NodeAeroporto.cs" />
+    <Compile Include="Avioes\NodeVoo.cs" />
+    <Compile Include="Avioes\Voo.cs" />
     <Compile Include="Menu\Menu.cs" />
     <Compile Include="Menu\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -54,9 +54,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="ClassDiagram1.cd" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="FAeroporto\ProcuraVoos.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

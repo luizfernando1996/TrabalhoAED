@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TrabalhoAED.Avioes.Luiz
+namespace TrabalhoAED.Avioes
 {
     public class NodeVoo
     {

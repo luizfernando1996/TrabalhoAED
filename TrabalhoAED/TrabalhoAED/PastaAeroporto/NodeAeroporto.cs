@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TrabalhoAED.Avioes.Luiz;
+using TrabalhoAED.Avioes;
 
-namespace TrabalhoAED.FAeroporto.jonathan
+namespace TrabalhoAED.PastaAeroporto
 {
     public class NodeAeroporto
     {
@@ -20,7 +20,6 @@ namespace TrabalhoAED.FAeroporto.jonathan
             sigla = null;
             next = null;
         }
-
         public  NodeAeroporto(string cidade, int codigo, string sigla, NodeVoo next )
         {
             this.cidade = cidade;

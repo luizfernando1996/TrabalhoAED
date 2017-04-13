@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TrabalhoAED.FAeroporto.jonathan;
+using TrabalhoAED.PastaAeroporto;
 
-namespace TrabalhoAED.Avioes.Luiz
+namespace TrabalhoAED.Avioes
 {
     class Voo
     {
@@ -27,15 +27,5 @@ namespace TrabalhoAED.Avioes.Luiz
             objVoo = new NodeVoo(numVoo, codigoDestino, sentinela.next);
             objAero.vincularVooAeroporto(objVoo, codigoOrigem);
         }
-        public void imprimeTudo()
-        {
-            NodeVoo p = sentinela;
-            while (p != null)
-            {
-                Console.WriteLine("Cidade de destino: " + p.indiceCidadeDestino + " Número do Voo: " + p.numeroVoo);
-                p = p.next;
-            }
-        }
-
     }
 }

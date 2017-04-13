@@ -4,22 +4,52 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using TrabalhoAED.FAeroporto.jonathan;
-using TrabalhoAED.Avioes.Luiz;
+using TrabalhoAED.PastaAeroporto;
+using TrabalhoAED.Avioes;
 
 namespace TrabalhoAED.Menu
 {
     class Menu
     {
         private Voo objVoo = new Voo();
-        Aeroporto objAero = new Aeroporto();
-
+        private Aeroporto objAero = new Aeroporto();
 
         //Métodos para string
-        public void imprimeMessage(string message)
+        public void imprimeMessage(string message,int position=0)
         {
+            switch (position)
+            {
+                case 0:
+                    break;
+                    case 1:
+                    Console.Write("\t");
+                    break;
+                case 2:
+                    Console.Write("\n");
+                    break;
+                case 3:
+                    Console.WriteLine();
+                    break;
+                default:
+                    break;
+            }
             Console.WriteLine(message);
         }
+        //solicita a string no inicio=0 ou no meio=1
+        public string solicitaString(int position = 0)
+        {
+            switch (position)
+            {
+                //solicita string no meio da tela
+                case 1:
+                    Console.Write("\t");
+                    break;
+                default:
+                    break;
+            }
+            return Console.ReadLine();
+        }
+        //fim dos métodos para string
 
         //Métodos para inteiro
         public bool verificaInt(string num)
@@ -40,7 +70,7 @@ namespace TrabalhoAED.Menu
                 sairWhile = verificaInt(num);
 
                 //se o numero não for inteiro
-                if (sairWhile == false) 
+                if (sairWhile == false)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("\tDigite um número, por favor");
@@ -82,8 +112,8 @@ namespace TrabalhoAED.Menu
             while (sairWhile == false)
             {
                 exibeMenu();
-                //o menu tem 8 opções, logo o número deve estar no range 0-8
-                int num = opcaoEscolhidaDoMenu(8);
+                //o menu tem 8 opções, logo o número deve estar no range 0-9
+                int num = opcaoEscolhidaDoMenu(9);
                 selecionaOptionMenu(num);
                 //Usuario deseja sair do programa
                 if (num == 0)
@@ -101,7 +131,8 @@ namespace TrabalhoAED.Menu
             message += "\nDigite 5 para imprimir tudo";
             message += "\nDigite 6 para procurar voo";
             message += "\nDigite 7 para limpar";
-            message += "\nDigite 8 para inserir entradas no programa - TESTE";
+            message += "\nDigite 8 para procurar voo";
+            message += "\nDigite 9 para inserir entradas no programa - TESTE";
             message += "\nDigite 0 para sair";
             imprimeMessage(message);
         }
@@ -112,12 +143,6 @@ namespace TrabalhoAED.Menu
             num = requisitaIntNoRange(range);
             return num;
         }
-        public void limparMenu()
-        {
-            Console.Clear();
-        }
-
-        //Opções do menu
         public void selecionaOptionMenu(int num)
         {
             switch (num)
@@ -145,6 +170,9 @@ namespace TrabalhoAED.Menu
                     limparMenu();
                     break;
                 case 8:
+                    procuraVoo();
+                    break;
+                case 9:
                     insereDadosParaTeste();
                     break;
                 case 0:
@@ -152,6 +180,8 @@ namespace TrabalhoAED.Menu
                     break;
             }
         }
+
+        //Opções do menu--> 1
         public void cadastraAeroporto()
         {
             Aeroporto obj = new Aeroporto();
@@ -159,40 +189,70 @@ namespace TrabalhoAED.Menu
             string message = "Digite o nome da cidade";
             imprimeMessage(message);
 
-            string cidade = Console.ReadLine();
-            obj.cadastraAeroporto(cidade);
+            string cidade = solicitaString();
+            string resultado=obj.cadastraAeroporto(cidade);
+            imprimeMessage(resultado);
         }
+
+        //métodos para cadastrarVoo -->OPÇÃO 2 DO MENU
         public void cadastraVoo()
         {
-            //Voo objVoo = new Voo();
-            Aeroporto objAero = new Aeroporto();
+            gerenciaIndicesCidades();
 
+        }
+        public void gerenciaIndicesCidades()
+        {
+            int numeroVoo = solicitaNumeroVoo();
+
+            string message;
+            //solicita uma aeroporto origem CADASTRADO
+            int indiceCidadeOrigem = solicitaCidadeOrigem();
+            if (indiceCidadeOrigem != 10)
+            {
+                //solicita uma aeroporto destino CADASTRADO
+                int indiceCidadeDestino = solicitaCidadeDestino();
+                if (indiceCidadeDestino != 10)
+                {
+                    objVoo.cadastraVoo(numeroVoo, indiceCidadeOrigem, indiceCidadeDestino);
+                    message = "Voo cadastrado";
+                }
+                else
+                    message = "Aeroporto de destino não cadastrado";
+            }
+            else
+                message = "Aeroporto de origem não cadastrado";
+
+            imprimeMessage(message);
+        }
+        public int solicitaNumeroVoo()
+        {
             string message = "Identifique o codigo do Voo";
             imprimeMessage(message);
-            int codigoVoo = requisitaInt();
-
-            int indiceCidadeOrigem;
-            message = "Digite a cidade do Aeroporto de Origem";
-            imprimeMessage(message);
-            Console.Write("\t");
-            string cidadeOrigem = Console.ReadLine();
-            indiceCidadeOrigem=objAero.verificarAeroportoExiste(cidadeOrigem,ref message);
-            //Exibe a mensagem se o Aeroporto está ou não cadastrado
-            imprimeMessage(message);
-
-            int indiceCidadeDestino;
-            message = "Digite o cidade do Aeroporto de Destino";
-            imprimeMessage(message);
-            //int codigoDestino = requisitaInt();
-            Console.Write("\t");
-            string cidadeDestino = Console.ReadLine();
-            indiceCidadeDestino=objAero.verificarAeroportoExiste(cidadeDestino,ref message);
-            //Exibe a mensagem se o Aeroporto está ou não cadastrado
-            imprimeMessage(message);
-
-            //objVoo é um objeto da classe
-            objVoo.cadastraVoo(codigoVoo, indiceCidadeOrigem, indiceCidadeDestino);
+            int numeroVoo = requisitaInt();
+            return numeroVoo;
         }
+        public int solicitaCidadeOrigem()
+        {
+            string message = "Digite a cidade do Aeroporto de Origem";
+            imprimeMessage(message);
+
+            string cidadeOrigem = solicitaString(1);
+
+            int indiceExiste = objAero.encontraIndiceAeroportoPelaCidade(cidadeOrigem);
+            return indiceExiste;
+        }
+        public int solicitaCidadeDestino()
+        {
+            string message = "Digite o cidade do Aeroporto de Destino";
+            imprimeMessage(message);
+
+            string cidadeDestino = solicitaString(1);
+            int indiceCidadeDestino = objAero.encontraIndiceAeroportoPelaCidade(cidadeDestino);
+            return indiceCidadeDestino;
+        }
+        //fim dos métodos para cadastrarVoo
+
+        //Opções do menu--> 3,4,5,6,7,8
         public void removeVoo()
         {
             string message = "Digite o numero do voo a ser removido";
@@ -202,43 +262,43 @@ namespace TrabalhoAED.Menu
             //retorna uma mensagem de sucesso ou não sobre a remoção do Voo
             objAero.removeVoo(numero);
         }
+        //imprime todos voos de um determinado aeroporto
         public void imprimeVoo()
         {
-           
-            //imprime todos voos de um determinado aeroporto
-
             string message = "Forneça a sigla do Aeroporto";
             imprimeMessage(message);
             string sigla = Console.ReadLine();
             objAero.imprimeVoo(sigla);
-            //int num = requisitaInt();
-            //objAero.imprimeVoo(num);
-
         }
         public void imprimeTudo()
         {
             objAero.imprimeTudo();
         }
+        public void limparMenu()
+        {
+            Console.Clear();
+        }
         public void procuraVoo()
         {
-            Voo objVoo = new Voo();
-
-            string message = "Digite o codigo de origem do Aeroporto";
+            string message = "Digite a sigla de origem do Aeroporto";
             imprimeMessage(message);
-            string codigoOrigem = Console.ReadLine();
+            string siglaOrigem = solicitaString();
+            //objAero.buscaSigla();
 
-            message = "Digite o codigo de destino do Aeroporto";
+            message = "Digite a sigla de destino do Aeroporto";
             imprimeMessage(message);
-            string codigoDestino = Console.ReadLine();
-
+            string siglaDestino= solicitaString();
+            //objAero.buscaSigla();
 
             message = "Digite o limite maximo de conexões que deve ser apresentado";
             imprimeMessage(message);
             int maximoConexoes = requisitaInt();
 
-            objAero.procuraVoo(codigoOrigem, codigoDestino, maximoConexoes);
+            objAero.procuraVoo(siglaOrigem, siglaDestino, maximoConexoes);
 
         }
+
+        //métodos de teste -->OPÇÃO 9 DO MENU
         public void insereDadosParaTeste()
         {
             cadastrarAeroportosTeste();
@@ -274,6 +334,9 @@ namespace TrabalhoAED.Menu
             //cadastra voos em salvador
             objVoo.cadastraVoo(215, 4, 2);
         }
+        //fim dos métodos de teste
+
+        //Opção do menu--> 0
         public void finalizarProgram()
         {
             int j = 100 * 100 * 100 * 100;
@@ -287,5 +350,6 @@ namespace TrabalhoAED.Menu
             }
         }
         //fim das opções do menu
+
     }
 }
