@@ -79,6 +79,11 @@ namespace TrabalhoAED.PastaAeroporto
             }
             return indice;
         }
+        public string encontraSiglaAeroportoPeloIndice(int indice)
+        {
+            return vetor[indice].sigla;
+        }
+
         //*****menu*****
 
         //Opção 1 do menu-->cadastra aeroporto
@@ -245,18 +250,18 @@ namespace TrabalhoAED.PastaAeroporto
             int indiceOrigem = encontraIndiceAeroportoPelaSigla(siglaOrigem);
             NodeVoo ponteiroVoo;
 
-            while (sairWhile1)
-            {
-                if (vetor[indiceOrigem] != null)
-                {
-                    ponteiroVoo = vetor[indiceOrigem].next;
+            int indiceDestino = encontraIndiceAeroportoPelaSigla(siglaDestino);
 
-                    while (ponteiroVoo != null)
-                    {
-                        ponteiroVoo = ponteiroVoo.next;
-                        if(ponteiroVoo.indiceCidadeDestino==cidade)
-                    }
-                }
+        }
+        public void procuraRecursivamente(NodeVoo ponteiroVoo, int indiceDestino,int maxConexoes)
+        {
+            //Finaliza a repetição se encontrar o voo com o destino ou se o limite de conexões for ultrapassado
+            if ((ponteiroVoo.indiceCidadeDestino == indiceDestino) || (maxConexoes == 0))
+                return;
+            else
+            {
+                ponteiroVoo = vetor[indiceDestino].next;
+                procuraRecursivamente(ponteiroVoo, indiceDestino, --maxConexoes);
             }
         }
 
