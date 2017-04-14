@@ -92,16 +92,41 @@ namespace TrabalhoAED.PastaAeroporto
             string sigla = buscaSigla(cidade);
             string message;
             //o indice é statico
-            if (indice != 10)
+
+            if (aeroportoExistente(cidade))
             {
-                vetor[indice] = new NodeAeroporto(cidade, indice, sigla, null);
-                indice++;
-                message = "Aeroporto Cadastrado com sucesso!!";
+                if (indice != 10)
+                {
+                    vetor[indice] = new NodeAeroporto(cidade, indice, sigla, null);
+                    indice++;
+                    message = "Aeroporto Cadastrado com sucesso!!";
+                }
+                else
+                    message = "O Vetor está com todas suas posições ocupadas";
+                
             }
             else
-                message = "O Vetor está com todas suas posições ocupadas";
+            {
+                message = "Impossível cadastrar! Aeroporto já cadastrado!";
+            }
             return message;
         }
+        //Checa se o aeroporto já está inserido no vetor
+        public bool aeroportoExistente(string cidade)
+        {
+            bool result = true;
+            int i = 0;
+            while(vetor[i] != null && result != false)
+            {
+                if(vetor[i].cidade == cidade)
+                {
+                    result = false;
+                }
+                i++;
+            }
+            return result;
+        }
+        //Busca a sigla do aeroporto correspondete a cidade inserida
         public string buscaSigla(string cidade)
         {
             cidade = cidade.ToLower();
