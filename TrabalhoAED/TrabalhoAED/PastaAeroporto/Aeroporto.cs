@@ -12,8 +12,10 @@ namespace TrabalhoAED.PastaAeroporto
     {
 
         public static NodeAeroporto[] vetor = new NodeAeroporto[10];
+        //todos os objetos devem ter o mesmos aeroportos
         static int indice = 0;
 
+        public int k = 0;
         //construtor
         public Aeroporto() { }
 
@@ -103,7 +105,7 @@ namespace TrabalhoAED.PastaAeroporto
                 }
                 else
                     message = "O Vetor está com todas suas posições ocupadas";
-                
+
             }
             else
             {
@@ -116,9 +118,9 @@ namespace TrabalhoAED.PastaAeroporto
         {
             bool result = true;
             int i = 0;
-            while(vetor[i] != null && result != false)
+            while (vetor[i] != null && result != false)
             {
-                if(vetor[i].cidade == cidade)
+                if (vetor[i].cidade == cidade)
                 {
                     result = false;
                 }
@@ -274,76 +276,76 @@ namespace TrabalhoAED.PastaAeroporto
             int indiceOrigem = encontraIndiceAeroportoPelaSigla(siglaOrigem);
             int indiceDestino = encontraIndiceAeroportoPelaSigla(siglaDestino);
 
-            bool sairWhile1 = true;
-            //primeiro voo do vetor do aeroporto que parte da origem informada
-            NodeVoo ponteiroVoo = vetor[indiceOrigem].next;
-            NodeVoo pontVoo;
-            while (sairWhile1)
-            {
-                int p = indiceOrigem;
-                procuraRecursivamente(p, indiceDestino, maxConexoes, 0, ponteiroVoo, 0);
-                pontVoo = ponteiroVoo.next;
-                if (pontVoo == null)
-                    sairWhile1 = false;
-            }
+            
+            NodeVoo ponteiroVoo=null;
+
+            int p = indiceOrigem;
+            procuraRecursivamente(p, indiceDestino, maxConexoes, 0, ponteiroVoo);
+
         }
         //j captura o indice de origem do voo, isto é, captura o aeroporto
         //ponteiro para o aeroporto com o indice j (indice de origem)
         //int k é para mostrar quantos deram certo.
-        public void procuraRecursivamente(int p, int indiceDestino, int maxConexoes, int j, NodeVoo ponteiroMaxConexoes0, int k)
+        public void procuraRecursivamente(int p, int indiceDestino, int maxConexoes, int j, NodeVoo ponteiroMaxConexoes0)
         {
 
-            if ((vetor[p].next == null) || (vetor[p].next.indiceCidadeDestino == indiceDestino))
-            {
-
-            }
-            else
-            {
-                //procura o 1°voo do numero MaxConexoes e compara se = indiceDestino
-                if ((vetor[p].next.indiceCidadeDestino != indiceDestino) && (maxConexoes > 0))
+                if ((vetor[p].next == null) || (vetor[p].next.indiceCidadeDestino == indiceDestino))
                 {
-                    //APAGAR DEPOIS
-                    int a, b;
-                    a = vetor[p].next.indiceCidadeDestino;
-                    b = indiceDestino;
-                    //APAGAR DEPOIS
 
-                    //pega o indice de origem do 1°voo
-                    j = p;
-                    ponteiroMaxConexoes0 = vetor[j].next;
-                    //o ponteiro vai progressivamente pegando o 1°voo até o maximo de conexoes, isto é,
-                    //ele vai pegando o 1°voo de cada origem
-                    p = vetor[p].next.indiceCidadeDestino;
-
-                    //p não pode sair com o indice do voo desta estrutura.Ele deve sair com o indice do vetor
-                    //para que assim quando maxConexoes seja =0 ele sai daqui e percorra todo o vetor
-                    //o max de conexoes ele é decrementado no final deste algoritmo, logo devo pegar MaxConexoes==2
-                    //porque neste momento maxConexoes será==1
-                    if (maxConexoes == 2)
+                }
+                else
+                {
+                    //procura o 1°voo do numero MaxConexoes e compara se = indiceDestino
+                    if ((vetor[p].next.indiceCidadeDestino != indiceDestino) && (maxConexoes > 0))
                     {
-                        procuraRecursivamente(p, indiceDestino, --maxConexoes, j, ponteiroMaxConexoes0, 0);
+                        //APAGAR DEPOIS
+                        int a, b;
+                        a = vetor[p].next.indiceCidadeDestino;
+                        b = indiceDestino;
+                        //APAGAR DEPOIS
+
+                        //pega o indice de origem do 1°voo
+                        j = p;
+                        ponteiroMaxConexoes0 = vetor[j].next;
+                        //o ponteiro vai progressivamente pegando o 1°voo até o maximo de conexoes, isto é,
+                        //ele vai pegando o 1°voo de cada origem
+                        p = vetor[p].next.indiceCidadeDestino;
+
+                        //p não pode sair com o indice do voo desta estrutura.Ele deve sair com o indice do vetor
+                        //para que assim quando maxConexoes seja =0 ele sai daqui e percorra todo o vetor
+                        //o max de conexoes ele é decrementado no final deste algoritmo, logo devo pegar MaxConexoes==2
+                        //porque neste momento maxConexoes será==1
+                        if (maxConexoes == 2)
+                        {
+                            procuraRecursivamente(p, indiceDestino, --maxConexoes, j, ponteiroMaxConexoes0);
+                        if (maxConexoes > 0)
+                        {
+                            j = ponteiroMaxConexoes0.next.indiceCidadeDestino;
+                            ponteiroMaxConexoes0 = ponteiroMaxConexoes0.next;
+                            procuraRecursivamente(j, indiceDestino, maxConexoes, j, ponteiroMaxConexoes0);
+                        }
                     }
                     //decrementa o numero de conexoes porque o ponteiro está indo para as conexoes
                     else
-                        procuraRecursivamente(p, indiceDestino, --maxConexoes, j, ponteiroMaxConexoes0, 0);
-                    bool chave = true;
-                    while (chave)
-                    {
-                        if (ponteiroMaxConexoes0.indiceCidadeDestino != indiceDestino)
-                            ponteiroMaxConexoes0 = ponteiroMaxConexoes0.next;
-                        if (ponteiroMaxConexoes0 == null || ponteiroMaxConexoes0.indiceCidadeDestino == indiceDestino)
+                            procuraRecursivamente(p, indiceDestino, --maxConexoes, j, ponteiroMaxConexoes0);
+                        bool chave = true;
+                        while (chave)
                         {
-                            chave = false;
-                            if (ponteiroMaxConexoes0 != null)
-                                if (ponteiroMaxConexoes0.indiceCidadeDestino == indiceDestino)
-                                    k++;
+                            if (ponteiroMaxConexoes0.indiceCidadeDestino != indiceDestino)
+                                ponteiroMaxConexoes0 = ponteiroMaxConexoes0.next;
+                            if (ponteiroMaxConexoes0 == null || ponteiroMaxConexoes0.indiceCidadeDestino == indiceDestino)
+                            {
+                                chave = false;
+                                if (ponteiroMaxConexoes0 != null)
+                                    if (ponteiroMaxConexoes0.indiceCidadeDestino == indiceDestino)
+                                        k++;
+                            }
                         }
-                    }
-                }
-            }
 
+                    }//fim if maxConexoes>0
+                }//fim else
 
-        }
+        }//fim procuraRecursivamente
 
     }
 
