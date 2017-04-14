@@ -303,6 +303,7 @@ namespace TrabalhoAED.Menu
         {
             cadastrarAeroportosTeste();
             cadastrarVoosTeste();
+            procuraVooTeste();
         }
         public void cadastrarAeroportosTeste()
         {
@@ -319,20 +320,24 @@ namespace TrabalhoAED.Menu
         {
             //cadastra todos os voos        
             //cadastra voos em brasilia
-            objVoo.cadastraVoo(107, 0, 5);
+            objVoo.cadastraVoo(107, 0, 4);
             //cadastra voos em belo horizonte
-            objVoo.cadastraVoo(214, 1, 5);
-            objVoo.cadastraVoo(555, 1, 3);
-            objVoo.cadastraVoo(101, 1, 4);
+            objVoo.cadastraVoo(214, 1, 4);
+            objVoo.cadastraVoo(555, 1, 2);
+            objVoo.cadastraVoo(101, 1, 3);
             //cadastra voos em rio de janeiro
-            objVoo.cadastraVoo(554, 2, 2);
-            objVoo.cadastraVoo(090, 2, 4);
+            objVoo.cadastraVoo(554, 2, 1);
+            objVoo.cadastraVoo(090, 2, 3);
             //cadastra voos em sao paulo
-            objVoo.cadastraVoo(050, 3, 1);
-            objVoo.cadastraVoo(089, 3, 3);
-            objVoo.cadastraVoo(102, 3, 2);
-            //cadastra voos em salvador
-            objVoo.cadastraVoo(215, 4, 2);
+            objVoo.cadastraVoo(050, 3, 0);
+            objVoo.cadastraVoo(089, 3, 2);
+            objVoo.cadastraVoo(102, 3, 1);
+            //cadastra voos em salvado
+            objVoo.cadastraVoo(215, 4, 1);
+        }
+        public void procuraVooTeste()
+        {
+            objAero.procuraVoo("CNF", "GRU", 2);
         }
         //fim dos métodos de teste
 
