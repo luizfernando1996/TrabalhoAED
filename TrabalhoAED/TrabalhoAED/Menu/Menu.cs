@@ -349,7 +349,7 @@ namespace TrabalhoAED.Menu
         public void procuraVooTeste()
         {
 
-            objAero.procuraVoo("GIG", "CNF", 2);
+            objAero.procuraVoo("CNF", "GRU", 2);
         }
         //fim dos métodos de teste
 
