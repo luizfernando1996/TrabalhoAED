@@ -20,12 +20,13 @@ namespace TrabalhoAED.Avioes
             return sentinela.next == null;
         }
 
-        public void cadastraVoo(int numVoo, int codigoOrigem, int codigoDestino)
+        public string cadastraVoo(int numVoo, int codigoOrigem, int codigoDestino)
         {
             NodeVoo objVoo = sentinela;
             Aeroporto objAero = new Aeroporto();
             objVoo = new NodeVoo(numVoo, codigoDestino, sentinela.next);
-            objAero.vincularVooAeroporto(objVoo, codigoOrigem);
+            string message=objAero.vincularVooAeroporto(objVoo, codigoOrigem);
+            return message;
         }
     }
 }

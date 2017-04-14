@@ -15,13 +15,13 @@ namespace TrabalhoAED.Menu
         private Aeroporto objAero = new Aeroporto();
 
         //Métodos para string
-        public void imprimeMessage(string message,int position=0)
+        public void imprimeMessage(string message, int position = 0)
         {
             switch (position)
             {
                 case 0:
                     break;
-                    case 1:
+                case 1:
                     Console.Write("\t");
                     break;
                 case 2:
@@ -114,6 +114,7 @@ namespace TrabalhoAED.Menu
                 exibeMenu();
                 //o menu tem 8 opções, logo o número deve estar no range 0-9
                 int num = opcaoEscolhidaDoMenu(9);
+                Console.WriteLine();
                 selecionaOptionMenu(num);
                 //Usuario deseja sair do programa
                 if (num == 0)
@@ -190,7 +191,7 @@ namespace TrabalhoAED.Menu
             imprimeMessage(message);
 
             string cidade = solicitaString();
-            string resultado=obj.cadastraAeroporto(cidade);
+            string resultado = obj.cadastraAeroporto(cidade);
             imprimeMessage(resultado);
         }
 
@@ -213,8 +214,8 @@ namespace TrabalhoAED.Menu
                 int indiceCidadeDestino = solicitaCidadeDestino();
                 if (indiceCidadeDestino != 10)
                 {
-                    objVoo.cadastraVoo(numeroVoo, indiceCidadeOrigem, indiceCidadeDestino);
-                    message = "Voo cadastrado";
+                    //retorna se cadastrou ou não o voo
+                    message = objVoo.cadastraVoo(numeroVoo, indiceCidadeOrigem, indiceCidadeDestino);
                 }
                 else
                     message = "Aeroporto de destino não cadastrado";
@@ -253,6 +254,7 @@ namespace TrabalhoAED.Menu
         //fim dos métodos para cadastrarVoo
 
         //Opções do menu--> 3,4,5,6,7,8
+
         public void removeVoo()
         {
             string message = "Digite o numero do voo a ser removido";
@@ -287,7 +289,7 @@ namespace TrabalhoAED.Menu
 
             message = "Digite a sigla de destino do Aeroporto";
             imprimeMessage(message);
-            string siglaDestino= solicitaString();
+            string siglaDestino = solicitaString();
             //objAero.buscaSigla();
 
             message = "Digite o limite maximo de conexões que deve ser apresentado";
@@ -309,35 +311,45 @@ namespace TrabalhoAED.Menu
         {
             //cadastra os aeroportos
             Aeroporto obj = new Aeroporto();
-            obj.cadastraAeroporto("Brasilia");
-            obj.cadastraAeroporto("Belo Horizonte");
-            obj.cadastraAeroporto("Rio de Janeiro");
-            obj.cadastraAeroporto("São Paulo");
-            obj.cadastraAeroporto("Salvador");
+            string message = null;
+            message += obj.cadastraAeroporto("Brasilia");
+            message += "\n" + obj.cadastraAeroporto("Belo Horizonte");
+            message += "\n" + obj.cadastraAeroporto("Rio de Janeiro");
+            message += "\n" + obj.cadastraAeroporto("São Paulo");
+            message += "\n" + obj.cadastraAeroporto("Salvador");
+            imprimeMessage(message);
 
         }
         public void cadastrarVoosTeste()
         {
-            //cadastra todos os voos        
+            //cadastra todos os voos
+            string message = null;
             //cadastra voos em brasilia
-            objVoo.cadastraVoo(107, 0, 4);
+            message += "\n" + objVoo.cadastraVoo(107, 0, 4);
             //cadastra voos em belo horizonte
-            objVoo.cadastraVoo(214, 1, 4);
-            objVoo.cadastraVoo(555, 1, 2);
-            objVoo.cadastraVoo(101, 1, 3);
+            message += "\n" + objVoo.cadastraVoo(214, 1, 4);
+            message += "\n" + objVoo.cadastraVoo(555, 1, 2);
+            message += "\n" + objVoo.cadastraVoo(101, 1, 3);
             //cadastra voos em rio de janeiro
-            objVoo.cadastraVoo(554, 2, 1);
-            objVoo.cadastraVoo(090, 2, 3);
+            message += "\n" + objVoo.cadastraVoo(554, 2, 1);
+            message += "\n" + objVoo.cadastraVoo(090, 2, 3);
+            message += "\n" + objVoo.cadastraVoo(090, 2, 3);
             //cadastra voos em sao paulo
-            objVoo.cadastraVoo(050, 3, 0);
-            objVoo.cadastraVoo(089, 3, 2);
-            objVoo.cadastraVoo(102, 3, 1);
+            message += "\n" + objVoo.cadastraVoo(050, 3, 0);
+            message += "\n" + objVoo.cadastraVoo(089, 3, 2);
+            message += "\n" + objVoo.cadastraVoo(102, 3, 1);
             //cadastra voos em salvado
-            objVoo.cadastraVoo(215, 4, 1);
+            message += "\n" + objVoo.cadastraVoo(215, 4, 1);
+            message += "\n" + objVoo.cadastraVoo(215, 4, 1);
+
+            imprimeMessage(message);
+            //fim do cadastra todos os voos
+
         }
         public void procuraVooTeste()
         {
-            objAero.procuraVoo("CNF", "GRU", 2);
+
+            objAero.procuraVoo("GIG", "CNF", 2);
         }
         //fim dos métodos de teste
 
