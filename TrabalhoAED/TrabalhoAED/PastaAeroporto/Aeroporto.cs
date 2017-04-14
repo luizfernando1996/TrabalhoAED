@@ -300,13 +300,7 @@ namespace TrabalhoAED.PastaAeroporto
                     //procura o 1°voo do numero MaxConexoes e compara se = indiceDestino
                     if ((vetor[p].next.indiceCidadeDestino != indiceDestino) && (maxConexoes > 0))
                     {
-                        //APAGAR DEPOIS
-                        int a, b;
-                        a = vetor[p].next.indiceCidadeDestino;
-                        b = indiceDestino;
-                        //APAGAR DEPOIS
-
-                        //pega o indice de origem do 1°voo
+                        //pega o aeroporto do voo
                         j = p;
                         ponteiroMaxConexoes0 = vetor[j].next;
                         //o ponteiro vai progressivamente pegando o 1°voo até o maximo de conexoes, isto é,
