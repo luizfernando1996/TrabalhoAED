@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TrabalhoAED.Avioes;
 
-namespace TrabalhoAED.PastaAeroporto
+namespace TrabalhoAED.FolderAeroporto
 {
     public class NodeAeroporto
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using TrabalhoAED.PastaAeroporto;
+using TrabalhoAED.FolderAeroporto;
 using TrabalhoAED.Avioes;
 
 namespace TrabalhoAED.Menu
@@ -316,7 +316,7 @@ namespace TrabalhoAED.Menu
             message += "\n" + obj.cadastraAeroporto("Belo Horizonte");
             message += "\n" + obj.cadastraAeroporto("Rio de Janeiro");
             message += "\n" + obj.cadastraAeroporto("São Paulo");
-            message += "\n" + obj.cadastraAeroporto("Salvador");
+              message += "\n" + obj.cadastraAeroporto("Salvador");
             imprimeMessage(message);
 
         }
@@ -325,31 +325,36 @@ namespace TrabalhoAED.Menu
             //cadastra todos os voos
             string message = null;
             //cadastra voos em brasilia
-            message += "\n" + objVoo.cadastraVoo(107, 0, 4);
+            message += "\n" + objVoo.cadastraVoo(1, 0, 1); 
+            message += "\n" + objVoo.cadastraVoo(2, 0, 4);
             //cadastra voos em belo horizonte
-            message += "\n" + objVoo.cadastraVoo(214, 1, 4);
-            message += "\n" + objVoo.cadastraVoo(555, 1, 2);
-            message += "\n" + objVoo.cadastraVoo(101, 1, 3);
+            message += "\n" + objVoo.cadastraVoo(3, 1, 2);
+            message += "\n" + objVoo.cadastraVoo(4, 1, 3);
+            message += "\n" + objVoo.cadastraVoo(5, 1, 4);
+            //message += "\n" + objVoo.cadastraVoo(555, 1, 2);
             //cadastra voos em rio de janeiro
-            message += "\n" + objVoo.cadastraVoo(554, 2, 1);
-            message += "\n" + objVoo.cadastraVoo(090, 2, 3);
-            message += "\n" + objVoo.cadastraVoo(090, 2, 3);
+            message += "\n" + objVoo.cadastraVoo(6, 2, 3);
+            message += "\n" + objVoo.cadastraVoo(7, 2, 4);
+            //message += "\n" + objVoo.cadastraVoo(554, 2, 1);
+            //message += "\n" + objVoo.cadastraVoo(090, 2, 3);
             //cadastra voos em sao paulo
-            message += "\n" + objVoo.cadastraVoo(050, 3, 0);
-            message += "\n" + objVoo.cadastraVoo(089, 3, 2);
-            message += "\n" + objVoo.cadastraVoo(102, 3, 1);
+            message += "\n" + objVoo.cadastraVoo(8, 3, 4);
+            message += "\n" + objVoo.cadastraVoo(9, 3, 0);
+            message += "\n" + objVoo.cadastraVoo(10, 3, 2);
+            //message += "\n" + objVoo.cadastraVoo(102, 3, 1);
             //cadastra voos em salvado
-            message += "\n" + objVoo.cadastraVoo(215, 4, 1);
-            message += "\n" + objVoo.cadastraVoo(215, 4, 1);
+            message += "\n" + objVoo.cadastraVoo(11, 4, 0);
+            message += "\n" + objVoo.cadastraVoo(12, 4, 2);
+            message += "\n" + objVoo.cadastraVoo(13, 4, 1);
 
-            imprimeMessage(message);
+            //imprimeMessage(message);
             //fim do cadastra todos os voos
 
         }
         public void procuraVooTeste()
         {
 
-            objAero.procuraVoo("CNF", "GRU", 2);
+            objAero.procuraVoo("CNF", "GIG",3);
         }
         //fim dos métodos de teste
 
