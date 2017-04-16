@@ -28,6 +28,9 @@ namespace TrabalhoAED.FolderAeroporto
         private int indiceDestino;
         private int maxConexoes;
         private int caminhosPossiveis;
+        private string mensagem = null;
+        private int quantOpcao = 1;
+        private int cont;
 
         //construtor
         public Aeroporto() { }
@@ -330,15 +333,17 @@ namespace TrabalhoAED.FolderAeroporto
             int selecionaMtd = 1;
             bool mudouPonteiro = false;
             bool desempilhou = false;
+            bool empilharAtivou = false;
+
             while (selecionaMtd != 0)
             {
                 //chama a função empilha
                 if (selecionaMtd == 1)
-                    selecionaMtd = empilhar(mudouPonteiro, ref desempilhou);
+                    selecionaMtd = empilhar(mudouPonteiro, ref desempilhou, ref empilharAtivou);
 
                 //muda o ponteiro
                 else if (selecionaMtd == 2)
-                    selecionaMtd = mudaPonteiroMtd(ref mudouPonteiro);
+                    selecionaMtd = mudaPonteiroMtd(ref mudouPonteiro, ref empilharAtivou);
 
                 //percorreTudo
                 else if (selecionaMtd == 3)
@@ -349,11 +354,12 @@ namespace TrabalhoAED.FolderAeroporto
                     selecionaMtd = desempilharPilha(ref desempilhou);
             }
 
-            Console.WriteLine("\t"+caminhosPossiveis);
+            Console.WriteLine("\t" + mensagem);
+            Console.WriteLine("\t" + caminhosPossiveis);
 
         }
 
-        public int empilhar(bool mudouPonteiro, ref bool desempilhou)
+        public int empilhar(bool mudouPonteiro, ref bool desempilhou, ref bool empilharAtivou)
         {
             int selecionaMtd = 1;
 
@@ -377,8 +383,11 @@ namespace TrabalhoAED.FolderAeroporto
                     desempilhou = false;
                     ++maxConexoes;
                 }
+
                 //Verifica se pode empilhar, isto é, se o voo não vai para a origem ou para o destino
-                selecionaMtd = casosMudancaPonteiro(1);
+                empilharAtivou = true;
+                selecionaMtd = casosMudancaPonteiro(ref empilharAtivou);
+                empilharAtivou = false;
 
                 //Inicio if empilhar
                 if (selecionaMtd == 1)
@@ -395,7 +404,11 @@ namespace TrabalhoAED.FolderAeroporto
                     }
                     else
                     {
-                        objPilha.add(aeroportoDoVoo, indiceDestinoDoVoo, primeiroAviaoDoAeroporto.numeroVoo, maxConexoes, null);
+                        string siglaOrigem = encontraSiglaAeroportoPeloIndice(aeroportoDoVoo);
+                        string siglaDestino = encontraSiglaAeroportoPeloIndice(primeiroAviaoDoAeroporto.indiceCidadeDestino);
+                        mensagem += "Opção " + quantOpcao + ":" + " (" + primeiroAviaoDoAeroporto.numeroVoo + ") " + siglaOrigem + " - " + siglaDestino+",";
+                        objPilha.add(aeroportoDoVoo, indiceDestinoDoVoo, primeiroAviaoDoAeroporto.numeroVoo, maxConexoes, mensagem);
+                        mensagem = null;
                     }
 
                 }//fim if 
@@ -405,17 +418,15 @@ namespace TrabalhoAED.FolderAeroporto
             return selecionaMtd;
         }
 
-        public int mudaPonteiroMtd(ref bool mudouPonteiro)
+        public int mudaPonteiroMtd(ref bool mudouPonteiro, ref bool empilharAtivou)
         {
-            int cont = 0;
             bool ponteiroNull = false;
-
             //Verifica se pode finalizar a mudança do ponteiro
-            while (ponteiroNull == false && casosMudancaPonteiro(cont) == 2)
+            while (ponteiroNull == false && casosMudancaPonteiro(ref empilharAtivou) == 2)
             {
                 //Efetua a mudança do ponteiro
                 primeiroAviaoDoAeroporto = primeiroAviaoDoAeroporto.next;
-                cont = 1;
+
                 if (primeiroAviaoDoAeroporto == null)
                     ponteiroNull = true;
             }
@@ -425,31 +436,27 @@ namespace TrabalhoAED.FolderAeroporto
 
             int retorno;
             if (ponteiroNull == false)
-                retorno = casosMudancaPonteiro(cont);
+                retorno = 1;
             else
                 retorno = 4;
             return retorno;
         }
-        public int casosMudancaPonteiro(int cont)
+        public int casosMudancaPonteiro(ref bool empilharAtivou)
         {
             int selecionaMtd = 2;
             bool trocarPonteiroDesempilhamento = false;
 
-            //O voo no momento é um voo que foi desempilhado
-            if (cont == 0)
+            //O voo no momento é um voo que foi desempilhado e ele só será executado UMA VEZ 
+            if ((cont == 0) && (empilharAtivou == false))
             {
                 if ((primeiroAviaoDoAeroporto.indiceCidadeDestino != indiceDestino) && (primeiroAviaoDoAeroporto.indiceCidadeDestino != indiceOrigem))
                 {
                     selecionaMtd = 2;
                     trocarPonteiroDesempilhamento = true;
-
-                    NodeVoo VooDesempilhado = primeiroAviaoDoAeroporto;
-                    if (VooDesempilhado != null)
-                        VooDesempilhado = VooDesempilhado.next;
-                    if (VooDesempilhado!=null && VooDesempilhado.indiceCidadeDestino == indiceDestino)
-                        caminhosPossiveis++;
                 }
             }
+
+            //É um voo que está sendo empilhando
             if (trocarPonteiroDesempilhamento == false)
             {
                 //O voo ja vai para o lugar desejado
@@ -458,8 +465,24 @@ namespace TrabalhoAED.FolderAeroporto
                     //muda o ponteiro
                     selecionaMtd = 2;
                     //Dois metodos diferentes acessam este método.
-                    if (cont == 0)
+                    //Só deve ser permitido que um deles incremente
+                    if (empilharAtivou == false)
+                    {
                         caminhosPossiveis++;
+                        string siglaOrigem = encontraSiglaAeroportoPeloIndice(aeroportoDoVoo);
+                        string siglaDestino = encontraSiglaAeroportoPeloIndice(primeiroAviaoDoAeroporto.indiceCidadeDestino);
+
+
+                        if (objPilha.returnMensagem() != null)
+                            mensagem = "\n" + objPilha.returnMensagem() + "," + " Opção " + quantOpcao + ":" + " (" + primeiroAviaoDoAeroporto.numeroVoo + ") " + siglaOrigem + " - " + siglaDestino;
+                        else
+                            mensagem = "\nOpção " + quantOpcao + ":" + " (" + primeiroAviaoDoAeroporto.numeroVoo + ") " + siglaOrigem + " - " + siglaDestino;
+                        //Incrementa sempre no final
+                        quantOpcao++;
+                        Console.WriteLine(mensagem);
+                        //apaga o valor
+                        mensagem = null;
+                    }
                 }
                 //O voo volta ao lugar de origem.
                 else if (primeiroAviaoDoAeroporto.indiceCidadeDestino == indiceOrigem)
@@ -472,12 +495,11 @@ namespace TrabalhoAED.FolderAeroporto
                     //deve se empilhar
                     selecionaMtd = 1;
             }
-
+            //Reseta o ponteiro de desempilhamento
             trocarPonteiroDesempilhamento = false;
+            cont = 1;
             return selecionaMtd;
-
         }
-
         public int percorrerTudo()
         {
 
@@ -490,7 +512,22 @@ namespace TrabalhoAED.FolderAeroporto
                 if (primeiroAviaoDoAeroporto == null)
                     sairDoWhile = true;
                 else if (primeiroAviaoDoAeroporto.indiceCidadeDestino == indiceDestino)
+                {
                     caminhosPossiveis++;
+                    string siglaOrigem = encontraSiglaAeroportoPeloIndice(aeroportoDoVoo);
+                    string siglaDestino = encontraSiglaAeroportoPeloIndice(primeiroAviaoDoAeroporto.indiceCidadeDestino);
+
+
+                    if (objPilha.returnMensagem() != null)
+                        mensagem = "\n" + objPilha.returnMensagem() + "," + " Opção " + quantOpcao + ":" + " (" + primeiroAviaoDoAeroporto.numeroVoo + ") " + siglaOrigem + " - " + siglaDestino;
+                    else
+                        mensagem = "\nOpção " + quantOpcao + ":" + " (" + primeiroAviaoDoAeroporto.numeroVoo + ") " + siglaOrigem + " - " + siglaDestino;
+
+                    //Incrementa sempre no final porque assim a mensagem terá a opcao sempre no valor correto
+                    quantOpcao++;
+
+
+                }
                 //else if (primeiroAviaoDoAeroporto.indiceCidadeDestino == IndiceOrigem)
                 //No caso acima mudar o ponteiro é a ação necessaria
                 if (primeiroAviaoDoAeroporto != null)
@@ -522,21 +559,21 @@ namespace TrabalhoAED.FolderAeroporto
                         sairDoWhile = true;
                     else
                         primeiroAviaoDoAeroporto = primeiroAviaoDoAeroporto.next;
-
                 }
 
                 aeroportoDoVoo = objPilha.returnCaracter(0);
                 maxConexoes = objPilha.returnCaracter(3);
                 //Remove o objeto da pilha
                 objPilha.remove();
-
                 //ira mudar o ponteiro
                 selecionaMtd = 2;
                 /*****************desempilha******************/
             }
+            //encerra a estrutura
             else
                 selecionaMtd = 0;
 
+            cont = 0;
             desempilhou = true;
             return selecionaMtd;
         }
@@ -545,3 +582,27 @@ namespace TrabalhoAED.FolderAeroporto
     }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+//NodeVoo VooDesempilhado = primeiroAviaoDoAeroporto;
+//if (VooDesempilhado != null)
+//    VooDesempilhado = VooDesempilhado.next;
+//if (VooDesempilhado != null && VooDesempilhado.indiceCidadeDestino == indiceDestino)
+//{
+//    caminhosPossiveis++;
+//    string siglaOrigem = encontraSiglaAeroportoPeloIndice(aeroportoDoVoo);
+//    string siglaDestino = encontraSiglaAeroportoPeloIndice(VooDesempilhado.indiceCidadeDestino);
+//    mensagem += "\nOpção " + quantOpcao + ":" + " (" + VooDesempilhado.numeroVoo + ") " + siglaOrigem + " - " + siglaDestino + ",";
+//    quantOpcao++;
+//}
