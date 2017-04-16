@@ -20,6 +20,8 @@ namespace TrabalhoAED.FolderAeroporto
         //objeto pilha
         public Pilha objPilha = new Pilha();
 
+        //public 
+
         /****************fim dos objetos****************************/
 
         //construtor
@@ -304,6 +306,7 @@ namespace TrabalhoAED.FolderAeroporto
         }
 
         //Opção 6 do menu-->procura caminhos de uma origem ate um destino
+        public NodeVoo primeiroAviaoDoAeroporto;
         public void procuraVoo(string siglaOrigem, string siglaDestino, int maxConexoes)
         {
             int indiceOrigem = encontraIndiceAeroportoPelaSigla(siglaOrigem);
@@ -313,7 +316,7 @@ namespace TrabalhoAED.FolderAeroporto
             bool empilharTudo = true;
 
             NodeAeroporto aeroportoPartida = vetor[indiceOrigem];
-            NodeVoo primeiroAviaoDoAeroporto = aeroportoPartida.next;
+            primeiroAviaoDoAeroporto = aeroportoPartida.next;
 
             int indiceDestinoDoVoo, aeroportoDoVoo = indiceOrigem;
             indiceDestinoDoVoo = aeroportoDoVoo;
@@ -327,7 +330,7 @@ namespace TrabalhoAED.FolderAeroporto
             while (finalizarProcuraVoo == false)
             {
                 //chama a função empilha
-                vet = empilhar(aeroportoDoVoo, indiceDestinoDoVoo, k, maxConexoes, ref mudarPonteiro, ref empilharTudo, indiceDestino, ref primeiroAviaoDoAeroporto);
+                vet = empilhar(aeroportoDoVoo, indiceDestinoDoVoo, k, maxConexoes, ref mudarPonteiro, ref empilharTudo, indiceDestino);
 
                 //coloca o retorno da função empilha nas variaveis corretas
                 aeroportoDoVoo = vet[0];
@@ -336,18 +339,14 @@ namespace TrabalhoAED.FolderAeroporto
                 maxConexoes = vet[3];
                 indiceDestino = vet[4];
 
-                vet = mudarPonteiroAndPercorrer(aeroportoDoVoo, indiceDestinoDoVoo, k, maxConexoes, ref mudarPonteiro, ref empilharTudo, indiceDestino, ref primeiroAviaoDoAeroporto, ref finalizarProcuraVoo, indiceOrigem);
-                aeroportoDoVoo = vet[0];
-                indiceDestinoDoVoo = vet[1];
-                k = vet[2];
-                maxConexoes = vet[3];
-                indiceDestino = vet[4];
+                gerenciadorDePonteiro(aeroportoDoVoo, indiceDestinoDoVoo, k, maxConexoes, ref mudarPonteiro, ref empilharTudo, indiceDestino, ref finalizarProcuraVoo, indiceOrigem);
+
 
             }
 
             Console.WriteLine(k);
         }
-        public int[] empilhar(int aeroportoDoVoo, int indiceDestinoDoVoo, int k, int maxConexoes, ref bool mudarPonteiro, ref bool empilharTudo, int indiceDestino, ref NodeVoo primeiroAviaoDoAeroporto)
+        public int[] empilhar(int aeroportoDoVoo, int indiceDestinoDoVoo, int k, int maxConexoes, ref bool mudarPonteiro, ref bool empilharTudo, int indiceDestino)
         {
             string mensagem;
 
@@ -396,17 +395,17 @@ namespace TrabalhoAED.FolderAeroporto
             vet[4] = indiceDestino;
             return vet;
         }
-        public void gerenciadorDePonteiro(int aeroportoDoVoo, int indiceDestinoDoVoo, int k, int maxConexoes, ref bool mudarPonteiro, ref bool empilharTudo, int indiceDestino, ref NodeVoo primeiroAviaoDoAeroporto, ref bool finalizarProcuraVoo, int indiceOrigem)
+        public void gerenciadorDePonteiro(int aeroportoDoVoo, int indiceDestinoDoVoo, int k, int maxConexoes, ref bool mudarPonteiro, ref bool empilharTudo, int indiceDestino, ref bool finalizarProcuraVoo, int indiceOrigem)
         {
             int[] vet = new int[5];
 
-            vet = mudaPonteiroMtd(aeroportoDoVoo, indiceDestinoDoVoo, maxConexoes, ref mudarPonteiro, ref empilharTudo, indiceDestino, ref primeiroAviaoDoAeroporto);
+            vet = mudaPonteiroMtd(aeroportoDoVoo, indiceDestinoDoVoo, maxConexoes, ref mudarPonteiro, ref empilharTudo, indiceDestino);
             aeroportoDoVoo = vet[0];
             indiceDestinoDoVoo = vet[1];
             maxConexoes = vet[3];
             indiceDestino = vet[4];
 
-            vet = mudaPonteiroEmpilhamento(aeroportoDoVoo, indiceDestinoDoVoo, maxConexoes, ref mudarPonteiro, ref empilharTudo, indiceDestino, ref primeiroAviaoDoAeroporto);
+            vet = mudaPonteiroEmpilhamento(aeroportoDoVoo, indiceDestinoDoVoo, maxConexoes, ref mudarPonteiro, ref empilharTudo, indiceDestino);
             aeroportoDoVoo = vet[0];
             indiceDestinoDoVoo = vet[1];
             maxConexoes = vet[3];
@@ -416,14 +415,14 @@ namespace TrabalhoAED.FolderAeroporto
             k = vet[2];
             indiceDestino = vet[4];
 
-            vet = ordenarPilha(aeroportoDoVoo, indiceDestinoDoVoo, k, maxConexoes, ref mudarPonteiro, ref empilharTudo, indiceDestino, ref primeiroAviaoDoAeroporto, ref finalizarProcuraVoo);
+            vet = ordenarPilha(aeroportoDoVoo, indiceDestinoDoVoo, k, maxConexoes, ref mudarPonteiro, ref empilharTudo, indiceDestino, ref finalizarProcuraVoo, indiceOrigem);
             aeroportoDoVoo = vet[0];
             indiceDestinoDoVoo = vet[1];
             k = vet[2];
             maxConexoes = vet[3];
             indiceDestino = vet[4];
         }
-        public int[] mudaPonteiroMtd(int aeroportoDoVoo, int indiceDestinoDoVoo, int maxConexoes, ref bool mudarPonteiro, ref bool empilharTudo, int indiceDestino, ref NodeVoo primeiroAviaoDoAeroporto)
+        public int[] mudaPonteiroMtd(int aeroportoDoVoo, int indiceDestinoDoVoo, int maxConexoes, ref bool mudarPonteiro, ref bool empilharTudo, int indiceDestino)
         {
 
             if (!empilharTudo || mudarPonteiro)//inicio do 1°if
@@ -459,7 +458,7 @@ namespace TrabalhoAED.FolderAeroporto
             //************************************fim do programa*************************************************************
 
         }
-        public int[] mudaPonteiroEmpilhamento(int aeroportoDoVoo, int indiceDestinoDoVoo, int maxConexoes, ref bool mudarPonteiro, ref bool empilharTudo, int indiceDestino, ref NodeVoo primeiroAviaoDoAeroporto)
+        public int[] mudaPonteiroEmpilhamento(int aeroportoDoVoo, int indiceDestinoDoVoo, int maxConexoes, ref bool mudarPonteiro, ref bool empilharTudo, int indiceDestino)
         {
             int[] vet = new int[5];
 
@@ -512,7 +511,7 @@ namespace TrabalhoAED.FolderAeroporto
                 }//fim while
             }
         }
-        public int[] ordenarPilha(int aeroportoDoVoo, int indiceDestinoDoVoo, int k, int maxConexoes, ref bool mudarPonteiro, ref bool empilharTudo, int indiceDestino, ref NodeVoo primeiroAviaoDoAeroporto, ref bool finalizarProcuraVoo)
+        public int[] ordenarPilha(int aeroportoDoVoo, int indiceDestinoDoVoo, int k, int maxConexoes, ref bool mudarPonteiro, ref bool empilharTudo, int indiceDestino, ref bool finalizarProcuraVoo,int indiceOrigem)
         {
             bool sairDoWhile;
             bool desempilhar = true;
