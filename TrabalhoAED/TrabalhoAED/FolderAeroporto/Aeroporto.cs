@@ -593,28 +593,3 @@ namespace TrabalhoAED.FolderAeroporto
 
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//NodeVoo VooDesempilhado = primeiroAviaoDoAeroporto;
-//if (VooDesempilhado != null)
-//    VooDesempilhado = VooDesempilhado.next;
-//if (VooDesempilhado != null && VooDesempilhado.indiceCidadeDestino == indiceDestino)
-//{
-//    caminhosPossiveis++;
-//    string siglaOrigem = encontraSiglaAeroportoPeloIndice(aeroportoDoVoo);
-//    string siglaDestino = encontraSiglaAeroportoPeloIndice(VooDesempilhado.indiceCidadeDestino);
-//    mensagem += "\nOpção " + quantOpcao + ":" + " (" + VooDesempilhado.numeroVoo + ") " + siglaOrigem + " - " + siglaDestino + ",";
-//    quantOpcao++;
-//}
