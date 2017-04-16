@@ -86,20 +86,20 @@ namespace TrabalhoAED.FolderAeroporto
             {
                 case "brasilia":
                 case "brasília":
-                    messagem= "BSB";
+                    messagem = "BSB";
                     break;
                 case "belo horizonte":
-                    messagem= "CNF";
+                    messagem = "CNF";
                     break;
                 case "rio de janeiro":
-                    messagem= "GIG";
+                    messagem = "GIG";
                     break;
                 case "são paulo":
                 case "sao paulo":
-                    messagem= "GRU";
+                    messagem = "GRU";
                     break;
                 case "salvador":
-                    messagem= "SSA";
+                    messagem = "SSA";
                     break;
                 default:
                     messagem = "sigla não encontrada";
@@ -349,6 +349,8 @@ namespace TrabalhoAED.FolderAeroporto
                     selecionaMtd = desempilharPilha(ref desempilhou);
             }
 
+            Console.WriteLine("\t"+caminhosPossiveis);
+
         }
 
         public int empilhar(bool mudouPonteiro, ref bool desempilhou)
@@ -440,6 +442,12 @@ namespace TrabalhoAED.FolderAeroporto
                 {
                     selecionaMtd = 2;
                     trocarPonteiroDesempilhamento = true;
+
+                    NodeVoo VooDesempilhado = primeiroAviaoDoAeroporto;
+                    if (VooDesempilhado != null)
+                        VooDesempilhado = VooDesempilhado.next;
+                    if (VooDesempilhado!=null && VooDesempilhado.indiceCidadeDestino == indiceDestino)
+                        caminhosPossiveis++;
                 }
             }
             if (trocarPonteiroDesempilhamento == false)
@@ -497,6 +505,7 @@ namespace TrabalhoAED.FolderAeroporto
         }
         public int desempilharPilha(ref bool desempilhou)
         {
+            int selecionaMtd; ;
 
             /*****************desempilha******************/
             if (objPilha.returnCaracter() != null)
@@ -520,11 +529,14 @@ namespace TrabalhoAED.FolderAeroporto
                 maxConexoes = objPilha.returnCaracter(3);
                 //Remove o objeto da pilha
                 objPilha.remove();
+
+                //ira mudar o ponteiro
+                selecionaMtd = 2;
                 /*****************desempilha******************/
             }
+            else
+                selecionaMtd = 0;
 
-            //Irá mudar o ponteiro
-            int selecionaMtd = 2;
             desempilhou = true;
             return selecionaMtd;
         }
