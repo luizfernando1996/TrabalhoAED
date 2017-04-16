@@ -10,19 +10,100 @@ namespace TrabalhoAED.FolderAeroporto
 {
     class Aeroporto
     {
-        /****************objetos****************************/
 
-        //objeto aeroporto
-        public static NodeAeroporto[] vetor = new NodeAeroporto[10];
+        private static NodeAeroporto[] vetor = new NodeAeroporto[10];
         //todos os objetos devem ter o mesmos aeroportos
         static int indice = 0;
 
         //objeto pilha
         public Pilha objPilha = new Pilha();
 
-        //public 
+        //objeto para a opcao 6 do menu
+        public NodeVoo primeiroAviaoDoAeroporto;
 
-        /****************fim dos objetos****************************/
+        //atributos
+        private int aeroportoDoVoo;
+        private int indiceOrigem;
+        private int indiceDestinoDoVoo;
+        private int indiceDestino;
+        private int maxConexoes;
+        private int k;
+
+        //propriedades
+        public int AeroportoDoVoo
+        {
+            get
+            {
+                return aeroportoDoVoo;
+            }
+
+            set
+            {
+                aeroportoDoVoo = value;
+            }
+        }
+        public int IndiceOrigem
+        {
+            get
+            {
+                return indiceOrigem;
+            }
+
+            set
+            {
+                indiceOrigem = value;
+            }
+        }
+        public int IndiceDestinoDoVoo
+        {
+            get
+            {
+                return indiceDestinoDoVoo;
+            }
+
+            set
+            {
+                indiceDestinoDoVoo = value;
+            }
+        }
+        public int IndiceDestino
+        {
+            get
+            {
+                return indiceDestino;
+            }
+
+            set
+            {
+                indiceDestino = value;
+            }
+        }
+        public int MaxConexoes
+        {
+            get
+            {
+                return maxConexoes;
+            }
+
+            set
+            {
+                maxConexoes = value;
+            }
+        }
+        public int K
+        {
+            get
+            {
+                return k;
+            }
+
+            set
+            {
+                k = value;
+            }
+        }
+
+
 
         //construtor
         public Aeroporto() { }
@@ -306,50 +387,38 @@ namespace TrabalhoAED.FolderAeroporto
         }
 
         //Opção 6 do menu-->procura caminhos de uma origem ate um destino
-        public NodeVoo primeiroAviaoDoAeroporto;
-        public void procuraVoo(string siglaOrigem, string siglaDestino, int maxConexoes)
+        public void procuraVoo(string siglaOrigem, string siglaDestino,int maxConexoes)
         {
+            
             int indiceOrigem = encontraIndiceAeroportoPelaSigla(siglaOrigem);
             int indiceDestino = encontraIndiceAeroportoPelaSigla(siglaDestino);
 
 
-            bool empilharTudo = true;
-
-            NodeAeroporto aeroportoPartida = vetor[indiceOrigem];
-            primeiroAviaoDoAeroporto = aeroportoPartida.next;
+            primeiroAviaoDoAeroporto = vetor[indiceOrigem].next;
 
             int indiceDestinoDoVoo, aeroportoDoVoo = indiceOrigem;
             indiceDestinoDoVoo = aeroportoDoVoo;
 
-            string mensagem = null;
+            bool empilharTudo = true;
             bool mudarPonteiro = false;
             bool finalizarProcuraVoo = false;
-            int k = 0;
-            int[] vet = new int[5];
 
             while (finalizarProcuraVoo == false)
             {
                 //chama a função empilha
-                vet = empilhar(aeroportoDoVoo, indiceDestinoDoVoo, k, maxConexoes, ref mudarPonteiro, ref empilharTudo, indiceDestino);
+                empilhar();
 
                 //coloca o retorno da função empilha nas variaveis corretas
-                aeroportoDoVoo = vet[0];
-                indiceDestinoDoVoo = vet[1];
-                k = vet[2];
-                maxConexoes = vet[3];
-                indiceDestino = vet[4];
 
-                gerenciadorDePonteiro(aeroportoDoVoo, indiceDestinoDoVoo, k, maxConexoes, ref mudarPonteiro, ref empilharTudo, indiceDestino, ref finalizarProcuraVoo, indiceOrigem);
+                gerenciadorDePonteiro();
 
 
             }
-
-            Console.WriteLine(k);
         }
-        public int[] empilhar(int aeroportoDoVoo, int indiceDestinoDoVoo, int k, int maxConexoes, ref bool mudarPonteiro, ref bool empilharTudo, int indiceDestino)
+        public void empilhar()
         {
             string mensagem;
-
+            bool mudarPonteiro=false, empilharTudo=true;
             //estrutura responsavel pelo empilhamento
             while (empilharTudo)
             {
@@ -357,26 +426,26 @@ namespace TrabalhoAED.FolderAeroporto
                 if (empilharTudo)
                 {
 
-                    aeroportoDoVoo = indiceDestinoDoVoo;
-                    primeiroAviaoDoAeroporto = vetor[aeroportoDoVoo].next;
+                    AeroportoDoVoo = IndiceDestinoDoVoo;
+                    primeiroAviaoDoAeroporto = vetor[AeroportoDoVoo].next;
 
                     //deve se passar um voo porque o definido ja vai para o lugar
-                    if (primeiroAviaoDoAeroporto.indiceCidadeDestino == indiceDestino)
+                    if (primeiroAviaoDoAeroporto.indiceCidadeDestino == IndiceDestino)
                     {
                         mudarPonteiro = true;
-                        k++;
+                        K++;
                     }
 
                     //inicio if mudar ponteiro
                     if (mudarPonteiro == false)
                     {
-                        indiceDestinoDoVoo = primeiroAviaoDoAeroporto.indiceCidadeDestino;
+                        IndiceDestinoDoVoo = primeiroAviaoDoAeroporto.indiceCidadeDestino;
                         //decrementa o numero de conexões que se pode fazer
-                        --maxConexoes;
-                        if (maxConexoes != 0)
+                        --MaxConexoes;
+                        if (MaxConexoes != 0)
                         {
                             mensagem = null;
-                            objPilha.add(aeroportoDoVoo, indiceDestinoDoVoo, primeiroAviaoDoAeroporto.numeroVoo, maxConexoes, null);
+                            objPilha.add(AeroportoDoVoo, IndiceDestinoDoVoo, primeiroAviaoDoAeroporto.numeroVoo, MaxConexoes, null);
                         }
                         else
                         {
@@ -387,49 +456,26 @@ namespace TrabalhoAED.FolderAeroporto
 
                 }//fim 1° if
             }
-            int[] vet = new int[5];
-            vet[0] = aeroportoDoVoo;
-            vet[1] = indiceDestinoDoVoo;
-            vet[2] = k;
-            vet[3] = maxConexoes;
-            vet[4] = indiceDestino;
-            return vet;
         }
-        public void gerenciadorDePonteiro(int aeroportoDoVoo, int indiceDestinoDoVoo, int k, int maxConexoes, ref bool mudarPonteiro, ref bool empilharTudo, int indiceDestino, ref bool finalizarProcuraVoo, int indiceOrigem)
+        public void gerenciadorDePonteiro()
         {
-            int[] vet = new int[5];
+            bool mudarPonteiro, empilharTudo, finalizarProcuraVoo;
+            mudaPonteiroMtd();
 
-            vet = mudaPonteiroMtd(aeroportoDoVoo, indiceDestinoDoVoo, maxConexoes, ref mudarPonteiro, ref empilharTudo, indiceDestino);
-            aeroportoDoVoo = vet[0];
-            indiceDestinoDoVoo = vet[1];
-            maxConexoes = vet[3];
-            indiceDestino = vet[4];
+            mudaPonteiroEmpilhamento();
 
-            vet = mudaPonteiroEmpilhamento(aeroportoDoVoo, indiceDestinoDoVoo, maxConexoes, ref mudarPonteiro, ref empilharTudo, indiceDestino);
-            aeroportoDoVoo = vet[0];
-            indiceDestinoDoVoo = vet[1];
-            maxConexoes = vet[3];
-            indiceDestino = vet[4];
+            percorrerTudo();
 
-            percorrerTudo(k, ref mudarPonteiro, ref empilharTudo, indiceDestino, ref primeiroAviaoDoAeroporto);
-            k = vet[2];
-            indiceDestino = vet[4];
-
-            vet = ordenarPilha(aeroportoDoVoo, indiceDestinoDoVoo, k, maxConexoes, ref mudarPonteiro, ref empilharTudo, indiceDestino, ref finalizarProcuraVoo, indiceOrigem);
-            aeroportoDoVoo = vet[0];
-            indiceDestinoDoVoo = vet[1];
-            k = vet[2];
-            maxConexoes = vet[3];
-            indiceDestino = vet[4];
+          ordenarPilha();
         }
-        public int[] mudaPonteiroMtd(int aeroportoDoVoo, int indiceDestinoDoVoo, int maxConexoes, ref bool mudarPonteiro, ref bool empilharTudo, int indiceDestino)
+        public void mudaPonteiroMtd()
         {
-
+            bool mudarPonteiro=false, empilharTudo=true;
             if (!empilharTudo || mudarPonteiro)//inicio do 1°if
             {
                 //estrutura responsavel por  mudar o ponteiro do empilhamento
-                --maxConexoes;
-                if (maxConexoes == 0)
+                --MaxConexoes;
+                if (MaxConexoes == 0)
                 {
                     mudarPonteiro = false;
                     empilharTudo = false;
@@ -438,35 +484,28 @@ namespace TrabalhoAED.FolderAeroporto
                 {
                     //muda o ponteiro ja que o anterior vai para o lugar desejado85 
                     primeiroAviaoDoAeroporto = primeiroAviaoDoAeroporto.next;
-                    if (primeiroAviaoDoAeroporto != null && primeiroAviaoDoAeroporto.indiceCidadeDestino != indiceDestino)
+                    if (primeiroAviaoDoAeroporto != null && primeiroAviaoDoAeroporto.indiceCidadeDestino != IndiceDestino)
                     {
 
-                        indiceDestinoDoVoo = primeiroAviaoDoAeroporto.indiceCidadeDestino;
-                        objPilha.add(aeroportoDoVoo, indiceDestinoDoVoo, primeiroAviaoDoAeroporto.numeroVoo, maxConexoes, null);
+                        IndiceDestinoDoVoo = primeiroAviaoDoAeroporto.indiceCidadeDestino;
+                        objPilha.add(AeroportoDoVoo, IndiceDestinoDoVoo, primeiroAviaoDoAeroporto.numeroVoo, MaxConexoes, null);
                         mudarPonteiro = false;
                     }
                 }
             }//fim do if
-
-            int[] vet = new int[5];
-            vet[0] = aeroportoDoVoo;
-            vet[1] = indiceDestinoDoVoo;
-            vet[3] = maxConexoes;
-            vet[4] = indiceDestino;
-
-            return vet;
             //************************************fim do programa*************************************************************
 
         }
-        public int[] mudaPonteiroEmpilhamento(int aeroportoDoVoo, int indiceDestinoDoVoo, int maxConexoes, ref bool mudarPonteiro, ref bool empilharTudo, int indiceDestino)
+        public void mudaPonteiroEmpilhamento()
         {
+            bool mudarPonteiro=false, empilharTudo=false;
             int[] vet = new int[5];
 
             if (!empilharTudo || mudarPonteiro)
             {
                 //estrutura responsavel por  mudar o ponteiro do empilhamento
-                --maxConexoes;
-                if (maxConexoes == 0)
+                --MaxConexoes;
+                if (MaxConexoes == 0)
                 {
                     mudarPonteiro = false;
                     empilharTudo = false;
@@ -475,26 +514,22 @@ namespace TrabalhoAED.FolderAeroporto
                 {
                     //muda o ponteiro ja que o anterior vai para o lugar desejado
                     primeiroAviaoDoAeroporto = primeiroAviaoDoAeroporto.next;
-                    if (primeiroAviaoDoAeroporto != null && primeiroAviaoDoAeroporto.indiceCidadeDestino != indiceDestino)
+                    if (primeiroAviaoDoAeroporto != null && primeiroAviaoDoAeroporto.indiceCidadeDestino != IndiceDestino)
                     {
 
-                        indiceDestinoDoVoo = primeiroAviaoDoAeroporto.indiceCidadeDestino;
-                        objPilha.add(aeroportoDoVoo, indiceDestinoDoVoo, primeiroAviaoDoAeroporto.numeroVoo, maxConexoes, null);
+                        IndiceDestinoDoVoo = primeiroAviaoDoAeroporto.indiceCidadeDestino;
+                        objPilha.add(AeroportoDoVoo, IndiceDestinoDoVoo, primeiroAviaoDoAeroporto.numeroVoo, MaxConexoes, null);
                         mudarPonteiro = false;
                     }
                 }
 
             }
-            vet[0] = aeroportoDoVoo;
-            vet[1] = indiceDestinoDoVoo;
-            vet[3] = maxConexoes;
-            vet[4] = indiceDestino;
-            return vet;
-
         }
-        public void percorrerTudo(int k, ref bool mudarPonteiro, ref bool empilharTudo, int indiceDestino, ref NodeVoo primeiroAviaoDoAeroporto)
+        public void percorrerTudo()
         {
+            bool mudarPonteiro=false, empilharTudo=false;
             //estrutura responsavel por percorrer todas as combinações quando o maxConexao==0
+
             if ((mudarPonteiro == false && empilharTudo == false))
             {
                 bool sairDoWhile = false;
@@ -502,19 +537,21 @@ namespace TrabalhoAED.FolderAeroporto
                 {
                     primeiroAviaoDoAeroporto = primeiroAviaoDoAeroporto.next;
                     //estrutura responsavel por terminar de realizar todas as combinações e mudar o ponteiro
-                    if (primeiroAviaoDoAeroporto == null || primeiroAviaoDoAeroporto.indiceCidadeDestino == indiceDestino)
+                    if (primeiroAviaoDoAeroporto == null || primeiroAviaoDoAeroporto.indiceCidadeDestino == IndiceDestino)
                     {
                         sairDoWhile = true;
                         if (primeiroAviaoDoAeroporto != null)
-                            k++;
+                            K++;
                     }
                 }//fim while
             }
         }
-        public int[] ordenarPilha(int aeroportoDoVoo, int indiceDestinoDoVoo, int k, int maxConexoes, ref bool mudarPonteiro, ref bool empilharTudo, int indiceDestino, ref bool finalizarProcuraVoo,int indiceOrigem)
+        public void ordenarPilha()
         {
+            bool mudarPonteiro, empilharTudo, finalizarProcuraVoo;
             bool sairDoWhile;
             bool desempilhar = true;
+
             //desempilha e muda o ponteiro
             while (desempilhar)
             {
@@ -523,18 +560,18 @@ namespace TrabalhoAED.FolderAeroporto
                 {
                     sairDoWhile = false;
                     primeiroAviaoDoAeroporto = vetor[objPilha.returnCaracter(0)].next;
-                    indiceDestinoDoVoo = objPilha.returnCaracter(1);
+                    IndiceDestinoDoVoo = objPilha.returnCaracter(1);
 
                     //localiza o voo correto
                     while (sairDoWhile == false)
                     {
-                        if (primeiroAviaoDoAeroporto.indiceCidadeDestino != indiceDestinoDoVoo)
+                        if (primeiroAviaoDoAeroporto.indiceCidadeDestino != IndiceDestinoDoVoo)
                             primeiroAviaoDoAeroporto = primeiroAviaoDoAeroporto.next;
                         else
                             sairDoWhile = true;
                     }
-                    aeroportoDoVoo = objPilha.returnCaracter(0);
-                    maxConexoes = objPilha.returnCaracter(3);
+                    AeroportoDoVoo = objPilha.returnCaracter(0);
+                    MaxConexoes = objPilha.returnCaracter(3);
                     objPilha.remove();
                     mudarPonteiro = false;
                     /*****************desempilha******************/
@@ -548,13 +585,13 @@ namespace TrabalhoAED.FolderAeroporto
 
                         //não pode também achar um voo para o destino de origem pq ai vai percorrer o aeroporto de origem atrás de um qe va
                         //para o destino
-                        if (primeiroAviaoDoAeroporto == null || (primeiroAviaoDoAeroporto.indiceCidadeDestino != indiceDestino && primeiroAviaoDoAeroporto.indiceCidadeDestino != indiceOrigem))
+                        if (primeiroAviaoDoAeroporto == null || (primeiroAviaoDoAeroporto.indiceCidadeDestino != IndiceDestino && primeiroAviaoDoAeroporto.indiceCidadeDestino != IndiceOrigem))
                             sairDoWhile = true;
-                        else if (primeiroAviaoDoAeroporto.indiceCidadeDestino == indiceDestino)
-                            k++;
+                        else if (primeiroAviaoDoAeroporto.indiceCidadeDestino == IndiceDestino)
+                            K++;
                     }
                     if (primeiroAviaoDoAeroporto != null)
-                        indiceDestinoDoVoo = primeiroAviaoDoAeroporto.indiceCidadeDestino;
+                        IndiceDestinoDoVoo = primeiroAviaoDoAeroporto.indiceCidadeDestino;
                     empilharTudo = true;
                 }
                 else
@@ -567,16 +604,8 @@ namespace TrabalhoAED.FolderAeroporto
 
 
             //fim do if de mudar ponteiro e percorre tudo
-            int[] vet = new int[5];
-            vet[0] = aeroportoDoVoo;
-            vet[1] = indiceDestinoDoVoo;
-            vet[2] = k;
-            vet[3] = maxConexoes;
-            vet[4] = indiceDestino;
-            return vet;
         }
         //fim da opção 6 do menu-->procura caminhos de uma origem ate um destino
-
     }
 }
 
