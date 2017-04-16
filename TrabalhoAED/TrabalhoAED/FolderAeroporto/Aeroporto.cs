@@ -257,7 +257,7 @@ namespace TrabalhoAED.FolderAeroporto
             if (vooExistente)
                 message = "Voo ja cadastrado anteriormente";
             else
-                message = "Voo cadatrado com sucesso";
+                message = "Voo cadastrado com sucesso";
             return message;
 
         }
