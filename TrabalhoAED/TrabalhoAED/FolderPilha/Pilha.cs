@@ -58,7 +58,6 @@ namespace TrabalhoAED.FolderPilha
         }
         public int returnCaracter(int n = 0)
         {
-
             switch (n)
             {
                 case 0:
