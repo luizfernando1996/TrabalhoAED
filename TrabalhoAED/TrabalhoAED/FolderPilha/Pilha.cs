@@ -17,6 +17,18 @@ namespace TrabalhoAED.FolderPilha
             fimPilha = null;
         }
 
+        public NodePilha NodePilha
+        {
+            get
+            {
+                throw new System.NotImplementedException();
+            }
+
+            set
+            {
+            }
+        }
+
         //operation basic of stack
         public bool stackEmpty()
         {

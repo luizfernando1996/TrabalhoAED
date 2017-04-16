@@ -50,7 +50,6 @@ namespace TrabalhoAED.Menu
             return Console.ReadLine();
         }
         //fim dos métodos para string
-
         //Métodos para inteiro
         public bool verificaInt(string num)
         {
@@ -98,7 +97,6 @@ namespace TrabalhoAED.Menu
                 //requisitaIntRange();//pode dar overflow se o usuario errar mts vezes
                 //melhor while
             }
-
             return num;
         }
         //fim dos métodos para inteiro

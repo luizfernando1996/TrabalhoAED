@@ -15,6 +15,19 @@ namespace TrabalhoAED.Avioes
         {
             sentinela = new NodeVoo();
         }
+
+        public NodeVoo NodeVoo
+        {
+            get
+            {
+                throw new System.NotImplementedException();
+            }
+
+            set
+            {
+            }
+        }
+
         public bool listaVazia()
         {
             return sentinela.next == null;

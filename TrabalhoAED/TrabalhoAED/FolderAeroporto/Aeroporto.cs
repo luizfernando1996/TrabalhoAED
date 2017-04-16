@@ -35,6 +35,18 @@ namespace TrabalhoAED.FolderAeroporto
         //construtor
         public Aeroporto() { }
 
+        public NodeAeroporto NodeAeroporto
+        {
+            get
+            {
+                throw new System.NotImplementedException();
+            }
+
+            set
+            {
+            }
+        }
+
 
         /***menu******/
 
