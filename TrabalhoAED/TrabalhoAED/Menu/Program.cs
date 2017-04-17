@@ -13,6 +13,5 @@ namespace TrabalhoAED.Menu
             Menu obj = new Menu();
             obj.gerenciadorMenu();
         }
-    
     }
 }

@@ -58,7 +58,6 @@ namespace TrabalhoAED.FolderPilha
         }
         public int returnCaracter(int n = 0)
         {
-
             switch (n)
             {
                 case 0:
@@ -79,7 +78,24 @@ namespace TrabalhoAED.FolderPilha
             }
             return n;
         }
+        public string returnMensagem()
+        {
+            string message = null;
+            NodePilha ponteiro = fimPilha;
 
+            while (ponteiro != null)
+            {
+                if (stackEmpty())
+                    message += null;
+                else
+                    //troca a ordem do conteudo
+                    message = ponteiro.mensagem +message; 
+
+                ponteiro = ponteiro.next;
+            }
+            
+            return message;
+        }
     }
 
 }
