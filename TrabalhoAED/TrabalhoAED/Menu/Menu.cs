@@ -26,6 +26,7 @@ namespace TrabalhoAED.Menu
             switch (position)
             {
                 case 0:
+                    Console.WriteLine(message);
                     break;
                 case 1:
                     Console.Write("\t");
@@ -36,14 +37,17 @@ namespace TrabalhoAED.Menu
                 case 3:
                     Console.WriteLine();
                     break;
+                case 4:
+                    Console.Write(message);
+                    break;
                 default:
                     break;
             }
-            Console.WriteLine(message);
         }
         //solicita a string no inicio=0 ou no meio=1
         public string solicitaString(int position = 0)
         {
+
             switch (position)
             {
                 //solicita string no meio da tela
@@ -119,7 +123,6 @@ namespace TrabalhoAED.Menu
                 exibeMenu();
                 //o menu tem 8 opções, logo o número deve estar no range 0-9
                 int num = opcaoEscolhidaDoMenu(9);
-                Console.WriteLine();
                 selecionaOptionMenu(num);
                 //Usuario deseja sair do programa
                 if (num == 0)
@@ -301,44 +304,130 @@ namespace TrabalhoAED.Menu
             imprimeMessage(message);
             int maximoConexoes = requisitaInt();
 
-            objAero.procuraVoo(siglaOrigem, siglaDestino, maximoConexoes);
-
+            message = objAero.procuraVoo(siglaOrigem, siglaDestino, maximoConexoes);
+            imprimeMessage(message);
         }
 
         //métodos de teste -->OPÇÃO 9 DO MENU
         public void insereDadosParaTeste()
         {
-            using(FileStream sw=new FileStream(strPathFile, FileMode.Create)) { }
+            using (FileStream sw = new FileStream(strPathFile, FileMode.Create)) { }
             //cadastra os voos e os aeroportos 
             cadastrarAeroportosTeste();
             cadastrarVoosTeste();
             string mensagem = null;
+            Console.WriteLine("==========================RESULTADOS========================");
+            using (StreamWriter sw = File.AppendText(strPathFile))
+            { sw.WriteLine("==========================RESULTADOS========================"); }
 
             //realiza os testes
-            objAero.procuraVoo("GIG", "SSA", 3);
-            objAero.procuraVoo("CNF", "GRU", 2);
 
+            //imprime o comando
+            mensagem = "procuraVoo(GIG, SSA, 3)";
+            imprimeMessage(mensagem);
+            using (StreamWriter sw = File.AppendText(strPathFile))
+            { sw.WriteLine(mensagem); }
+
+            //imprime o resultado do comando
+            mensagem = objAero.procuraVoo("GIG", "SSA", 3);
+            imprimeMessage(mensagem);
+            using (StreamWriter sw = File.AppendText(strPathFile))
+            { sw.WriteLine(mensagem); }
+
+            Console.WriteLine();
+            using (StreamWriter sw = File.AppendText(strPathFile))
+            { sw.WriteLine(); }
+            //imprime o comando
+            mensagem = "procuraVoo(CNF, GRU, 2)";
+            imprimeMessage(mensagem);
+            using (StreamWriter sw = File.AppendText(strPathFile))
+            { sw.WriteLine(mensagem); }
+
+            //imprime o resultado do comando
+            mensagem = objAero.procuraVoo("CNF", "GRU", 2);
+            imprimeMessage(mensagem);
+            using (StreamWriter sw = File.AppendText(strPathFile))
+            { sw.WriteLine(mensagem); }
+
+            Console.WriteLine();
+            using (StreamWriter sw = File.AppendText(strPathFile))
+            { sw.WriteLine(); }
+            //imprime o comando
+            mensagem = "imprimeVoo(CNF)";
+            imprimeMessage(mensagem);
+            using (StreamWriter sw = File.AppendText(strPathFile))
+            { sw.WriteLine(mensagem); }
+
+            //imprime o resultado do comando
             mensagem = objAero.imprimeVoo("CNF");
             imprimeMessage(mensagem);
             using (StreamWriter sw = File.AppendText(strPathFile))
             { sw.WriteLine(mensagem); }
 
+            Console.WriteLine();
+            using (StreamWriter sw = File.AppendText(strPathFile))
+            { sw.WriteLine(); }
+            //imprime o comando
+            mensagem = "removeVoo(890)";
+            imprimeMessage(mensagem);
+            using (StreamWriter sw = File.AppendText(strPathFile))
+            { sw.WriteLine(mensagem); }
+
+            //imprime o resultado do comando
             mensagem = "\n" + objAero.removeVoo(890);
             imprimeMessage(mensagem);
             using (StreamWriter sw = File.AppendText(strPathFile))
             { sw.WriteLine(mensagem); }
 
+            Console.WriteLine();
+            using (StreamWriter sw = File.AppendText(strPathFile))
+            { sw.WriteLine(); }
+            //imprime o comando
+            mensagem = "removeVoo(101)";
+            imprimeMessage(mensagem);
+            using (StreamWriter sw = File.AppendText(strPathFile))
+            { sw.WriteLine(mensagem); }
+
+            //imprime o resultado do comando
             mensagem = "\n" + objAero.removeVoo(101);
             imprimeMessage(mensagem);
             using (StreamWriter sw = File.AppendText(strPathFile))
             { sw.WriteLine(mensagem); }
 
-            objAero.procuraVoo("CNF", "BSB", 2);
+            Console.WriteLine();
+            using (StreamWriter sw = File.AppendText(strPathFile))
+            { sw.WriteLine(); }
+            //imprime o comando
+            mensagem = "procuraVoo(CNF, BSB, 2)";
+            imprimeMessage(mensagem);
+            using (StreamWriter sw = File.AppendText(strPathFile))
+            { sw.WriteLine(mensagem); }
 
+            //imprime o resultado do comando
+            mensagem = objAero.procuraVoo("CNF", "BSB", 2);
+            imprimeMessage(mensagem);
+            using (StreamWriter sw = File.AppendText(strPathFile))
+            { sw.WriteLine(mensagem); }
+
+            Console.WriteLine();
+            using (StreamWriter sw = File.AppendText(strPathFile))
+            { sw.WriteLine(); }
+            //imprime o comando
+            mensagem = "imprimeTudo()";
+            imprimeMessage(mensagem);
+            using (StreamWriter sw = File.AppendText(strPathFile))
+            { sw.WriteLine(mensagem); }
+
+            //imprime o resultado do comando
             mensagem = objAero.imprimeTudo();
             imprimeMessage(mensagem);
             using (StreamWriter sw = File.AppendText(strPathFile))
             { sw.WriteLine(mensagem); }
+
+            Console.WriteLine("==========================RESULTADOS========================");
+            Console.WriteLine();
+            using (StreamWriter sw = File.AppendText(strPathFile))
+            { sw.WriteLine("==========================RESULTADOS========================"); }
         }
         public void cadastrarAeroportosTeste()
         {
@@ -346,8 +435,7 @@ namespace TrabalhoAED.Menu
             Aeroporto obj = new Aeroporto();
             string message = null;
 
-            Console.WriteLine("==========================RESULTADOS========================");
-            Console.WriteLine();
+            Console.WriteLine("=================REALIZAÇÂO DE CADASTROS===================");
             message += obj.cadastraAeroporto("Brasilia");
             message += "\n" + obj.cadastraAeroporto("Belo Horizonte");
             message += "\n" + obj.cadastraAeroporto("Rio de Janeiro");
@@ -357,11 +445,12 @@ namespace TrabalhoAED.Menu
 
             using (StreamWriter sw = File.AppendText(strPathFile))
             {
-                sw.WriteLine("==========================RESULTADOS========================");
+                sw.WriteLine("=================REALIZAÇÂO DE CADASTROS===================");
                 sw.WriteLine();
                 sw.WriteLine(message);
             }
 
+            message = null;
         }
         public void cadastrarVoosTeste()
         {
@@ -386,11 +475,16 @@ namespace TrabalhoAED.Menu
             //fim do cadastra todos os voos
 
             imprimeMessage(message);
+            imprimeMessage("=================FINALIZAÇÂO DE CADASTROS===================");
+            imprimeMessage("");
 
             using (StreamWriter sw = File.AppendText(strPathFile))
             {
                 sw.WriteLine(message);
+                sw.WriteLine("=================FINALIZAÇÂO DE CADASTROS===================");
+                sw.WriteLine();
             }//fim using
+            message = null;
         }
         //fim dos métodos de teste
 

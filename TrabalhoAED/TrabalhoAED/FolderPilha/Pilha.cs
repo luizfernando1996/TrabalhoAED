@@ -1,4 +1,4 @@
-﻿    using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -80,22 +80,21 @@ namespace TrabalhoAED.FolderPilha
             return n;
         }
         //RETORNA a mensagem de todos os objetos empilhados na forma correta
-        public string returnMensagem()
+        public string returnMensagem(int quantOpcao)
         {
             string message = null;
             NodePilha ponteiro = fimPilha;
-
             while (ponteiro != null)
             {
                 if (stackEmpty())
                     message += null;
                 else
                     //troca a ordem do conteudo
-                    message = ponteiro.mensagem +message; 
+                    message = "Opção " + quantOpcao + ponteiro.mensagem + "," + message;
 
                 ponteiro = ponteiro.next;
             }
-            
+
             return message;
         }
     }

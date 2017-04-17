@@ -1,31 +1,57 @@
+=================REALIZAÇÂO DE CADASTROS===================
+
+Aeroporto Cadastrado com sucesso!!
+Aeroporto Cadastrado com sucesso!!
+Aeroporto Cadastrado com sucesso!!
+Aeroporto Cadastrado com sucesso!!
+Aeroporto Cadastrado com sucesso!!
+
+Voo cadastrado com sucesso
+Voo cadastrado com sucesso
+Voo cadastrado com sucesso
+Voo cadastrado com sucesso
+Voo cadastrado com sucesso
+Voo cadastrado com sucesso
+Voo cadastrado com sucesso
+Voo cadastrado com sucesso
+Voo cadastrado com sucesso
+Voo cadastrado com sucesso
+=================FINALIZAÇÂO DE CADASTROS===================
+
 ==========================RESULTADOS========================
+procuraVoo(GIG, SSA, 3)
 
-Aeroporto Cadastrado com sucesso!!
-Aeroporto Cadastrado com sucesso!!
-Aeroporto Cadastrado com sucesso!!
-Aeroporto Cadastrado com sucesso!!
-Aeroporto Cadastrado com sucesso!!
+Opção 1: (554) GIG - CNF, Opção 1: (214) CNF - SSA
+Opção 2: (90) GIG - GRU,Opção 2: (50) GRU - BSB, Opção 2: (107) BSB - SSA
+Opção 3: (90) GIG - GRU,Opção 3: (102) GRU - CNF, Opção 3: (214) CNF - SSA
+	 Existem 3 caminhos
 
-Voo cadastrado com sucesso
-Voo cadastrado com sucesso
-Voo cadastrado com sucesso
-Voo cadastrado com sucesso
-Voo cadastrado com sucesso
-Voo cadastrado com sucesso
-Voo cadastrado com sucesso
-Voo cadastrado com sucesso
-Voo cadastrado com sucesso
-Voo cadastrado com sucesso
+procuraVoo(CNF, GRU, 2)
+
+Opção 0: (555) CNF - GIG, Opção 0: (90) GIG - GRU
+Opção 1: (101) CNF - GRU
+	 Existem 2 caminhos
+
+imprimeVoo(CNF)
 
 Aeroporto de Belo Horizonte Código: 1 Sigla: CNF
 Voo: 214 Destino: 4
 Voo: 555 Destino: 2
 Voo: 101 Destino: 3
 
+removeVoo(890)
+
 Não foi possivel remover este voo porque ele não foi cadastrado
+
+removeVoo(101)
 
 Voo removido com sucesso
 
+procuraVoo(CNF, BSB, 2)
+
+	 Não existem caminhos
+
+imprimeTudo()
 
 Aeroporto de Brasilia Código: 0 Sigla: BSB
 Voo: 107 Destino: 4
@@ -45,3 +71,4 @@ Voo: 102 Destino: 1
 
 Aeroporto de Salvador Código: 4 Sigla: SSA
 Voo: 215 Destino: 1
+==========================RESULTADOS========================

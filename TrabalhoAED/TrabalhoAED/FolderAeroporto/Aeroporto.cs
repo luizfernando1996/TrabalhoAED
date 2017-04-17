@@ -140,7 +140,7 @@ namespace TrabalhoAED.FolderAeroporto
             indice = 0;
             return message;
         }
-        public bool aeroportoExistente(string cidade)   
+        public bool aeroportoExistente(string cidade)
         {
             bool aeroportoEncontrado = false;
             int i = 0;
@@ -277,7 +277,7 @@ namespace TrabalhoAED.FolderAeroporto
         {
             int i = 0;
             NodeVoo p;
-            string mensagemImprimeVoo=null;
+            string mensagemImprimeVoo = null;
             while (vetor[i] != null)
             {
                 //percorre o vetor até encontrar a sigla correspondete
@@ -310,15 +310,20 @@ namespace TrabalhoAED.FolderAeroporto
             int i = 0;
             NodeVoo p;
             string mensagemMtdImprimeTudo = null;
+            //reponsavel por melhorar o visual da mensagem
+            int contImpressão=0;
             try
             {
                 while (vetor[i] != null)
                 {
                     p = vetor[i].next;
-                    if (p != null)
+                    if (p != null&& contImpressão != 0)
                         mensagemMtdImprimeTudo += "\n";
-                    mensagemMtdImprimeTudo += "\nAeroporto de " + vetor[i].cidade + " Código: " + vetor[i].codigo + " Sigla: " + vetor[i].sigla;
-
+                    if(contImpressão != 0)
+                        mensagemMtdImprimeTudo += "\nAeroporto de " + vetor[i].cidade + " Código: " + vetor[i].codigo + " Sigla: " + vetor[i].sigla;
+                    else//1°linha da mensagem
+                        mensagemMtdImprimeTudo += "\nAeroporto de " + vetor[i].cidade + " Código: " + vetor[i].codigo + " Sigla: " + vetor[i].sigla;
+                    contImpressão++;
                     while (p != null)
                     {
                         mensagemMtdImprimeTudo += "\nVoo: " + p.numeroVoo + " " + "Destino: " + p.indiceCidadeDestino;
@@ -332,47 +337,55 @@ namespace TrabalhoAED.FolderAeroporto
         }
 
         //Opção 6 do menu-->procura caminhos de uma origem ate um destino
-        public void procuraVoo(string siglaOrigem, string siglaDestino, int maxConexoes)
+        public string procuraVoo(string siglaOrigem, string siglaDestino, int maxConexoes)
         {
+            //reseta alguns atributos necessarios
+            mensagem = null;
             //seta alguns parametros necessarios
             indiceOrigem = encontraIndiceAeroportoPelaSigla(siglaOrigem);
             indiceDestino = encontraIndiceAeroportoPelaSigla(siglaDestino);
 
-            indiceDestinoDoVoo = indiceOrigem;
-            this.maxConexoes = maxConexoes;
-
-            //Executa os métodos  necessario para percorrer todos os caminhos
-            int selecionaMtd = 1;
-            bool mudouPonteiro = false;
-            bool desempilhou = false;
-            bool empilharAtivou = false;
-
-            while (selecionaMtd != 0)
-            {
-                //chama a função empilha
-                if (selecionaMtd == 1)
-                    selecionaMtd = empilhar(mudouPonteiro, ref desempilhou, ref empilharAtivou);
-
-                //chama a mudança de ponteiro
-                else if (selecionaMtd == 2)
-                    selecionaMtd = mudaPonteiroMtd(ref mudouPonteiro, ref empilharAtivou);
-
-                //percorreTudo
-                else if (selecionaMtd == 3)
-                    selecionaMtd = percorrerTudo();
-
-                //desempilha a pilha
-                else if (selecionaMtd == 4)
-                    selecionaMtd = desempilharPilha(ref desempilhou);
-            }
-            Console.WriteLine();
-            if (caminhosPossiveis != 0)
-                Console.WriteLine("\t Existem " + caminhosPossiveis + " caminhos");
+            if (indiceOrigem == 10 || indiceDestino == 10)
+                mensagem = "Alguns dos aeroportos não está cadastrado";
             else
-                Console.WriteLine("\t Não existem caminhos");
+            {
+                indiceDestinoDoVoo = indiceOrigem;
+                this.maxConexoes = maxConexoes;
 
-            quantOpcao = 0;
-            caminhosPossiveis = 0;
+                //Executa os métodos  necessario para percorrer todos os caminhos
+                int selecionaMtd = 1;
+                bool mudouPonteiro = false;
+                bool desempilhou = false;
+                bool empilharAtivou = false;
+
+                while (selecionaMtd != 0)
+                {
+                    //chama a função empilha
+                    if (selecionaMtd == 1)
+                        selecionaMtd = empilhar(mudouPonteiro, ref desempilhou, ref empilharAtivou);
+
+                    //chama a mudança de ponteiro
+                    else if (selecionaMtd == 2)
+                        selecionaMtd = mudaPonteiroMtd(ref mudouPonteiro, ref empilharAtivou);
+
+                    //percorreTudo
+                    else if (selecionaMtd == 3)
+                        selecionaMtd = percorrerTudo();
+
+                    //desempilha a pilha
+                    else if (selecionaMtd == 4)
+                        selecionaMtd = desempilharPilha(ref desempilhou);
+                }
+
+                if (caminhosPossiveis != 0)
+                    mensagem += ("\n\t Existem " + caminhosPossiveis + " caminhos");
+                else
+                    mensagem += ("\n\t Não existem caminhos");
+
+                quantOpcao = 0;
+                caminhosPossiveis = 0;
+            }
+            return mensagem;
         }
 
         public int empilhar(bool mudouPonteiro, ref bool desempilhou, ref bool empilharAtivou)
@@ -420,9 +433,10 @@ namespace TrabalhoAED.FolderAeroporto
                     {
                         string siglaOrigem = encontraSiglaAeroportoPeloIndice(aeroportoDoVoo);
                         string siglaDestino = encontraSiglaAeroportoPeloIndice(primeiroAviaoDoAeroporto.indiceCidadeDestino);
-                        mensagem += "Opção " + quantOpcao + ":" + " (" + primeiroAviaoDoAeroporto.numeroVoo + ") " + siglaOrigem + " - " + siglaDestino + ",";
-                        objPilha.add(aeroportoDoVoo, indiceDestinoDoVoo, primeiroAviaoDoAeroporto.numeroVoo, maxConexoes, mensagem);
-                        mensagem = null;
+                        string infomacao = null;
+                        infomacao += ":" + " (" + primeiroAviaoDoAeroporto.numeroVoo + ") " + siglaOrigem + " - " + siglaDestino;
+                        objPilha.add(aeroportoDoVoo, indiceDestinoDoVoo, primeiroAviaoDoAeroporto.numeroVoo, maxConexoes, infomacao);
+                        infomacao = null;
                     }
 
                 }//fim if 
@@ -487,16 +501,18 @@ namespace TrabalhoAED.FolderAeroporto
                         caminhosPossiveis++;
                         string siglaOrigem = encontraSiglaAeroportoPeloIndice(aeroportoDoVoo);
                         string siglaDestino = encontraSiglaAeroportoPeloIndice(primeiroAviaoDoAeroporto.indiceCidadeDestino);
+                        string informacao = null;
 
-
-                        if (objPilha.returnMensagem() != null)
-                            mensagem = "\n" + objPilha.returnMensagem() + "," + " Opção " + quantOpcao + ":" + " (" + primeiroAviaoDoAeroporto.numeroVoo + ") " + siglaOrigem + " - " + siglaDestino;
+                        if (objPilha.stackEmpty() == false)
+                            informacao += "\n" + objPilha.returnMensagem(quantOpcao) + " Opção " + quantOpcao + ":" + " (" + primeiroAviaoDoAeroporto.numeroVoo + ") " + siglaOrigem + " - " + siglaDestino;
                         else
-                            mensagem = "\nOpção " + quantOpcao + ":" + " (" + primeiroAviaoDoAeroporto.numeroVoo + ") " + siglaOrigem + " - " + siglaDestino;
+                            informacao += "\nOpção " + quantOpcao + ":" + " (" + primeiroAviaoDoAeroporto.numeroVoo + ") " + siglaOrigem + " - " + siglaDestino;
+
                         //Incrementa sempre no final para que assim a mensagem esteja sempre correta
                         quantOpcao++;
-                        Console.WriteLine(mensagem);
-                        mensagem = null;
+
+                        mensagem += informacao;
+                        informacao = null;
                     }
                 }
                 //O voo volta ao lugar de origem.
@@ -532,16 +548,17 @@ namespace TrabalhoAED.FolderAeroporto
                     caminhosPossiveis++;
                     string siglaOrigem = encontraSiglaAeroportoPeloIndice(aeroportoDoVoo);
                     string siglaDestino = encontraSiglaAeroportoPeloIndice(primeiroAviaoDoAeroporto.indiceCidadeDestino);
+                    string informacao = null;
 
-
-                    if (objPilha.returnMensagem() != null)
-                        mensagem = "\n" + objPilha.returnMensagem() + "," + " Opção " + quantOpcao + ":" + " (" + primeiroAviaoDoAeroporto.numeroVoo + ") " + siglaOrigem + " - " + siglaDestino;
+                    if (objPilha.stackEmpty() == false)
+                        informacao = "\n" + objPilha.returnMensagem(quantOpcao) + "," + " Opção " + quantOpcao + ":" + " (" + primeiroAviaoDoAeroporto.numeroVoo + ") " + siglaOrigem + " - " + siglaDestino;
                     else
-                        mensagem = "\nOpção " + quantOpcao + ":" + " (" + primeiroAviaoDoAeroporto.numeroVoo + ") " + siglaOrigem + " - " + siglaDestino;
+                        informacao = "\nOpção " + quantOpcao + ":" + " (" + primeiroAviaoDoAeroporto.numeroVoo + ") " + siglaOrigem + " - " + siglaDestino;
 
                     //Incrementa sempre no final porque assim a mensagem terá a opcao sempre no valor correto
                     quantOpcao++;
-
+                    mensagem += informacao;
+                    informacao = null;
 
                 }
                 //else if (primeiroAviaoDoAeroporto.indiceCidadeDestino == IndiceOrigem)
