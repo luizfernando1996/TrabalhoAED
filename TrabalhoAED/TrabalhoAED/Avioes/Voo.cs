@@ -9,24 +9,14 @@ namespace TrabalhoAED.Avioes
 {
     class Voo
     {
-        public NodeVoo sentinela;
-
-        public Voo()
-        {
-            sentinela = new NodeVoo();
-        }
-        public bool listaVazia()
-        {
-            return sentinela.next == null;
-        }
 
         public string cadastraVoo(int numVoo, int codigoOrigem, int codigoDestino)
         {
-            NodeVoo objVoo = sentinela;
             Aeroporto objAero = new Aeroporto();
-            objVoo = new NodeVoo(numVoo, codigoDestino, sentinela.next);
+            NodeVoo objVoo = new NodeVoo(numVoo, codigoDestino, null);
             string message=objAero.vincularVooAeroporto(objVoo, codigoOrigem);
             return message;
         }
+
     }
 }

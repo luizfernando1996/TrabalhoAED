@@ -12,13 +12,14 @@ namespace TrabalhoAED.Menu
 {
     class Menu
     {
+        //caminho do arquivo
         private string strPathFile = "D:/Luiz Fernando/Puc Minas/3°Periodo/AED/Aulas/Trabalho/AvioesAeroportos/TrabalhoAED/TrabalhoAED/Menu/Teste.txt";
 
         //Inicio dos atributos/objetos da classe
         private Voo objVoo = new Voo();
         private Aeroporto objAero = new Aeroporto();
 
-        //fim dos atributos/objetos da classe
+        /*fim dos atributos/objetos da classe*/
 
         //Métodos para string
         public void imprimeMessage(string message, int position = 0)
@@ -61,7 +62,7 @@ namespace TrabalhoAED.Menu
         }
         //fim dos métodos para string
 
-        //Métodos para inteiro
+        /*Métodos para inteiro*/
         public bool verificaInt(string num)
         {
             int n;
@@ -112,7 +113,7 @@ namespace TrabalhoAED.Menu
         }
         //fim dos métodos para inteiro
 
-        //gerencia o menu
+        /*gerencia o menu*/
         public void gerenciadorMenu()
         {
             bool sairWhile = false;
@@ -278,11 +279,13 @@ namespace TrabalhoAED.Menu
             string message = "Forneça a sigla do Aeroporto";
             imprimeMessage(message);
             string sigla = Console.ReadLine();
-            objAero.imprimeVoo(sigla);
+            string messagem = objAero.imprimeVoo(sigla);
+            imprimeMessage(message);
         }
         public void imprimeTudo()
         {
-            objAero.imprimeTudo();
+            string mensagem=objAero.imprimeTudo();
+            imprimeMessage(mensagem);
         }
         public void limparMenu()
         {
@@ -488,7 +491,7 @@ namespace TrabalhoAED.Menu
         }
         //fim dos métodos de teste
 
-        //Opção do menu--> 0
+        /*Opção do menu--> 0*/
         public void finalizarProgram()
         {
             int j = 100 * 100 * 100 * 100;

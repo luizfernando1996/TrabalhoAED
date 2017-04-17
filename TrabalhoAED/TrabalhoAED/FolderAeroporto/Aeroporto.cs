@@ -21,7 +21,7 @@ namespace TrabalhoAED.FolderAeroporto
         //objeto para a opcao 6 do menu
         public NodeVoo primeiroAviaoDoAeroporto;
 
-        //atributos 
+        //atributos para a opcao 6
         private int aeroportoDoVoo;
         private int indiceOrigem;
         private int indiceDestinoDoVoo;
@@ -213,6 +213,7 @@ namespace TrabalhoAED.FolderAeroporto
                 vooExistente = false;
                 bool sairWhile = false;
                 while ((sairWhile == false) && (vooExistente == false))
+                {
                     if (p.numeroVoo == voo.numeroVoo)
                         vooExistente = true;
                     else
@@ -222,6 +223,7 @@ namespace TrabalhoAED.FolderAeroporto
                         else
                             p = p.next;
                     }
+                }
 
                 if (vooExistente == false)
                     p.next = voo;

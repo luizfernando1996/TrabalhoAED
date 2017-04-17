@@ -8,15 +8,13 @@ namespace TrabalhoAED.Avioes
 {
     public class NodeVoo
     {
+        //a segurar que será null
         public NodeVoo next;
         public int indiceCidadeDestino;
         public int numeroVoo;
 
-        public NodeVoo()
-        {
-            this.next = null;
-        }
-        
+        public NodeVoo() { }
+
         public NodeVoo(int numeroVoo, int indiceCidadeDestino,NodeVoo next)
         {
             this.next = next;
