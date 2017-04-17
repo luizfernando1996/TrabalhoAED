@@ -360,7 +360,8 @@ namespace TrabalhoAED.FolderAeroporto
             }
             Console.WriteLine();
             Console.WriteLine("\t Existem " + caminhosPossiveis + " caminhos");
-
+            quantOpcao = 0;
+            caminhosPossiveis = 0;
         }
 
         public int empilhar(bool mudouPonteiro, ref bool desempilhou, ref bool empilharAtivou)
