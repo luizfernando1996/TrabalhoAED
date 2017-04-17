@@ -140,7 +140,7 @@ namespace TrabalhoAED.FolderAeroporto
             indice = 0;
             return message;
         }
-        public bool aeroportoExistente(string cidade)
+        public bool aeroportoExistente(string cidade)   
         {
             bool aeroportoEncontrado = false;
             int i = 0;
