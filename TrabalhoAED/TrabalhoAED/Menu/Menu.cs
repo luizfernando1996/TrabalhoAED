@@ -310,7 +310,7 @@ namespace TrabalhoAED.Menu
 
             //realiza os testes
             //O codigo abaixo está dando erro!!
-            //objAero.procuraVoo("CIG", "SSA", 3);
+            objAero.procuraVoo("GIG", "SSA", 3);
             objAero.procuraVoo("CNF", "GRU", 2);
             objAero.imprimeVoo("CNF");
             objAero.removeVoo(890);
