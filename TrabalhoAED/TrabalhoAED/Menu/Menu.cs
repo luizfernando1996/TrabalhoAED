@@ -6,11 +6,14 @@ using System.Threading.Tasks;
 
 using TrabalhoAED.FolderAeroporto;
 using TrabalhoAED.Avioes;
+using System.IO;
 
 namespace TrabalhoAED.Menu
 {
     class Menu
     {
+        private string strPathFile = "D:/Luiz Fernando/Puc Minas/3°Periodo/AED/Aulas/Trabalho/AvioesAeroportos/TrabalhoAED/TrabalhoAED/Menu/Teste.txt";
+
         //Inicio dos atributos/objetos da classe
         private Voo objVoo = new Voo();
         private Aeroporto objAero = new Aeroporto();
@@ -258,12 +261,13 @@ namespace TrabalhoAED.Menu
         //Opções do menu--> 3,4,5,6,7,8
         public void removeVoo()
         {
-            string message = "Digite o numero do voo a ser removido";
-            imprimeMessage(message);
+            string menssagem = "Digite o numero do voo a ser removido";
+            imprimeMessage(menssagem);
 
             int numero = requisitaInt();
             //retorna uma mensagem de sucesso ou não sobre a remoção do Voo
-            objAero.removeVoo(numero);
+            menssagem = objAero.removeVoo(numero);
+            imprimeMessage(menssagem);
         }
         //imprime todos voos de um determinado aeroporto
         public void imprimeVoo()
@@ -304,31 +308,59 @@ namespace TrabalhoAED.Menu
         //métodos de teste -->OPÇÃO 9 DO MENU
         public void insereDadosParaTeste()
         {
+            using(FileStream sw=new FileStream(strPathFile, FileMode.Create)) { }
             //cadastra os voos e os aeroportos 
             cadastrarAeroportosTeste();
             cadastrarVoosTeste();
+            string mensagem = null;
 
             //realiza os testes
-            //O codigo abaixo está dando erro!!
             objAero.procuraVoo("GIG", "SSA", 3);
             objAero.procuraVoo("CNF", "GRU", 2);
-            objAero.imprimeVoo("CNF");
-            objAero.removeVoo(890);
-            objAero.removeVoo(101);
+
+            mensagem = objAero.imprimeVoo("CNF");
+            imprimeMessage(mensagem);
+            using (StreamWriter sw = File.AppendText(strPathFile))
+            { sw.WriteLine(mensagem); }
+
+            mensagem = "\n" + objAero.removeVoo(890);
+            imprimeMessage(mensagem);
+            using (StreamWriter sw = File.AppendText(strPathFile))
+            { sw.WriteLine(mensagem); }
+
+            mensagem = "\n" + objAero.removeVoo(101);
+            imprimeMessage(mensagem);
+            using (StreamWriter sw = File.AppendText(strPathFile))
+            { sw.WriteLine(mensagem); }
+
             objAero.procuraVoo("CNF", "BSB", 2);
-            objAero.imprimeTudo();
+
+            mensagem = objAero.imprimeTudo();
+            imprimeMessage(mensagem);
+            using (StreamWriter sw = File.AppendText(strPathFile))
+            { sw.WriteLine(mensagem); }
         }
         public void cadastrarAeroportosTeste()
         {
             //cadastra os aeroportos
             Aeroporto obj = new Aeroporto();
             string message = null;
+
+            Console.WriteLine("==========================RESULTADOS========================");
+            Console.WriteLine();
             message += obj.cadastraAeroporto("Brasilia");
             message += "\n" + obj.cadastraAeroporto("Belo Horizonte");
             message += "\n" + obj.cadastraAeroporto("Rio de Janeiro");
             message += "\n" + obj.cadastraAeroporto("São Paulo");
             message += "\n" + obj.cadastraAeroporto("Salvador");
             imprimeMessage(message);
+
+            using (StreamWriter sw = File.AppendText(strPathFile))
+            {
+                sw.WriteLine("==========================RESULTADOS========================");
+                sw.WriteLine();
+                sw.WriteLine(message);
+            }
 
         }
         public void cadastrarVoosTeste()
@@ -351,9 +383,14 @@ namespace TrabalhoAED.Menu
             message += "\n" + objVoo.cadastraVoo(102, 3, 1);
             //cadastra voos em salvado
             message += "\n" + objVoo.cadastraVoo(215, 4, 1);
+            //fim do cadastra todos os voos
 
             imprimeMessage(message);
-            //fim do cadastra todos os voos
+
+            using (StreamWriter sw = File.AppendText(strPathFile))
+            {
+                sw.WriteLine(message);
+            }//fim using
         }
         //fim dos métodos de teste
 

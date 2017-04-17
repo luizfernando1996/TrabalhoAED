@@ -230,11 +230,13 @@ namespace TrabalhoAED.FolderAeroporto
         }
 
         //Opção 3 do menu-->Remove voo com um determinado numero
-        public void removeVoo(int numeroVoo)
+        public string removeVoo(int numeroVoo)
         {
             int indice = 0;
             bool sairWhile = true;
             //ponteiro para percorrer todos os voos de cada origem
+            string mensagemRemoveVoo = "Não foi possivel remover este voo porque ele não foi cadastrado";
+
             NodeVoo p;
             while (vetor[indice] != null)
             {
@@ -244,7 +246,10 @@ namespace TrabalhoAED.FolderAeroporto
                 //remove o primeiro voo
                 if (vetor[indice] != null && vetor[indice].next != null)
                     if (vetor[indice].next.numeroVoo == numeroVoo)
+                    {
                         vetor[indice].next = vetor[indice].next.next;
+                        mensagemRemoveVoo = "Voo removido com sucesso";
+                    }
 
                 sairWhile = true;
                 while (sairWhile)
@@ -254,6 +259,7 @@ namespace TrabalhoAED.FolderAeroporto
                         {
                             p.next = p.next.next;
                             sairWhile = false;
+                            mensagemRemoveVoo = "Voo removido com sucesso";
                         }
                     if (p == null)
                         sairWhile = false;
@@ -262,15 +268,16 @@ namespace TrabalhoAED.FolderAeroporto
                 }
 
                 indice++;
-
             }
+            return mensagemRemoveVoo;
         }
 
         //Opção 4 do menu-->Imprime os voos de um aeroporto
-        public void imprimeVoo(string sigla)
+        public string imprimeVoo(string sigla)
         {
             int i = 0;
             NodeVoo p;
+            string mensagemImprimeVoo=null;
             while (vetor[i] != null)
             {
                 //percorre o vetor até encontrar a sigla correspondete
@@ -279,11 +286,12 @@ namespace TrabalhoAED.FolderAeroporto
                     //ponteiro inicial que aponta para a origem...para o vertice
                     p = vetor[i].next;
                     if (p != null)
-                        Console.WriteLine("\nAeroporto de " + vetor[i].cidade + " Código: " + vetor[i].codigo + " Sigla: " + vetor[i].sigla);
-
+                    {
+                        mensagemImprimeVoo += "\nAeroporto de " + vetor[i].cidade + " Código: " + vetor[i].codigo + " Sigla: " + vetor[i].sigla;
+                    }
                     while (p != null)
                     {
-                        Console.WriteLine("Voo: " + p.numeroVoo + " " + "Destino: " + p.indiceCidadeDestino);
+                        mensagemImprimeVoo += "\nVoo: " + p.numeroVoo + " " + "Destino: " + p.indiceCidadeDestino;
                         p = p.next;
                     }
                     i++;
@@ -293,35 +301,34 @@ namespace TrabalhoAED.FolderAeroporto
                     i++;
                 }
             }
+            return mensagemImprimeVoo;
         }
 
         //Opção 5 do menu-->Imprime os voos de todos os aerportos
-        public void imprimeTudo()
+        public string imprimeTudo()
         {
             int i = 0;
             NodeVoo p;
+            string mensagemMtdImprimeTudo = null;
             try
             {
                 while (vetor[i] != null)
                 {
                     p = vetor[i].next;
                     if (p != null)
-                        Console.WriteLine("\nAeroporto de " + vetor[i].cidade + " Código: " + vetor[i].codigo + " Sigla: " + vetor[i].sigla);
+                        mensagemMtdImprimeTudo += "\n";
+                    mensagemMtdImprimeTudo += "\nAeroporto de " + vetor[i].cidade + " Código: " + vetor[i].codigo + " Sigla: " + vetor[i].sigla;
 
                     while (p != null)
                     {
-                        Console.WriteLine("Voo: " + p.numeroVoo + " " + "Destino: " + p.indiceCidadeDestino);
+                        mensagemMtdImprimeTudo += "\nVoo: " + p.numeroVoo + " " + "Destino: " + p.indiceCidadeDestino;
                         p = p.next;
                     }
                     i++;
                 }
             }
-
-            catch (IndexOutOfRangeException)
-            {
-
-
-            }
+            catch (IndexOutOfRangeException) { }
+            return mensagemMtdImprimeTudo;
         }
 
         //Opção 6 do menu-->procura caminhos de uma origem ate um destino
@@ -359,7 +366,11 @@ namespace TrabalhoAED.FolderAeroporto
                     selecionaMtd = desempilharPilha(ref desempilhou);
             }
             Console.WriteLine();
-            Console.WriteLine("\t Existem " + caminhosPossiveis + " caminhos");
+            if (caminhosPossiveis != 0)
+                Console.WriteLine("\t Existem " + caminhosPossiveis + " caminhos");
+            else
+                Console.WriteLine("\t Não existem caminhos");
+
             quantOpcao = 0;
             caminhosPossiveis = 0;
         }

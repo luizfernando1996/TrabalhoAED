@@ -3,7 +3,7 @@
   <Class Name="TrabalhoAED.Menu.Menu">
     <Position X="11" Y="5" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAgEIOAIAAQQIAAAQhAYAAAAACCAYQAFIAAAgAAAJA=</HashCode>
+      <HashCode>AAAgEIOAIAAQQICAAQhAYAAAAACCAYQAFAAAAgAAAJA=</HashCode>
       <FileName>Menu\Menu.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -38,20 +38,10 @@
   </Class>
   <Class Name="TrabalhoAED.FolderAeroporto.Aeroporto">
     <Position X="1.75" Y="4.75" Width="2.75" />
-    <AssociationLine Name="NodeAeroporto" Type="TrabalhoAED.FolderAeroporto.NodeAeroporto" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
-      <Path>
-        <Point X="4.5" Y="11.812" />
-        <Point X="17.75" Y="11.812" />
-        <Point X="17.75" Y="9.882" />
-      </Path>
-    </AssociationLine>
     <TypeIdentifier>
-      <HashCode>ACIAEYIAIAAAAAAEQAgAFEAgSAAQAUAACGAIhRgAQAA=</HashCode>
+      <HashCode>ACIAEYIAIAAAAAAEQAgAFEAgSAAQAUAACGAIhRgAAAA=</HashCode>
       <FileName>FolderAeroporto\Aeroporto.cs</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="NodeAeroporto" />
-    </ShowAsAssociation>
   </Class>
   <Class Name="TrabalhoAED.FolderAeroporto.NodeAeroporto">
     <Position X="16.5" Y="7.75" Width="2.5" />

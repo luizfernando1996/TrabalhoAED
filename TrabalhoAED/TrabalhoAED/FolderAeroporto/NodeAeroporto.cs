@@ -23,6 +23,7 @@ namespace TrabalhoAED.FolderAeroporto
         public  NodeAeroporto(string cidade, int codigo, string sigla, NodeVoo next )
         {
             this.cidade = cidade;
+            this.codigo = codigo;
             this.sigla = sigla;
             this.next = next;
         }

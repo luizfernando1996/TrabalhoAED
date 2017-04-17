@@ -1,0 +1,47 @@
+==========================RESULTADOS========================
+
+Aeroporto Cadastrado com sucesso!!
+Aeroporto Cadastrado com sucesso!!
+Aeroporto Cadastrado com sucesso!!
+Aeroporto Cadastrado com sucesso!!
+Aeroporto Cadastrado com sucesso!!
+
+Voo cadastrado com sucesso
+Voo cadastrado com sucesso
+Voo cadastrado com sucesso
+Voo cadastrado com sucesso
+Voo cadastrado com sucesso
+Voo cadastrado com sucesso
+Voo cadastrado com sucesso
+Voo cadastrado com sucesso
+Voo cadastrado com sucesso
+Voo cadastrado com sucesso
+
+Aeroporto de Belo Horizonte Código: 1 Sigla: CNF
+Voo: 214 Destino: 4
+Voo: 555 Destino: 2
+Voo: 101 Destino: 3
+
+Não foi possivel remover este voo porque ele não foi cadastrado
+
+Voo removido com sucesso
+
+
+Aeroporto de Brasilia Código: 0 Sigla: BSB
+Voo: 107 Destino: 4
+
+Aeroporto de Belo Horizonte Código: 1 Sigla: CNF
+Voo: 214 Destino: 4
+Voo: 555 Destino: 2
+
+Aeroporto de Rio de Janeiro Código: 2 Sigla: GIG
+Voo: 554 Destino: 1
+Voo: 90 Destino: 3
+
+Aeroporto de São Paulo Código: 3 Sigla: GRU
+Voo: 50 Destino: 0
+Voo: 89 Destino: 2
+Voo: 102 Destino: 1
+
+Aeroporto de Salvador Código: 4 Sigla: SSA
+Voo: 215 Destino: 1
