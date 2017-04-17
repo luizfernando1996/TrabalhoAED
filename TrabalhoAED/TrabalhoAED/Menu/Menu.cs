@@ -127,6 +127,7 @@ namespace TrabalhoAED.Menu
                 //Usuario deseja sair do programa
                 if (num == 0)
                     sairWhile = true;
+                //rer
             }
         }
         public void exibeMenu()
