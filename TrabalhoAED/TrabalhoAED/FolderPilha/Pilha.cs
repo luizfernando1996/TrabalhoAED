@@ -56,6 +56,7 @@ namespace TrabalhoAED.FolderPilha
         {
             return fimPilha;
         }
+        //retorna um atributo desejado do objeto pilha
         public int returnCaracter(int n = 0)
         {
             switch (n)
@@ -78,6 +79,7 @@ namespace TrabalhoAED.FolderPilha
             }
             return n;
         }
+        //RETORNA a mensagem de todos os objetos empilhados na forma correta
         public string returnMensagem()
         {
             string message = null;

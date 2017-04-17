@@ -1,4 +1,0 @@
-Se dois métodos estão usando os mesmos atributos então eu coloco estes atributos
-como private e faço o encapsulamento deles, obtendo assim propriedades.
-
-Se existe muitos booleanos é melhor transformar o booleano em inteiro.

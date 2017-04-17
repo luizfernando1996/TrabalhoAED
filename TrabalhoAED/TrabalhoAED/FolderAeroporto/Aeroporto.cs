@@ -13,7 +13,7 @@ namespace TrabalhoAED.FolderAeroporto
 
         private static NodeAeroporto[] vetor = new NodeAeroporto[10];
         //todos os objetos devem ter o mesmos aeroportos
-        static int indice = 0;
+        private static int indice = 0;
 
         //objeto pilha
         public Pilha objPilha = new Pilha();
@@ -35,20 +35,83 @@ namespace TrabalhoAED.FolderAeroporto
         //construtor
         public Aeroporto() { }
 
-        public NodeAeroporto NodeAeroporto
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
 
-            set
+        /***Métodos auxiliares aos diversos métodos da classe******/
+
+        //verifica se o aeroporto existe e se sim retorna o indice do aerporto
+        public int encontraIndiceAeroportoPelaCidade(string cidade)
+        {
+            bool sairWhile = true;
+            //sempre se zera o indice que é static por via das duvidas
+            indice = 0;
+            while (sairWhile)
             {
+                try
+                {
+                    if (vetor[indice].cidade == cidade)
+                    {
+                        sairWhile = false;
+                    }
+                    else
+                        indice++;
+                }
+                //vetor ja tem 10 posições e não se encontrou a cidade
+                catch (IndexOutOfRangeException)
+                {
+                    indice = 10;
+                    sairWhile = false;
+                }
+                //vetor não tem as 10 posições e não se encontrou a cidade
+                catch (NullReferenceException)
+                {
+                    indice = 10;
+                    sairWhile = false;
+                }
             }
+            return indice;
+        }
+        public int encontraIndiceAeroportoPelaSigla(string sigla)
+        {
+            bool sairWhile = true;
+            //sempre se zera o indice que é static por via das duvidas
+            indice = 0;
+            while (sairWhile)
+            {
+                try
+                {
+                    if (vetor[indice].sigla == sigla)
+                    {
+                        sairWhile = false;
+                    }
+                    else
+                    {
+                        indice++;
+                    }
+                }
+                //vetor ja tem 10 posições e não se encontrou a cidade
+                catch (IndexOutOfRangeException)
+                {
+                    indice = 10;
+                    sairWhile = false;
+                }
+                //vetor não tem as 10 posições e não se encontrou a sigla da cidade
+                catch (NullReferenceException)
+                {
+                    indice = 10;
+                    sairWhile = false;
+                }
+            }
+            return indice;
+        }
+        public string encontraSiglaAeroportoPeloIndice(int indice)
+        {
+            return vetor[indice].sigla;
         }
 
+        /***Métodos auxiliares aos diversos métodos da classe******/
 
-        /***menu******/
+
+        //---------Menu-----------------//
 
         //Opção 1 do menu-->cadastra aeroporto
         public string cadastraAeroporto(string cidade)
@@ -121,76 +184,6 @@ namespace TrabalhoAED.FolderAeroporto
                     break;
             }
             return messagem;
-        }
-
-        //verifica se o aeroporto existe e se sim retorna o indice do aerporto
-        public int encontraIndiceAeroportoPelaCidade(string cidade)
-        {
-            bool sairWhile = true;
-            //sempre se zera o indice que é static por via das duvidas
-            indice = 0;
-            while (sairWhile)
-            {
-                try
-                {
-                    if (vetor[indice].cidade == cidade)
-                    {
-                        sairWhile = false;
-                    }
-                    else
-                        indice++;
-                }
-                //vetor ja tem 10 posições e não se encontrou a cidade
-                catch (IndexOutOfRangeException)
-                {
-                    indice = 10;
-                    sairWhile = false;
-                }
-                //vetor não tem as 10 posições e não se encontrou a cidade
-                catch (NullReferenceException)
-                {
-                    indice = 10;
-                    sairWhile = false;
-                }
-            }
-            return indice;
-        }
-        public int encontraIndiceAeroportoPelaSigla(string sigla)
-        {
-            bool sairWhile = true;
-            //sempre se zera o indice que é static por via das duvidas
-            indice = 0;
-            while (sairWhile)
-            {
-                try
-                {
-                    if (vetor[indice].sigla == sigla)
-                    {
-                        sairWhile = false;
-                    }
-                    else
-                    {
-                        indice++;
-                    }
-                }
-                //vetor ja tem 10 posições e não se encontrou a cidade
-                catch (IndexOutOfRangeException)
-                {
-                    indice = 10;
-                    sairWhile = false;
-                }
-                //vetor não tem as 10 posições e não se encontrou a sigla da cidade
-                catch (NullReferenceException)
-                {
-                    indice = 10;
-                    sairWhile = false;
-                }
-            }
-            return indice;
-        }
-        public string encontraSiglaAeroportoPeloIndice(int indice)
-        {
-            return vetor[indice].sigla;
         }
 
         //Opção 2 do menu-->Cadastra voo no aeroporto de origem
@@ -353,7 +346,7 @@ namespace TrabalhoAED.FolderAeroporto
                 if (selecionaMtd == 1)
                     selecionaMtd = empilhar(mudouPonteiro, ref desempilhou, ref empilharAtivou);
 
-                //muda o ponteiro
+                //chama a mudança de ponteiro
                 else if (selecionaMtd == 2)
                     selecionaMtd = mudaPonteiroMtd(ref mudouPonteiro, ref empilharAtivou);
 
@@ -365,9 +358,8 @@ namespace TrabalhoAED.FolderAeroporto
                 else if (selecionaMtd == 4)
                     selecionaMtd = desempilharPilha(ref desempilhou);
             }
-
-            Console.WriteLine("\t" + mensagem);
-            Console.WriteLine("\t" + caminhosPossiveis);
+            Console.WriteLine();
+            Console.WriteLine("\t Existem " + caminhosPossiveis + " caminhos");
 
         }
 
@@ -375,19 +367,19 @@ namespace TrabalhoAED.FolderAeroporto
         {
             int selecionaMtd = 1;
 
-            //estrutura responsavel pelo empilhamento
+            //estrutura responsavel pelo empilhamento consecutivo
             while (selecionaMtd == 1)
             {
-                //Estrutura que empilha os voos
+                //Estrutura que impede que após a mudança de ponteiro se pegue o primeiro voo
                 if (mudouPonteiro == false)
                 {
                     aeroportoDoVoo = indiceDestinoDoVoo;
                     primeiroAviaoDoAeroporto = vetor[aeroportoDoVoo].next;
                 }
-                //Estrutura que impede que após a mudança de ponteiro se pegue o voo anterior
                 else
                     mudouPonteiro = false;
-                //Empilha o voo seguinte
+
+                //Empilha o voo posterior ao voo desempilhado
                 if (desempilhou)
                 {
                     indiceDestinoDoVoo = primeiroAviaoDoAeroporto.indiceCidadeDestino;
@@ -401,24 +393,22 @@ namespace TrabalhoAED.FolderAeroporto
                 selecionaMtd = casosMudancaPonteiro(ref empilharAtivou);
                 empilharAtivou = false;
 
-                //Inicio if empilhar
+                //SelecionaMtd==1-->Pode se empilhar o voo não vai para a origem ou para o destino
                 if (selecionaMtd == 1)
                 {
                     indiceDestinoDoVoo = primeiroAviaoDoAeroporto.indiceCidadeDestino;
                     --maxConexoes;
 
-                    //Deve se percorrer o empilhamento acima
+                    //Deve se percorrer tudo
                     if (maxConexoes == 0)
                     {
-                        selecionaMtd = 3;
-                        //mensagem = "#";
-                        //empilharTudo = false;
+                        selecionaMtd = 3;//selecionaMtd3-->percorre tudo
                     }
                     else
                     {
                         string siglaOrigem = encontraSiglaAeroportoPeloIndice(aeroportoDoVoo);
                         string siglaDestino = encontraSiglaAeroportoPeloIndice(primeiroAviaoDoAeroporto.indiceCidadeDestino);
-                        mensagem += "Opção " + quantOpcao + ":" + " (" + primeiroAviaoDoAeroporto.numeroVoo + ") " + siglaOrigem + " - " + siglaDestino+",";
+                        mensagem += "Opção " + quantOpcao + ":" + " (" + primeiroAviaoDoAeroporto.numeroVoo + ") " + siglaOrigem + " - " + siglaDestino + ",";
                         objPilha.add(aeroportoDoVoo, indiceDestinoDoVoo, primeiroAviaoDoAeroporto.numeroVoo, maxConexoes, mensagem);
                         mensagem = null;
                     }
@@ -442,15 +432,16 @@ namespace TrabalhoAED.FolderAeroporto
                 if (primeiroAviaoDoAeroporto == null)
                     ponteiroNull = true;
             }
-            //retorna 1
             //Ocorreu a troca de ponteiro, logo o empilhar não pode empilhar o primeiro elemento
+            //mas deve empilhar o voo alterado neste metodo
             mudouPonteiro = true;
 
             int retorno;
             if (ponteiroNull == false)
-                retorno = 1;
+                retorno = 1;//retorno-->1 empilhar
             else
-                retorno = 4;
+                retorno = 4;//retorno-->4 desempilhar
+
             return retorno;
         }
         public int casosMudancaPonteiro(ref bool empilharAtivou)
@@ -458,7 +449,8 @@ namespace TrabalhoAED.FolderAeroporto
             int selecionaMtd = 2;
             bool trocarPonteiroDesempilhamento = false;
 
-            //O voo no momento é um voo que foi desempilhado e ele só será executado UMA VEZ 
+            //O voo no momento é um voo que foi desempilhado,
+            //logo ele só necessita OBRIGATORIAMENTE de UMA mudança de ponteiro
             if ((cont == 0) && (empilharAtivou == false))
             {
                 if ((primeiroAviaoDoAeroporto.indiceCidadeDestino != indiceDestino) && (primeiroAviaoDoAeroporto.indiceCidadeDestino != indiceOrigem))
@@ -489,10 +481,9 @@ namespace TrabalhoAED.FolderAeroporto
                             mensagem = "\n" + objPilha.returnMensagem() + "," + " Opção " + quantOpcao + ":" + " (" + primeiroAviaoDoAeroporto.numeroVoo + ") " + siglaOrigem + " - " + siglaDestino;
                         else
                             mensagem = "\nOpção " + quantOpcao + ":" + " (" + primeiroAviaoDoAeroporto.numeroVoo + ") " + siglaOrigem + " - " + siglaDestino;
-                        //Incrementa sempre no final
+                        //Incrementa sempre no final para que assim a mensagem esteja sempre correta
                         quantOpcao++;
                         Console.WriteLine(mensagem);
-                        //apaga o valor
                         mensagem = null;
                     }
                 }
@@ -509,6 +500,7 @@ namespace TrabalhoAED.FolderAeroporto
             }
             //Reseta o ponteiro de desempilhamento
             trocarPonteiroDesempilhamento = false;
+            //variavel que Obriga pelo menos UMA mudança no ponteiro de desempilhamento 
             cont = 1;
             return selecionaMtd;
         }
@@ -547,8 +539,7 @@ namespace TrabalhoAED.FolderAeroporto
 
             }//fim while
 
-            //Deve se desempilhar a pilha e mudar o ponteiro
-            int selecionaMtd = 4;
+            int selecionaMtd = 4;//desempilhar a pilha
             return selecionaMtd;
 
         }
@@ -563,7 +554,7 @@ namespace TrabalhoAED.FolderAeroporto
                 primeiroAviaoDoAeroporto = vetor[objPilha.returnCaracter(0)].next;
                 indiceDestinoDoVoo = objPilha.returnCaracter(1);
 
-                //Localiza o voo correto
+                //Localiza o voo correto que deseja desempilhar
                 bool sairDoWhile = false;
                 while (sairDoWhile == false)
                 {
@@ -573,12 +564,14 @@ namespace TrabalhoAED.FolderAeroporto
                         primeiroAviaoDoAeroporto = primeiroAviaoDoAeroporto.next;
                 }
 
+                //finaliza o desempilhamento dos atributos do objeto pilha
                 aeroportoDoVoo = objPilha.returnCaracter(0);
                 maxConexoes = objPilha.returnCaracter(3);
-                //Remove o objeto da pilha
                 objPilha.remove();
+
                 //ira mudar o ponteiro
                 selecionaMtd = 2;
+
                 /*****************desempilha******************/
             }
             //encerra a estrutura
@@ -589,7 +582,8 @@ namespace TrabalhoAED.FolderAeroporto
             desempilhou = true;
             return selecionaMtd;
         }
-        //************************************fim do programa*************************************************************
+
+        //---------Fim do Menu-----------------//
 
     }
 }

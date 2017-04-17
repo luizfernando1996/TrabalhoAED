@@ -11,8 +11,11 @@ namespace TrabalhoAED.Menu
 {
     class Menu
     {
+        //Inicio dos atributos/objetos da classe
         private Voo objVoo = new Voo();
         private Aeroporto objAero = new Aeroporto();
+
+        //fim dos atributos/objetos da classe
 
         //Métodos para string
         public void imprimeMessage(string message, int position = 0)
@@ -50,6 +53,7 @@ namespace TrabalhoAED.Menu
             return Console.ReadLine();
         }
         //fim dos métodos para string
+
         //Métodos para inteiro
         public bool verificaInt(string num)
         {
@@ -204,15 +208,15 @@ namespace TrabalhoAED.Menu
             int numeroVoo = solicitaNumeroVoo();
 
             string message;
-            //solicita uma aeroporto origem CADASTRADO
+            //solicita uma aeroporto de origem CADASTRADO
             int indiceCidadeOrigem = solicitaCidadeOrigem();
             if (indiceCidadeOrigem != 10)
             {
-                //solicita uma aeroporto destino CADASTRADO
+                //solicita uma aeroporto de destino CADASTRADO
                 int indiceCidadeDestino = solicitaCidadeDestino();
                 if (indiceCidadeDestino != 10)
                 {
-                    //retorna se cadastrou ou não o voo
+                    //retorna se cadastrou ou não o voo,isto é, se não existe voo com o mesmo numero
                     message = objVoo.cadastraVoo(numeroVoo, indiceCidadeOrigem, indiceCidadeDestino);
                 }
                 else
@@ -300,9 +304,19 @@ namespace TrabalhoAED.Menu
         //métodos de teste -->OPÇÃO 9 DO MENU
         public void insereDadosParaTeste()
         {
+            //cadastra os voos e os aeroportos 
             cadastrarAeroportosTeste();
             cadastrarVoosTeste();
-            procuraVooTeste();
+
+            //realiza os testes
+            //O codigo abaixo está dando erro!!
+            //objAero.procuraVoo("CIG", "SSA", 3);
+            objAero.procuraVoo("CNF", "GRU", 2);
+            objAero.imprimeVoo("CNF");
+            objAero.removeVoo(890);
+            objAero.removeVoo(101);
+            objAero.procuraVoo("CNF", "BSB", 2);
+            objAero.imprimeTudo();
         }
         public void cadastrarAeroportosTeste()
         {
@@ -313,7 +327,7 @@ namespace TrabalhoAED.Menu
             message += "\n" + obj.cadastraAeroporto("Belo Horizonte");
             message += "\n" + obj.cadastraAeroporto("Rio de Janeiro");
             message += "\n" + obj.cadastraAeroporto("São Paulo");
-              message += "\n" + obj.cadastraAeroporto("Salvador");
+            message += "\n" + obj.cadastraAeroporto("Salvador");
             imprimeMessage(message);
 
         }
@@ -321,31 +335,7 @@ namespace TrabalhoAED.Menu
         {
             //cadastra todos os voos
             string message = null;
-            //cadastra voos em brasilia
-            //message += "\n" + objVoo.cadastraVoo(1, 0, 1);
-            //message += "\n" + objVoo.cadastraVoo(2, 0, 4);
-            ////cadastra voos em belo horizonte
-            //message += "\n" + objVoo.cadastraVoo(3, 1, 2);
-            //message += "\n" + objVoo.cadastraVoo(4, 1, 3);
-            //message += "\n" + objVoo.cadastraVoo(5, 1, 4);
-            ////message += "\n" + objVoo.cadastraVoo(555, 1, 2);
-            ////cadastra voos em rio de janeiro
-            //message += "\n" + objVoo.cadastraVoo(6, 2, 3);
-            //message += "\n" + objVoo.cadastraVoo(7, 2, 4);
-            ////message += "\n" + objVoo.cadastraVoo(554, 2, 1);
-            ////message += "\n" + objVoo.cadastraVoo(090, 2, 3);
-            ////cadastra voos em sao paulo
-            //message += "\n" + objVoo.cadastraVoo(8, 3, 4);
-            //message += "\n" + objVoo.cadastraVoo(9, 3, 0);
-            //message += "\n" + objVoo.cadastraVoo(10, 3, 2);
-            ////message += "\n" + objVoo.cadastraVoo(102, 3, 1);
-            ////cadastra voos em salvado
-            //message += "\n" + objVoo.cadastraVoo(11, 4, 0);
-            //message += "\n" + objVoo.cadastraVoo(12, 4, 2);
-            //message += "\n" + objVoo.cadastraVoo(13, 4, 1);
 
-            //cadastra todos os voos do teste da professora
-            //string message = null;
             //cadastra voos em brasilia
             message += "\n" + objVoo.cadastraVoo(107, 0, 4);
             //cadastra voos em belo horizonte
@@ -364,10 +354,6 @@ namespace TrabalhoAED.Menu
 
             imprimeMessage(message);
             //fim do cadastra todos os voos
-        }
-        public void procuraVooTeste()
-        {
-            objAero.procuraVoo("CNF", "GRU",3);
         }
         //fim dos métodos de teste
 
