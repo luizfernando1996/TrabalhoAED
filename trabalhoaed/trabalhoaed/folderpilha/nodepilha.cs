@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 /// 15/04/2017 
 /// Alunos:Luiz Fernando e Jonathan Dias.
 /// </summary>
-//observar
+
 namespace TrabalhoAED.FolderPilha
 {
     public class NodePilha
