@@ -8,12 +8,18 @@ using TrabalhoAED.FolderAeroporto;
 using TrabalhoAED.Avioes;
 using System.IO;
 
+/// <summary>
+/// Trabalho AED
+/// 15/04/2017 
+/// Alunos:Luiz Fernando e Jonathan Dias.
+/// </summary>
+
 namespace TrabalhoAED.Menu
 {
     class Menu
     {
         //caminho do arquivo
-        private string strPathFile = "D:/Luiz Fernando/Puc Minas/3°Periodo/AED/Aulas/Trabalho/AvioesAeroportos/TrabalhoAED/TrabalhoAED/Menu/Teste.txt";
+        private string strPathFile = "D:/Luiz Fernando/TrabalhoAed/TrabalhoAED/TrabalhoAED/Menu/Teste.txt";
 
         //Inicio dos atributos/objetos da classe
         private Voo objVoo = new Voo();
@@ -280,7 +286,7 @@ namespace TrabalhoAED.Menu
             imprimeMessage(message);
             string sigla = Console.ReadLine();
             string messagem = objAero.imprimeVoo(sigla);
-            imprimeMessage(message);
+            imprimeMessage(messagem);
         }
         public void imprimeTudo()
         {

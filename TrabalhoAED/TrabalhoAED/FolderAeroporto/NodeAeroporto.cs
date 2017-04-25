@@ -5,6 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using TrabalhoAED.Avioes;
 
+/// <summary>
+/// Trabalho AED
+/// 15/04/2017 
+/// Alunos:Luiz Fernando e Jonathan Dias.
+/// </summary>
+
 namespace TrabalhoAED.FolderAeroporto
 {
     public class NodeAeroporto

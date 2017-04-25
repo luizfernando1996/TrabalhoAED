@@ -1,7 +1,74 @@
-=================REALIZAÇÂO DE CADASTROS===================
+﻿=================REALIZAÇÂO DE CADASTROS===================
 
-Aeroporto Cadastrado com sucesso!!
-Aeroporto Cadastrado com sucesso!!
-Aeroporto Cadastrado com sucesso!!
-Aeroporto Cadastrado com sucesso!!
-Aeroporto Cadastrado com sucesso!!
+Impossível cadastrar! Aeroporto já cadastrado!
+Impossível cadastrar! Aeroporto já cadastrado!
+Impossível cadastrar! Aeroporto já cadastrado!
+Impossível cadastrar! Aeroporto já cadastrado!
+Impossível cadastrar! Aeroporto já cadastrado!
+
+Voo ja cadastrado anteriormente
+Voo ja cadastrado anteriormente
+Voo ja cadastrado anteriormente
+Voo cadastrado com sucesso
+Voo ja cadastrado anteriormente
+Voo ja cadastrado anteriormente
+Voo ja cadastrado anteriormente
+Voo ja cadastrado anteriormente
+Voo ja cadastrado anteriormente
+Voo ja cadastrado anteriormente
+=================FINALIZAÇÂO DE CADASTROS===================
+
+==========================RESULTADOS========================
+procuraVoo(GIG, SSA, 3)
+
+Opção 0: (554) GIG - CNF, Opção 0: (214) CNF - SSA
+Opção 1: (90) GIG - GRU,Opção 1: (50) GRU - BSB, Opção 1: (107) BSB - SSA
+Opção 2: (90) GIG - GRU,Opção 2: (102) GRU - CNF, Opção 2: (214) CNF - SSA
+	 Existem 3 caminhos
+
+procuraVoo(CNF, GRU, 2)
+
+Opção 0: (555) CNF - GIG, Opção 0: (90) GIG - GRU
+Opção 1: (101) CNF - GRU
+	 Existem 2 caminhos
+
+imprimeVoo(CNF)
+
+Aeroporto de Belo Horizonte Código: 1 Sigla: CNF
+Voo: 214 Destino: 4
+Voo: 555 Destino: 2
+Voo: 101 Destino: 3
+
+removeVoo(890)
+
+Não foi possivel remover este voo porque ele não foi cadastrado
+
+removeVoo(101)
+
+Voo removido com sucesso
+
+procuraVoo(CNF, BSB, 2)
+
+	 Não existem caminhos
+
+imprimeTudo()
+
+Aeroporto de Brasilia Código: 0 Sigla: BSB
+Voo: 107 Destino: 4
+
+Aeroporto de Belo Horizonte Código: 1 Sigla: CNF
+Voo: 214 Destino: 4
+Voo: 555 Destino: 2
+
+Aeroporto de Rio de Janeiro Código: 2 Sigla: GIG
+Voo: 554 Destino: 1
+Voo: 90 Destino: 3
+
+Aeroporto de São Paulo Código: 3 Sigla: GRU
+Voo: 50 Destino: 0
+Voo: 89 Destino: 2
+Voo: 102 Destino: 1
+
+Aeroporto de Salvador Código: 4 Sigla: SSA
+Voo: 215 Destino: 1
+==========================RESULTADOS========================
